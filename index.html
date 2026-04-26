@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.003-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.004</div>
   </div>
 </div>
 
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.003-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.004</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -840,7 +840,7 @@ nav.nav-hidden{transform:translateY(100%)}
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Cambiar clave
       </button>
-      <button class="nav-dd-item" onclick="closeNavMenu();var nl=lang==='es'?'pt':'es';toast('Cambiando a '+nl,false);setLang(nl)" style="justify-content:space-between">
+      <button class="nav-dd-item" onclick="closeNavMenu();setLang(lang==='es'?'pt':'es')" style="justify-content:space-between">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         <span id="lang-btn-label">ES → PT</span>
       </button>
@@ -953,33 +953,48 @@ let lang = localStorage.getItem('golf_lang') || 'es';
 function t(key) { return (i18n[lang] && i18n[lang][key]) || (i18n.es[key]) || key; }
 
 function applyLangDOM() {
+  // Actualizar label botón idioma
   const lb = $('lang-btn-label');
   if (lb) lb.textContent = lang === 'es' ? '🌐 ES → PT' : '🌐 PT → ES';
 
-  // Actualizar nav buttons (texto después del SVG)
-  [['nav-inicio','nav_inicio'],['nav-nueva','nav_ronda'],
-   ['nav-historial','nav_historial'],['nav-campos','nav_campos'],
-   ['nav-formula','nav_info']].forEach(([id,key]) => {
+  // Actualizar nav buttons
+  const navMap = [
+    ['nav-inicio','nav_inicio'],['nav-nueva','nav_ronda'],
+    ['nav-historial','nav_historial'],['nav-campos','nav_campos'],
+    ['nav-formula','nav_info']
+  ];
+  navMap.forEach(([id,key]) => {
     const el = $(id); if (!el) return;
     const tn = [...el.childNodes].filter(n => n.nodeType === 3 && n.textContent.trim());
     if (tn.length) tn[tn.length-1].textContent = t(key);
   });
 
-  // Botones principales
+  // Botón registrar ronda
   const btnAdd = $('btn-add');
   if (btnAdd) btnAdd.textContent = t('registrar_ronda');
   const btnBorrar = $('btn-borrar-todo');
   if (btnBorrar) btnBorrar.textContent = t('borrar_todo');
 
-  // Menu items texto
-  const menuSalir = document.querySelector('.nav-dd-item.danger');
-  if (menuSalir) {
-    const tn = [...menuSalir.childNodes].filter(n => n.nodeType === 3 && n.textContent.trim());
-    if (tn.length) tn[tn.length-1].textContent = t('menu_salir');
-  }
+  // Menú desplegable items
+  document.querySelectorAll('.nav-dd-item').forEach(el => {
+    const txt = el.textContent.trim();
+    if (txt === 'Info Hándicap' || txt === 'Info Handicap')
+      el.childNodes[el.childNodes.length-1].textContent = ' ' + t('menu_info_hcp');
+    else if (txt === 'Guía de inicio' || txt === 'Guia inicial')
+      el.childNodes[el.childNodes.length-1].textContent = ' ' + t('menu_guia');
+    else if (txt === 'Cambiar clave' || txt === 'Alterar senha')
+      el.childNodes[el.childNodes.length-1].textContent = ' ' + t('menu_clave');
+    else if (txt === 'Salir' || txt === 'Sair')
+      el.childNodes[el.childNodes.length-1].textContent = ' ' + t('menu_salir');
+  });
 
-  // Re-render dinámico si hay datos cargados
-  if (state.user) renderAll();
+  // Re-render todo el contenido dinámico
+  if (state?.user) {
+    renderResult();
+    renderHistory();
+    renderCampos();
+    renderSelectorCampos();
+  }
 }
 
 function setLang(l) {
