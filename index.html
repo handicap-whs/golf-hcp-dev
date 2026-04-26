@@ -312,12 +312,12 @@ nav.nav-hidden{transform:translateY(100%)}
       <div class="guide-card">
         <div class="guide-card-title" data-i18n="g_nav">🧭 Botones de navegación</div>
         <ul class="guide-card-body">
-          <li><strong style="color:#e8c96a">Inicio</strong> — Tu HCP Index, selección de campo y barra, cálculo de golpes objetivo.</li>
-          <li><strong style="color:#e8c96a">Ronda</strong> — Registra una nueva ronda. Golpes hoyo a hoyo con cálculo en tiempo real.</li>
-          <li><strong style="color:#e8c96a">Historial</strong> — Todas tus rondas ordenadas por fecha. Editar y eliminar rondas.</li>
-          <li><strong style="color:#e8c96a">Campos</strong> — Gestiona tus campos de golf: crear, editar, barras de salida y datos de 9 hoyos.</li>
-          <li><strong style="color:#e8c96a">🛡️ Clave</strong> — Cambia tu contraseña de acceso a la app.</li>
-          <li><strong style="color:#e8c96a">Salir</strong> — Cierra tu sesión en la app.</li>
+          <li><span data-i18n="g_nav_inicio"><strong style="color:#e8c96a">Inicio</strong> — Tu HCP Index, selección de campo y barra, cálculo de golpes objetivo.</span></li>
+          <li><span data-i18n="g_nav_ronda"><strong style="color:#e8c96a">Ronda</strong> — Registra una nueva ronda. Golpes hoyo a hoyo con cálculo en tiempo real.</span></li>
+          <li><span data-i18n="g_nav_hist"><strong style="color:#e8c96a">Historial</strong> — Todas tus rondas ordenadas por fecha. Editar y eliminar rondas.</span></li>
+          <li><span data-i18n="g_nav_campos"><strong style="color:#e8c96a">Campos</strong> — Gestiona tus campos de golf: crear, editar, barras de salida y datos de 9 hoyos.</span></li>
+          <li><span data-i18n="g_nav_clave"><strong style="color:#e8c96a">🛡️ Clave</strong> — Cambia tu contraseña de acceso a la app.</span></li>
+          <li><span data-i18n="g_nav_salir"><strong style="color:#e8c96a">Salir</strong> — Cierra tu sesión en la app.</span></li>
         </ul>
       </div>
     </div>
@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.014-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.015-DEV</div>
   </div>
 </div>
 
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.014-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.015-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -754,13 +754,13 @@ nav.nav-hidden{transform:translateY(100%)}
   <div class="card" style="margin-bottom:8px">
     <div class="card-title" style="margin-bottom:6px" data-i18n="f_titulo">Fórmula WHS 2020</div>
     <div class="formula-grid">
-      <div class="formula-row"><span class="fk">Diferencial</span><span class="fv">(Golpes − CR) × 113 / Slope</span></div>
-      <div class="formula-row"><span class="fk">HCP Jugador</span><span class="fv">Promedio mejores diferenciales × 0.95</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_dif">Diferencial</span><span class="fv" data-i18n="fi_dif_f">(Golpes − CR) × 113 / Slope</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_hcp_jug">HCP Jugador</span><span class="fv" data-i18n="fi_hcp_jug_f">Promedio mejores diferenciales × 0.95</span></div>
       <div class="formula-row"><span class="fk">Course HCP</span><span class="fv">HCP × (Slope/113) + (CR−Par)</span></div>
-      <div class="formula-row"><span class="fk">1–4 rondas</span><span class="fv">Mejor diferencial − 2.0</span></div>
-      <div class="formula-row"><span class="fk">5–6 rondas</span><span class="fv">Mejor diferencial − 1.0</span></div>
-      <div class="formula-row"><span class="fk">7–8 rondas</span><span class="fv">Mejor diferencial</span></div>
-      <div class="formula-row"><span class="fk">9–11 rondas</span><span class="fv">2 mejores · sin ajuste</span></div>
+      <div class="formula-row"><span class="fk">1–4 rondas</span><span class="fv" data-i18n="fi_mejor_dif2">Mejor diferencial − 2.0</span></div>
+      <div class="formula-row"><span class="fk">5–6 rondas</span><span class="fv" data-i18n="fi_mejor_dif1">Mejor diferencial − 1.0</span></div>
+      <div class="formula-row"><span class="fk">7–8 rondas</span><span class="fv" data-i18n="fi_mejor_dif">Mejor diferencial</span></div>
+      <div class="formula-row"><span class="fk">9–11 rondas</span><span class="fv" data-i18n="fi_2best">2 mejores · sin ajuste</span></div>
       <div class="formula-row"><span class="fk">12–14 rondas</span><span class="fv">3 mejores · sin ajuste</span></div>
       <div class="formula-row"><span class="fk">15–16 rondas</span><span class="fv">4 mejores · sin ajuste</span></div>
       <div class="formula-row"><span class="fk">17 rondas</span><span class="fv">5 mejores · sin ajuste</span></div>
@@ -770,21 +770,21 @@ nav.nav-hidden{transform:translateY(100%)}
       <div class="formula-row"><span class="fk">100% Informal</span><span class="fv">Playing HCP = Course HCP</span></div>
       <div class="formula-row"><span class="fk">95% Medal / Stblf</span><span class="fv">Playing HCP = Course HCP × 0.95</span></div>
       <div class="formula-row"><span class="fk">85% Four Ball</span><span class="fv">Playing HCP = Course HCP × 0.85</span></div>
-      <div class="formula-row"><span class="fk">Máximo</span><span class="fv">54.0</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_max">Máximo</span><span class="fv">54.0</span></div>
     </div>
   </div>
   <div class="card" style="margin-bottom:8px">
-    <div class="card-title" style="margin-bottom:6px">Stableford</div>
+    <div class="card-title" style="margin-bottom:6px" data-i18n="fi_stbl_title">Stableford</div>
     <div class="formula-grid">
-      <div class="formula-row"><span class="fk">Eagle o mejor</span><span class="fv">4 puntos</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_eagle">Eagle o mejor</span><span class="fv">4 puntos</span></div>
       <div class="formula-row"><span class="fk">Birdie</span><span class="fv">3 puntos</span></div>
       <div class="formula-row"><span class="fk">Par</span><span class="fv">2 puntos</span></div>
-      <div class="formula-row"><span class="fk">Bogey</span><span class="fv">1 punto</span></div>
-      <div class="formula-row"><span class="fk">Doble bogey +</span><span class="fv">0 puntos</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_bogey">Bogey</span><span class="fv">1 punto</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_dbogey">Doble bogey +</span><span class="fv">0 puntos</span></div>
     </div>
   </div>
   <div class="card" style="margin-bottom:8px">
-    <div class="card-title" style="margin-bottom:6px">Barras de Salida</div>
+    <div class="card-title" style="margin-bottom:6px" data-i18n="fi_barras_title">Barras de Salida</div>
     <div class="formula-grid">
       <div style="display:flex;align-items:center;gap:10px;padding:2px 0;border-bottom:1px solid var(--border);font-size:11px">
         <span class="barra-dot" style="background:#e8e8e8;flex-shrink:0"></span>
@@ -900,6 +900,18 @@ const i18n = {
     'e_9h_incompleto':'⚠️ Datos incompletos de 9 hoyos en ',
     'e_barras':'⚠️ Introduce CR y Slope de la barra Blanca o Amarilla como mínimo.',
     'g_continuar':'Continuar','pts':' pts','ver_guia':'📖 Ver guía de inicio',
+    'g_nav_inicio':'<strong style="color:#e8c96a">Inicio</strong> — Tu HCP Index, selección de campo y barra, cálculo de golpes objetivo.',
+    'g_nav_ronda':'<strong style="color:#e8c96a">Ronda</strong> — Registra una nueva ronda. Golpes hoyo a hoyo con cálculo en tiempo real.',
+    'g_nav_hist':'<strong style="color:#e8c96a">Historial</strong> — Todas tus rondas ordenadas por fecha. Editar y eliminar rondas.',
+    'g_nav_campos':'<strong style="color:#e8c96a">Campos</strong> — Gestiona tus campos de golf: crear, editar, barras de salida y datos de 9 hoyos.',
+    'g_nav_clave':'<strong style="color:#e8c96a">🛡️ Clave</strong> — Cambia tu contraseña de acceso a la app.',
+    'g_nav_salir':'<strong style="color:#e8c96a">Salir</strong> — Cierra tu sesión en la app.',
+    'fi_dif':'Diferencial','fi_dif_f':'(Golpes − CR) × 113 / Slope',
+    'fi_hcp_jug':'HCP Jugador','fi_hcp_jug_f':'Promedio mejores diferenciales × 0.95',
+    'fi_max':'Máximo','fi_eagle':'Eagle o mejor','fi_bogey':'Bogey','fi_dbogey':'Doble bogey +',
+    'fi_stbl_title':'Stableford','fi_barras_title':'Barras de Salida',
+    'fi_mejor_dif2':'Mejor diferencial − 2.0','fi_mejor_dif1':'Mejor diferencial − 1.0',
+    'fi_mejor_dif':'Mejor diferencial','fi_2best':'2 mejores · sin ajuste',
     'g_inicio_txt1':'Crea tu campo de golf con los 18 hoyos, par e índice y las barras de salida con su CR y Slope.',
     'g_inicio_txt2':'Selecciona campo e introduce tu HCP real (si lo sabes) o teclea la cifra que desees. El cálculo de tu HCP de Campo y golpes objetivo se realizará a partir de este dato y se irá actualizando según las rondas creadas. Podrás probar diferentes valores de Hándicap.',
     'g_inicio_txt3':'Registra tus golpes hoyo a hoyo. La app calcula automáticamente tu diferencial y Stableford.',
@@ -960,6 +972,18 @@ const i18n = {
     'e_9h_incompleto':'⚠️ Dados incompletos de 9 buracos em ',
     'e_barras':'⚠️ Introduza CR e Slope da barra Branca ou Amarela no mínimo.',
     'g_continuar':'Continuar','pts':' pts','ver_guia':'📖 Ver guia inicial',
+    'g_nav_inicio':'<strong style="color:#e8c96a">Início</strong> — O teu HCP Index, seleção de campo e tee, cálculo de pancadas objetivo.',
+    'g_nav_ronda':'<strong style="color:#e8c96a">Volta</strong> — Regista uma nova volta. Pancadas buraco a buraco com cálculo em tempo real.',
+    'g_nav_hist':'<strong style="color:#e8c96a">Histórico</strong> — Todas as tuas voltas ordenadas por data. Editar e eliminar voltas.',
+    'g_nav_campos':'<strong style="color:#e8c96a">Campos</strong> — Gere os teus campos de golfe: criar, editar, tees de saída e dados de 9 buracos.',
+    'g_nav_clave':'<strong style="color:#e8c96a">🛡️ Senha</strong> — Altera a tua senha de acesso à app.',
+    'g_nav_salir':'<strong style="color:#e8c96a">Sair</strong> — Fecha a tua sessão na app.',
+    'fi_dif':'Diferencial','fi_dif_f':'(Pancadas − CR) × 113 / Slope',
+    'fi_hcp_jug':'HCP Jogador','fi_hcp_jug_f':'Média melhores diferenciais × 0.95',
+    'fi_max':'Máximo','fi_eagle':'Eagle ou melhor','fi_bogey':'Bogey','fi_dbogey':'Double bogey +',
+    'fi_stbl_title':'Stableford','fi_barras_title':'Tees de Saída',
+    'fi_mejor_dif2':'Melhor diferencial − 2.0','fi_mejor_dif1':'Melhor diferencial − 1.0',
+    'fi_mejor_dif':'Melhor diferencial','fi_2best':'2 melhores · sem ajuste',
     'g_inicio_txt1':'Cria o teu campo de golfe com os 18 buracos, par e índice e os tees de saída com CR e Slope.',
     'g_inicio_txt2':'Seleciona campo e introduz o teu HCP real (se o souberes) ou escreve o valor que quiseres. O cálculo do teu HCP do Campo e pancadas objetivo será feito a partir deste dado e irá atualizando-se segundo as voltas criadas. Podes experimentar diferentes valores de Handicap.',
     'g_inicio_txt3':'Regista as tuas pancadas buraco a buraco. A app calcula automaticamente o teu diferencial e Stableford.',
@@ -1016,6 +1040,7 @@ function applyLangDOM() {
       const key = el.dataset.i18n;
       const val = t(key);
       if (el.tagName === 'INPUT') el.placeholder = val;
+      else if (val.includes('<')) el.innerHTML = val;
       else el.textContent = val;
     });
 
