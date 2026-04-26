@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.001-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.002-DEV</div>
   </div>
 </div>
 
@@ -496,7 +496,7 @@ nav.nav-hidden{transform:translateY(100%)}
     </div>
     <div class="modal-actions">
       <button class="btn" style="margin-top:0" id="btn-guardar-ronda" onclick="guardarEditRonda()">Guardar</button>
-      <button class="btn-danger" style="margin-top:0" onclick="if(confirm('¿Cancelar edición de ronda? Los cambios no se guardarán.'))cerrarModal('modal-ronda')">Cancelar</button>
+      <button class="btn-danger" style="margin-top:0" onclick="if(confirm(t('c_cancelar_edit_ronda')))cerrarModal('modal-ronda')">Cancelar</button>
     </div>
   </div>
 </div>
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.001-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.002-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -692,7 +692,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
     <div style="display:flex;gap:10px">
       <button class="btn" id="btn-add" type="button" style="flex:2;margin-top:0">+ Registrar Ronda</button>
-      <button class="btn-danger" onclick="if(confirm('¿Cancelar nueva ronda? Los datos introducidos se perderán.'))cancelarNueva()" style="flex:1;margin-top:0">Cancelar</button>
+      <button class="btn-danger" onclick="if(confirm(t('c_cancelar_nueva_ronda')))cancelarNueva()" style="flex:1;margin-top:0">Cancelar</button>
     </div>
     <div class="info">Diferencial = (Golpes − CR) × 113 / Slope</div>
   </div>
@@ -840,7 +840,11 @@ nav.nav-hidden{transform:translateY(100%)}
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Cambiar clave
       </button>
-      <button class="nav-dd-item danger" onclick="closeNavMenu();if(confirm('¿Cerrar sesión?'))doLogout()">
+      <button class="nav-dd-item" onclick="closeNavMenu();setLang(lang==='es'?'pt':'es')" style="justify-content:space-between">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="lang-btn-label">ES → PT</span>
+      </button>
+      <button class="nav-dd-item danger" onclick="closeNavMenu();if(confirm(t('c_cerrar_sesion')))doLogout()">
         <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
         Salir
       </button>
@@ -848,6 +852,111 @@ nav.nav-hidden{transform:translateY(100%)}
 </nav>
 
 <script>
+
+const i18n = {
+  es: {
+    'nav_inicio':'Inicio','nav_ronda':'Ronda','nav_historial':'Historial','nav_campos':'Campos','nav_info':'Info',
+    'menu_info_hcp':'Info Hándicap','menu_guia':'Guía de inicio','menu_clave':'Cambiar clave','menu_salir':'Salir',
+    'email':'Email','password':'Contraseña','btn_entrar':'Entrar','sin_cuenta':'¿Sin cuenta?','registrate':'Regístrate',
+    'ya_cuenta':'¿Ya tienes cuenta?','inicia_sesion':'Inicia sesión','crear_cuenta':'Crear Cuenta',
+    'enviar_enlace':'Enviar enlace','volver':'← Volver','recuperar_pass':'Recuperar contraseña',
+    'email_ph':'tu@email.com','pass_ph':'••••••••',
+    'selecciona_campo':'— Selecciona campo —','selecciona_barra':'— Selecciona barra —','selecciona_hoyos':'— Hoyos —',
+    'hcp_jugador':'HCP Jugador','hcp_campo':'HCP de Campo','course_rating':'Course Rating','slope_rating':'Slope Rating',
+    'total_golpes':'Total Golpes','formato':'Formato de juego',
+    'nueva_ronda':'Nueva Ronda','campo':'Campo','fecha':'Fecha','hoyos':'Hoyos','vuelta':'Vuelta',
+    'ida':'1ª (1–9)','vuelta2':'2ª (10–18)','hoyos_18':'18 hoyos','hoyos_9':'9 hoyos',
+    'barra_salida':'Barra de salida','hcp_idx':'HCP Index','registrar_ronda':'+ Registrar Ronda',
+    'cancelar':'Cancelar','guardando':'Guardando…',
+    'historial':'Historial','fecha_col':'Fecha','campo_col':'Campo','golpes_col':'Golpes','dif_col':'Dif.','stbl_col':'Stbl',
+    'borrar_todo':'Borrar todo',
+    'mis_campos':'Mis Campos','nuevo_campo':'+ Nuevo','nuevo_campo_title':'Nuevo Campo',
+    'nombre_campo':'Nombre del campo','max15':'(máx. 15 caracteres)','barras_salida':'Barras de Salida',
+    'par_indice':'Par e Índice por Hoyo','guardar_campo':'Guardar Campo','guardar':'Guardar',
+    'editar':'Editar','eliminar':'Eliminar',
+    'cambiar_clave':'Cambiar Contraseña','nueva_pass':'Nueva contraseña','confirmar_pass':'Confirmar contraseña',
+    'min6':'mínimo 6 caracteres','repite_pass':'repite la contraseña','cambiar':'Cambiar',
+    't_campo_eliminado':'✓ Campo eliminado','t_campo_no_encontrado':'Campo no encontrado',
+    't_historial_borrado':'✓ Historial borrado','t_ronda_eliminada':'✓ Ronda eliminada',
+    't_ronda_no_encontrada':'Ronda no encontrada','t_sin_sesion':'Sin sesión activa',
+    't_completa_hoyos':'⚠️ Completa los 18 hoyos con par e índice',
+    't_completa_golpes':'⚠️ Completa los golpes de todos los hoyos',
+    't_selecciona_campo':'⚠️ Selecciona un campo antes de registrar la ronda.',
+    't_campo_actualizado':'✓ Campo actualizado','t_campo_guardado':'✓ Campo guardado',
+    't_pass_actualizada':'✓ Contraseña actualizada correctamente','t_ronda_actualizada':'✓ Ronda actualizada',
+    't_error_borrar':'❌ Error al borrar','t_error_eliminar':'❌ Error al eliminar',
+    't_error_guardar':'❌ Error al guardar: ','t_error':'❌ Error: ',
+    'c_sin_campos':'No tienes campos creados.\n\n¿Ir a Campos para crear uno?',
+    'c_borrar_rondas':'¿Borrar TODAS las rondas? Esta acción no se puede deshacer.',
+    'c_cancelar_edit_ronda':'¿Cancelar edición de ronda? Los cambios no se guardarán.',
+    'c_cancelar_edit_campo':'¿Cancelar edición del campo? Los cambios no se guardarán.',
+    'c_cancelar_nueva_ronda':'¿Cancelar nueva ronda? Los datos introducidos se perderán.',
+    'c_cancelar_nuevo_campo':'¿Cancelar nuevo campo? Los datos introducidos se perderán.',
+    'c_cerrar_sesion':'¿Cerrar sesión?','c_salir':'⚠️ ¿SALIR DE LA APLICACIÓN?\n\nSe cerrará tu sesión.',
+    'e_nombre_campo':'Completa el nombre del campo.','e_nombre':'Completa el nombre.',
+    'e_golpes':'Golpes no válidos.','e_pass_min':'La contraseña debe tener al menos 6 caracteres.',
+    'e_pass_match':'Las contraseñas no coinciden.','e_sin_sesion':'Sin sesión.',
+    'e_hoyos_completos':'⚠️ Completa los 18 hoyos con par e índice antes de guardar.',
+    'e_9h_incompleto':'⚠️ Datos incompletos de 9 hoyos en ',
+    'e_barras':'⚠️ Introduce CR y Slope de la barra Blanca o Amarilla como mínimo.',
+    'g_continuar':'Continuar','pts':' pts','ver_guia':'📖 Ver guía de inicio',
+  },
+  pt: {
+    'nav_inicio':'Início','nav_ronda':'Volta','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info',
+    'menu_info_hcp':'Info Handicap','menu_guia':'Guia inicial','menu_clave':'Alterar senha','menu_salir':'Sair',
+    'email':'Email','password':'Senha','btn_entrar':'Entrar','sin_cuenta':'Sem conta?','registrate':'Registe-se',
+    'ya_cuenta':'Já tem conta?','inicia_sesion':'Iniciar sessão','crear_cuenta':'Criar Conta',
+    'enviar_enlace':'Enviar link','volver':'← Voltar','recuperar_pass':'Recuperar senha',
+    'email_ph':'seu@email.com','pass_ph':'••••••••',
+    'selecciona_campo':'— Selecione campo —','selecciona_barra':'— Selecione barra —','selecciona_hoyos':'— Buracos —',
+    'hcp_jugador':'HCP Jogador','hcp_campo':'HCP do Campo','course_rating':'Course Rating','slope_rating':'Slope Rating',
+    'total_golpes':'Total Pancadas','formato':'Formato de jogo',
+    'nueva_ronda':'Nova Volta','campo':'Campo','fecha':'Data','hoyos':'Buracos','vuelta':'Volta',
+    'ida':'1ª (1–9)','vuelta2':'2ª (10–18)','hoyos_18':'18 buracos','hoyos_9':'9 buracos',
+    'barra_salida':'Tee de saída','hcp_idx':'HCP Index','registrar_ronda':'+ Registar Volta',
+    'cancelar':'Cancelar','guardando':'A guardar…',
+    'historial':'Histórico','fecha_col':'Data','campo_col':'Campo','golpes_col':'Pancadas','dif_col':'Dif.','stbl_col':'Stbl',
+    'borrar_todo':'Apagar tudo',
+    'mis_campos':'Os Meus Campos','nuevo_campo':'+ Novo','nuevo_campo_title':'Novo Campo',
+    'nombre_campo':'Nome do campo','max15':'(máx. 15 caracteres)','barras_salida':'Tees de Saída',
+    'par_indice':'Par e Índice por Buraco','guardar_campo':'Guardar Campo','guardar':'Guardar',
+    'editar':'Editar','eliminar':'Eliminar',
+    'cambiar_clave':'Alterar Senha','nueva_pass':'Nova senha','confirmar_pass':'Confirmar senha',
+    'min6':'mínimo 6 caracteres','repite_pass':'repita a senha','cambiar':'Alterar',
+    't_campo_eliminado':'✓ Campo eliminado','t_campo_no_encontrado':'Campo não encontrado',
+    't_historial_borrado':'✓ Histórico apagado','t_ronda_eliminada':'✓ Volta eliminada',
+    't_ronda_no_encontrada':'Volta não encontrada','t_sin_sesion':'Sem sessão ativa',
+    't_completa_hoyos':'⚠️ Complete os 18 buracos com par e índice',
+    't_completa_golpes':'⚠️ Complete as pancadas de todos os buracos',
+    't_selecciona_campo':'⚠️ Selecione um campo antes de registar a volta.',
+    't_campo_actualizado':'✓ Campo atualizado','t_campo_guardado':'✓ Campo guardado',
+    't_pass_actualizada':'✓ Senha atualizada com sucesso','t_ronda_actualizada':'✓ Volta atualizada',
+    't_error_borrar':'❌ Erro ao apagar','t_error_eliminar':'❌ Erro ao eliminar',
+    't_error_guardar':'❌ Erro ao guardar: ','t_error':'❌ Erro: ',
+    'c_sin_campos':'Não tem campos criados.\n\nIr a Campos para criar um?',
+    'c_borrar_rondas':'Apagar TODAS as voltas? Esta ação não pode ser desfeita.',
+    'c_cancelar_edit_ronda':'Cancelar edição de volta? As alterações não serão guardadas.',
+    'c_cancelar_edit_campo':'Cancelar edição do campo? As alterações não serão guardadas.',
+    'c_cancelar_nueva_ronda':'Cancelar nova volta? Os dados introduzidos serão perdidos.',
+    'c_cancelar_nuevo_campo':'Cancelar novo campo? Os dados introduzidos serão perdidos.',
+    'c_cerrar_sesion':'Fechar sessão?','c_salir':'⚠️ SAIR DA APLICAÇÃO?\n\nA sua sessão será encerrada.',
+    'e_nombre_campo':'Complete o nome do campo.','e_nombre':'Complete o nome.',
+    'e_golpes':'Pancadas inválidas.','e_pass_min':'A senha deve ter pelo menos 6 caracteres.',
+    'e_pass_match':'As senhas não coincidem.','e_sin_sesion':'Sem sessão.',
+    'e_hoyos_completos':'⚠️ Complete os 18 buracos com par e índice antes de guardar.',
+    'e_9h_incompleto':'⚠️ Dados incompletos de 9 buracos em ',
+    'e_barras':'⚠️ Introduza CR e Slope da barra Branca ou Amarela no mínimo.',
+    'g_continuar':'Continuar','pts':' pts','ver_guia':'📖 Ver guia inicial',
+  }
+};
+let lang = localStorage.getItem('golf_lang') || 'es';
+function t(key) { return (i18n[lang] && i18n[lang][key]) || (i18n.es[key]) || key; }
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('golf_lang', l);
+  location.reload();
+}
+
 // ═══════════════════════════════════════════════════════════════════════
 // GOLF HCP — Calculadora WHS 2020
 // ═══════════════════════════════════════════════════════════════════════
@@ -1857,7 +1966,7 @@ async function addRound() {
   if (document.activeElement) document.activeElement.blur();
   // Validar campo obligatorio
   if (!$('f-campo').value) {
-    toast('⚠️ Selecciona un campo antes de registrar la ronda.', true);
+    toast(t('t_selecciona_campo'), true);
     return;
   }
   const campoId  = parseInt($('f-campo').value) || null;
@@ -1870,7 +1979,7 @@ async function addRound() {
   const barraColor = $('f-barra')?.value || null;
   const uid      = state.user?.id;
 
-  if (!uid) { toast('Sin sesión activa', true); return; }
+  if (!uid) { toast(t('t_sin_sesion'), true); return; }
 
   let ok = true;
   if (!campo) {
@@ -1901,7 +2010,7 @@ async function addRound() {
           setTimeout(() => el.classList.remove('err'), 3000);
         }
       }
-      toast('⚠️ Completa los golpes de todos los hoyos', true);
+      toast(t('t_completa_golpes'), true);
       return;
     }
     if (!isNaN(hcpIdx)) {
@@ -1963,7 +2072,7 @@ async function addRound() {
 // ── EDITAR RONDA ──────────────────────────────────────────────────────────
 function abrirEditRonda(id) {
   const r = state.rounds.find(r => r.id === id);
-  if (!r) { toast('Ronda no encontrada', true); return; }
+  if (!r) { toast(t('t_ronda_no_encontrada'), true); return; }
   $('edit-r-id').value  = r.id;
   $('edit-r-campo-id').value = r.campo_id || '';
   // Solo lectura — rellenar divs display
@@ -2194,7 +2303,7 @@ async function guardarEditRonda() {
   const saveVuelta = parseInt($('edit-r-num-hoyos')?.dataset?.vuelta) || 1;
   const minGross = saveNumHoyos === 9 ? 18 : 40;
   const maxGross = saveNumHoyos === 9 ? 110 : 220;
-  if (isNaN(gross)||gross<minGross||gross>maxGross) { showErr('Golpes no válidos.'); return; }
+  if (isNaN(gross)||gross<minGross||gross>maxGross) { showErr(t('e_golpes')); return; }
   if (campo?.hoyos?.length >= 9) {
     shots = [];
     let allFilled = true;
@@ -2206,7 +2315,7 @@ async function guardarEditRonda() {
       shots.push(v);
     }
     if (!allFilled) {
-      toast('⚠️ Completa los golpes de todos los hoyos', true);
+      toast(t('t_completa_golpes'), true);
       return;
     }
   }
@@ -2242,7 +2351,7 @@ async function guardarEditRonda() {
     window.scrollTo(0, 0);
     const hc = $('hist-container');
     if (hc) hc.scrollTop = 0;
-    toast('✓ Ronda actualizada');
+    toast(t('t_ronda_actualizada'));
   } catch(e) {
     showErr('❌ ' + (e.message || 'Error al guardar.'));
   } finally {
@@ -2261,11 +2370,11 @@ async function delRound(id) {
     state.rounds = state.rounds.filter(r => r.id !== id);
     renderAll();
     toast('Ronda eliminada');
-  } catch(e) { toast('❌ Error al eliminar', true); }
+  } catch(e) { toast(t('t_error_eliminar'), true); }
 }
 
 async function clearAll() {
-  if (!confirm('¿Borrar TODAS las rondas? Esta acción no se puede deshacer.')) return;
+  if (!confirm(t('c_borrar_rondas'))) return;
   const uid = state.user?.id;
   try {
     const { error } = await sb.from('rondas').delete().eq('user_id', uid);
@@ -2273,7 +2382,7 @@ async function clearAll() {
     state.rounds = [];
     renderAll();
     toast('Historial borrado');
-  } catch(e) { toast('❌ Error al borrar', true); }
+  } catch(e) { toast(t('t_error_borrar'), true); }
 }
 
 // ── CAMPOS ────────────────────────────────────────────────────────────────
@@ -2384,7 +2493,7 @@ function cancelarNuevoCampo() {
   });
   const tieneHoyos = Array.from({length:18}, (_,i) => $('nc-par-'+(i+1))?.value).some(v => v && v !== '');
   if (nombre || tieneBarras || tieneHoyos) {
-    if (!confirm('¿Cancelar nuevo campo? Los datos introducidos se perderán.')) return;
+    if (!confirm(t('c_cancelar_nuevo_campo'))) return;
   }
   cerrarNuevoCampo();
 }
@@ -2443,15 +2552,15 @@ async function guardarNuevaPwd() {
   const errEl   = $('pwd-err');
   const showErr = msg => { errEl.textContent = msg; errEl.classList.add('show'); };
   errEl.classList.remove('show');
-  if (!newPwd || newPwd.length < 6) { showErr('La contraseña debe tener al menos 6 caracteres.'); return; }
-  if (newPwd !== confPwd) { showErr('Las contraseñas no coinciden.'); return; }
+  if (!newPwd || newPwd.length < 6) { showErr(t('e_pass_min')); return; }
+  if (newPwd !== confPwd) { showErr(t('e_pass_match')); return; }
   const btn = $('btn-guardar-pwd');
   btn.textContent = 'Guardando…'; btn.disabled = true;
   try {
     const { error } = await sb.auth.updateUser({ password: newPwd });
     if (error) throw error;
     cerrarModal('modal-pwd');
-    toast('✓ Contraseña actualizada correctamente');
+    toast(t('t_pass_actualizada'));
   } catch(e) {
     showErr('❌ ' + (e.message || 'Error al cambiar contraseña'));
   } finally {
@@ -2465,14 +2574,14 @@ async function guardarNuevoCampo() {
   const errEl  = $('nc-err');
   errEl.classList.remove('show');
   const showErr = msg => { errEl.textContent = msg; errEl.classList.add('show'); };
-  if (!nombre) { showErr('Completa el nombre del campo.'); return; }
-  if (!uid)    { showErr('Sin sesión.'); return; }
+  if (!nombre) { showErr(t('e_nombre_campo')); return; }
+  if (!uid)    { showErr(t('e_sin_sesion')); return; }
 
   const barras = getBarrasFromEditor('nc-');
   const hasBlanca   = barras.some(b => b.color === 'blanca');
   const hasAmarilla = barras.some(b => b.color === 'amarilla');
   if (!hasBlanca && !hasAmarilla) {
-    showErr('⚠️ Introduce CR y Slope de la barra Blanca o Amarilla como mínimo.');
+    showErr(t('e_barras'));
     ['blanca','amarilla'].forEach(color => {
       const crEl = $('nc-cr-'+color), slEl = $('nc-slope-'+color);
       if (crEl && (!crEl.value || isNaN(parseFloat(crEl.value)))) {
@@ -2503,7 +2612,7 @@ async function guardarNuevoCampo() {
   const { hoyos, parTotal, error: hErr } = getHoyosFromEditor('nc-');
   if (hErr) { showErr(hErr); return; }
   if (hoyos.length < 18) {
-    showErr('⚠️ Completa los 18 hoyos con par e índice antes de guardar.');
+    showErr(t('e_hoyos_completos'));
     for (let i = 1; i <= 18; i++) {
       const pEl = $('nc-par-'+i), iEl = $('nc-idx-'+i);
       if (pEl && (!pEl.value || isNaN(parseInt(pEl.value)))) { pEl.classList.add('err'); setTimeout(() => pEl.classList.remove('err'), 3000); }
@@ -2532,7 +2641,7 @@ async function guardarNuevoCampo() {
     // Recargar datos
     await loadData();
     cerrarNuevoCampo();
-    toast('✓ Campo guardado');
+    toast(t('t_campo_guardado'));
   } catch(e) {
     showErr('❌ ' + (e.message || 'Error al guardar.'));
   } finally {
@@ -2553,14 +2662,14 @@ function cancelarEditCampo() {
   const barras = getBarrasFromEditor('edit-b-');
   const tieneBarras = barras.length > 0;
   if (nombre || tieneBarras) {
-    if (!confirm('¿Cancelar edición del campo? Los cambios no se guardarán.')) return;
+    if (!confirm(t('c_cancelar_edit_campo'))) return;
   }
   cerrarModal('modal-campo');
 }
 
 function abrirEditCampo(id) {
   const campo = state.campos.find(c => c.id === id);
-  if (!campo) { toast('Campo no encontrado', true); return; }
+  if (!campo) { toast(t('t_campo_no_encontrado'), true); return; }
   $('edit-c-id').value = id;
   $('edit-c-nombre').value = campo.nombre;
   $('edit-c-err').classList.remove('show');
@@ -2578,15 +2687,15 @@ async function guardarEditCampo() {
   const errEl  = $('edit-c-err');
   errEl.classList.remove('show');
   const showErr = msg => { errEl.textContent = msg; errEl.classList.add('show'); };
-  if (!nombre) { showErr('Completa el nombre.'); return; }
-  if (!uid)    { showErr('Sin sesión.'); return; }
+  if (!nombre) { showErr(t('e_nombre')); return; }
+  if (!uid)    { showErr(t('e_sin_sesion')); return; }
 
   // 1. Validar barras primero
   const barras = getBarrasFromEditor('edit-b-');
   const hasBlancaV   = barras.some(b => b.color === 'blanca');
   const hasAmarillaV = barras.some(b => b.color === 'amarilla');
   if (!hasBlancaV && !hasAmarillaV) {
-    showErr('⚠️ Introduce CR y Slope de la barra Blanca o Amarilla como mínimo.');
+    showErr(t('e_barras'));
     ['blanca','amarilla'].forEach(color => {
       const crEl = $('edit-b-cr-'+color), slEl = $('edit-b-slope-'+color);
       if (crEl && (!crEl.value || isNaN(parseFloat(crEl.value)))) { crEl.classList.add('err'); setTimeout(() => crEl.classList.remove('err'),3000); }
@@ -2612,7 +2721,7 @@ async function guardarEditCampo() {
   const { hoyos, parTotal, error: hErr } = getHoyosFromEditor('edit-c-');
   if (hErr) { showErr(hErr); return; }
   if (hoyos.length < 18) {
-    toast('⚠️ Completa los 18 hoyos con par e índice', true);
+    toast(t('t_completa_hoyos'), true);
     let firstErrEl = null;
     for (let i = 1; i <= 18; i++) {
       const pEl = $('edit-c-par-'+i), iEl = $('edit-c-idx-'+i);
@@ -2678,7 +2787,7 @@ async function guardarEditCampo() {
     cerrarModal('modal-campo');
     await loadData();
     window.scrollTo(0, 0);
-    toast('✓ Campo actualizado');
+    toast(t('t_campo_actualizado'));
   } catch(e) {
     showErr('❌ ' + (e.message || 'Error desconocido'));
     console.error('guardarEditCampo:', e);
@@ -2698,7 +2807,7 @@ async function delCampo(id) {
     if (error) throw error;
     await loadData();
     toast('Campo eliminado');
-  } catch(e) { toast('❌ Error al eliminar', true); }
+  } catch(e) { toast(t('t_error_eliminar'), true); }
 }
 
 // ── NAV ───────────────────────────────────────────────────────────────────
@@ -2781,6 +2890,11 @@ function maybeShowGuide() {
 }
 
 async function init() {
+  // Actualizar label idioma en menú
+  const lb = $('lang-btn-label');
+  if (lb) lb.textContent = lang === 'es' ? '🌐 ES → PT' : '🌐 PT → ES';
+  const ms = $('menu-salir-txt');
+  if (ms) ms.textContent = t('menu_salir');
   $('f-date').value = new Date().toISOString().split('T')[0];
 
   // Botones de la barra de usuario
