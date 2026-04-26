@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.016-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.017-DEV</div>
   </div>
 </div>
 
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.016-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.017-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -757,16 +757,16 @@ nav.nav-hidden{transform:translateY(100%)}
       <div class="formula-row"><span class="fk" data-i18n="fi_dif">Diferencial</span><span class="fv" data-i18n="fi_dif_f">(Golpes − CR) × 113 / Slope</span></div>
       <div class="formula-row"><span class="fk" data-i18n="fi_hcp_jug">HCP Jugador</span><span class="fv" data-i18n="fi_hcp_jug_f">Promedio mejores diferenciales × 0.95</span></div>
       <div class="formula-row"><span class="fk">Course HCP</span><span class="fv">HCP × (Slope/113) + (CR−Par)</span></div>
-      <div class="formula-row"><span class="fk">1–4 rondas</span><span class="fv" data-i18n="fi_mejor_dif2">Mejor diferencial − 2.0</span></div>
-      <div class="formula-row"><span class="fk">5–6 rondas</span><span class="fv" data-i18n="fi_mejor_dif1">Mejor diferencial − 1.0</span></div>
-      <div class="formula-row"><span class="fk">7–8 rondas</span><span class="fv" data-i18n="fi_mejor_dif">Mejor diferencial</span></div>
-      <div class="formula-row"><span class="fk">9–11 rondas</span><span class="fv" data-i18n="fi_2best">2 mejores · sin ajuste</span></div>
-      <div class="formula-row"><span class="fk">12–14 rondas</span><span class="fv">3 mejores · sin ajuste</span></div>
-      <div class="formula-row"><span class="fk">15–16 rondas</span><span class="fv">4 mejores · sin ajuste</span></div>
-      <div class="formula-row"><span class="fk">17 rondas</span><span class="fv">5 mejores · sin ajuste</span></div>
-      <div class="formula-row"><span class="fk">18 rondas</span><span class="fv">6 mejores · sin ajuste</span></div>
-      <div class="formula-row"><span class="fk">19 rondas</span><span class="fv">7 mejores · sin ajuste</span></div>
-      <div class="formula-row"><span class="fk">20 rondas</span><span class="fv">8 mejores · sin ajuste</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_r14">1–4 rondas</span><span class="fv" data-i18n="fi_mejor_dif2">Mejor diferencial − 2.0</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_r56">5–6 rondas</span><span class="fv" data-i18n="fi_mejor_dif1">Mejor diferencial − 1.0</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_r78">7–8 rondas</span><span class="fv" data-i18n="fi_mejor_dif">Mejor diferencial</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_r911">9–11 rondas</span><span class="fv" data-i18n="fi_2best">2 mejores · sin ajuste</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_r1214">12–14 rondas</span><span class="fv" data-i18n="fi_3best">3 mejores · sin ajuste</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_r1516">15–16 rondas</span><span class="fv" data-i18n="fi_4best">4 mejores · sin ajuste</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_r17">17 rondas</span><span class="fv" data-i18n="fi_5best">5 mejores · sin ajuste</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_r18">18 rondas</span><span class="fv" data-i18n="fi_6best">6 mejores · sin ajuste</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_r19">19 rondas</span><span class="fv" data-i18n="fi_7best">7 mejores · sin ajuste</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_r20">20 rondas</span><span class="fv" data-i18n="fi_8best">8 mejores · sin ajuste</span></div>
       <div class="formula-row"><span class="fk">100% Informal</span><span class="fv">Playing HCP = Course HCP</span></div>
       <div class="formula-row"><span class="fk">95% Medal / Stblf</span><span class="fv">Playing HCP = Course HCP × 0.95</span></div>
       <div class="formula-row"><span class="fk">85% Four Ball</span><span class="fv">Playing HCP = Course HCP × 0.85</span></div>
@@ -776,11 +776,11 @@ nav.nav-hidden{transform:translateY(100%)}
   <div class="card" style="margin-bottom:8px">
     <div class="card-title" style="margin-bottom:6px" data-i18n="fi_stbl_title">Stableford</div>
     <div class="formula-grid">
-      <div class="formula-row"><span class="fk" data-i18n="fi_eagle">Eagle o mejor</span><span class="fv">4 puntos</span></div>
-      <div class="formula-row"><span class="fk">Birdie</span><span class="fv">3 puntos</span></div>
-      <div class="formula-row"><span class="fk">Par</span><span class="fv">2 puntos</span></div>
-      <div class="formula-row"><span class="fk" data-i18n="fi_bogey">Bogey</span><span class="fv">1 punto</span></div>
-      <div class="formula-row"><span class="fk" data-i18n="fi_dbogey">Doble bogey +</span><span class="fv">0 puntos</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_eagle">Eagle o mejor</span><span class="fv" data-i18n="fi_4pts">4 puntos</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_birdie">Birdie</span><span class="fv" data-i18n="fi_3pts">3 puntos</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_par">Par</span><span class="fv" data-i18n="fi_2pts">2 puntos</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_bogey">Bogey</span><span class="fv" data-i18n="fi_1pt">1 punto</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_dbogey">Doble bogey +</span><span class="fv" data-i18n="fi_0pts">0 puntos</span></div>
     </div>
   </div>
   <div class="card" style="margin-bottom:8px">
@@ -789,22 +789,22 @@ nav.nav-hidden{transform:translateY(100%)}
       <div style="display:flex;align-items:center;gap:10px;padding:2px 0;border-bottom:1px solid var(--border);font-size:11px">
         <span class="barra-dot" style="background:#e8e8e8;flex-shrink:0"></span>
         <span style="color:var(--cream);min-width:62px;font-size:10px;letter-spacing:.5px">Blanca</span>
-        <span style="color:var(--cream)">Profesionales y caballeros de hándicap bajo</span>
+        <span style="color:var(--cream)" data-i18n="fi_blanca_desc">Profesionales y caballeros de hándicap bajo</span>
       </div>
       <div style="display:flex;align-items:center;gap:10px;padding:2px 0;border-bottom:1px solid var(--border);font-size:11px">
         <span class="barra-dot" style="background:#f5c518;flex-shrink:0"></span>
         <span style="color:var(--cream);min-width:62px;font-size:10px;letter-spacing:.5px">Amarilla</span>
-        <span style="color:var(--cream)">Caballeros aficionados, nivel medio y general</span>
+        <span style="color:var(--cream)" data-i18n="fi_amarilla_desc">Caballeros aficionados, nivel medio y general</span>
       </div>
       <div style="display:flex;align-items:center;gap:10px;padding:2px 0;border-bottom:1px solid var(--border);font-size:11px">
         <span class="barra-dot" style="background:#3b82f6;flex-shrink:0"></span>
         <span style="color:var(--cream);min-width:62px;font-size:10px;letter-spacing:.5px">Azul</span>
-        <span style="color:var(--cream)">Profesionales femeninos, juniors o seniors</span>
+        <span style="color:var(--cream)" data-i18n="fi_azul_desc">Profesionales femeninos, juniors o seniors</span>
       </div>
       <div style="display:flex;align-items:center;gap:10px;padding:2px 0;font-size:11px">
         <span class="barra-dot" style="background:#e05555;flex-shrink:0"></span>
         <span style="color:var(--cream);min-width:62px;font-size:10px;letter-spacing:.5px">Roja</span>
-        <span style="color:var(--cream)">Damas, principiantes y niños</span>
+        <span style="color:var(--cream)" data-i18n="fi_roja_desc">Damas, principiantes y niños</span>
       </div>
     </div>
   </div>
@@ -912,6 +912,18 @@ const i18n = {
     'fi_stbl_title':'Stableford','fi_barras_title':'Barras de Salida',
     'fi_mejor_dif2':'Mejor diferencial − 2.0','fi_mejor_dif1':'Mejor diferencial − 1.0',
     'fi_mejor_dif':'Mejor diferencial','fi_2best':'2 mejores · sin ajuste',
+    'fi_3best':'3 mejores · sin ajuste','fi_4best':'4 mejores · sin ajuste',
+    'fi_5best':'5 mejores · sin ajuste','fi_6best':'6 mejores · sin ajuste',
+    'fi_7best':'7 mejores · sin ajuste','fi_8best':'8 mejores · sin ajuste',
+    'fi_4pts':'4 puntos','fi_birdie':'Birdie','fi_3pts':'3 puntos',
+    'fi_par':'Par','fi_2pts':'2 puntos','fi_1pt':'1 punto','fi_0pts':'0 puntos',
+    'fi_blanca_desc':'Profesionales y caballeros de hándicap bajo',
+    'fi_amarilla_desc':'Caballeros aficionados, nivel medio y general',
+    'fi_azul_desc':'Profesionales femeninos, juniors o seniors',
+    'fi_roja_desc':'Damas, principiantes y niños',
+    'fi_r14':'1–4 rondas','fi_r56':'5–6 rondas','fi_r78':'7–8 rondas',
+    'fi_r911':'9–11 rondas','fi_r1214':'12–14 rondas','fi_r1516':'15–16 rondas',
+    'fi_r17':'17 rondas','fi_r18':'18 rondas','fi_r19':'19 rondas','fi_r20':'20 rondas',
     'g_inicio_txt1':'Crea tu campo de golf con los 18 hoyos, par e índice y las barras de salida con su CR y Slope.',
     'g_inicio_txt2':'Selecciona campo e introduce tu HCP real (si lo sabes) o teclea la cifra que desees. El cálculo de tu HCP de Campo y golpes objetivo se realizará a partir de este dato y se irá actualizando según las rondas creadas. Podrás probar diferentes valores de Hándicap.',
     'g_inicio_txt3':'Registra tus golpes hoyo a hoyo. La app calcula automáticamente tu diferencial y Stableford.',
@@ -984,6 +996,18 @@ const i18n = {
     'fi_stbl_title':'Stableford','fi_barras_title':'Tees de Saída',
     'fi_mejor_dif2':'Melhor diferencial − 2.0','fi_mejor_dif1':'Melhor diferencial − 1.0',
     'fi_mejor_dif':'Melhor diferencial','fi_2best':'2 melhores · sem ajuste',
+    'fi_3best':'3 melhores · sem ajuste','fi_4best':'4 melhores · sem ajuste',
+    'fi_5best':'5 melhores · sem ajuste','fi_6best':'6 melhores · sem ajuste',
+    'fi_7best':'7 melhores · sem ajuste','fi_8best':'8 melhores · sem ajuste',
+    'fi_4pts':'4 pontos','fi_birdie':'Birdie','fi_3pts':'3 pontos',
+    'fi_par':'Par','fi_2pts':'2 pontos','fi_1pt':'1 ponto','fi_0pts':'0 pontos',
+    'fi_blanca_desc':'Profissionais e amadores de handicap baixo',
+    'fi_amarilla_desc':'Amadores, nível médio e geral',
+    'fi_azul_desc':'Profissionais femininas, juniores ou seniores',
+    'fi_roja_desc':'Damas, principiantes e crianças',
+    'fi_r14':'1–4 voltas','fi_r56':'5–6 voltas','fi_r78':'7–8 voltas',
+    'fi_r911':'9–11 voltas','fi_r1214':'12–14 voltas','fi_r1516':'15–16 voltas',
+    'fi_r17':'17 voltas','fi_r18':'18 voltas','fi_r19':'19 voltas','fi_r20':'20 voltas',
     'g_inicio_txt1':'Cria o teu campo de golfe com os 18 buracos, par e índice e os tees de saída com CR e Slope.',
     'g_inicio_txt2':'Seleciona campo e introduz o teu HCP real (se o souberes) ou escreve o valor que quiseres. O cálculo do teu HCP do Campo e pancadas objetivo será feito a partir deste dado e irá atualizando-se segundo as voltas criadas. Podes experimentar diferentes valores de Handicap.',
     'g_inicio_txt3':'Regista as tuas pancadas buraco a buraco. A app calcula automaticamente o teu diferencial e Stableford.',
