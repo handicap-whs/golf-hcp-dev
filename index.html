@@ -953,34 +953,39 @@ let lang = localStorage.getItem('golf_lang') || 'es';
 function t(key) { return (i18n[lang] && i18n[lang][key]) || (i18n.es[key]) || key; }
 
 function applyLangDOM() {
-  // Actualizar label del botón de idioma
   const lb = $('lang-btn-label');
   if (lb) lb.textContent = lang === 'es' ? '🌐 ES → PT' : '🌐 PT → ES';
-  if (lang === 'es') return; // ES es el idioma base del HTML, no hay que cambiar nada
 
-  // Aplicar traducción PT a elementos clave
-  const map = {
-    'nav-inicio': 'nav_inicio', 'nav-nueva': 'nav_ronda',
-    'nav-historial': 'nav_historial', 'nav-campos': 'nav_campos',
-    'nav-formula': 'nav_info',
-  };
-  Object.entries(map).forEach(([id, key]) => {
-    const el = $(id);
-    if (el) {
-      // Solo cambiar el texto, no el SVG
-      const textNodes = [...el.childNodes].filter(n => n.nodeType === 3);
-      if (textNodes.length) textNodes[textNodes.length-1].textContent = t(key);
-    }
+  // Actualizar nav buttons (texto después del SVG)
+  [['nav-inicio','nav_inicio'],['nav-nueva','nav_ronda'],
+   ['nav-historial','nav_historial'],['nav-campos','nav_campos'],
+   ['nav-formula','nav_info']].forEach(([id,key]) => {
+    const el = $(id); if (!el) return;
+    const tn = [...el.childNodes].filter(n => n.nodeType === 3 && n.textContent.trim());
+    if (tn.length) tn[tn.length-1].textContent = t(key);
   });
-  // Botón de registrar ronda
-  const btnAdd = $('btn-add'); if (btnAdd) btnAdd.textContent = t('registrar_ronda');
-  const btnBorrar = $('btn-borrar-todo'); if (btnBorrar) btnBorrar.textContent = t('borrar_todo');
+
+  // Botones principales
+  const btnAdd = $('btn-add');
+  if (btnAdd) btnAdd.textContent = t('registrar_ronda');
+  const btnBorrar = $('btn-borrar-todo');
+  if (btnBorrar) btnBorrar.textContent = t('borrar_todo');
+
+  // Menu items texto
+  const menuSalir = document.querySelector('.nav-dd-item.danger');
+  if (menuSalir) {
+    const tn = [...menuSalir.childNodes].filter(n => n.nodeType === 3 && n.textContent.trim());
+    if (tn.length) tn[tn.length-1].textContent = t('menu_salir');
+  }
+
+  // Re-render dinámico si hay datos cargados
+  if (state.user) renderAll();
 }
 
 function setLang(l) {
   lang = l;
   localStorage.setItem('golf_lang', l);
-  location.reload();
+  applyLangDOM();
 }
 
 // ═══════════════════════════════════════════════════════════════════════
