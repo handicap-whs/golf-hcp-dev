@@ -353,7 +353,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="modal-err" id="pwd-err" style="margin-bottom:10px"></div>
     <div style="display:flex;gap:10px">
       <button class="btn" id="btn-guardar-pwd" onclick="guardarNuevaPwd()" style="flex:1">Cambiar</button>
-      <button class="btn-danger" onclick="cerrarModal('modal-pwd')" style="flex:1">Cancelar</button>
+      <button class="btn-danger" onclick="cerrarModal('modal-pwd')" style="flex:1">${t('cancelar')}</button>
     </div>
   </div>
 </div>
@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.007-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.008-DEV</div>
   </div>
 </div>
 
@@ -496,7 +496,7 @@ nav.nav-hidden{transform:translateY(100%)}
     </div>
     <div class="modal-actions">
       <button class="btn" style="margin-top:0" id="btn-guardar-ronda" onclick="guardarEditRonda()">Guardar</button>
-      <button class="btn-danger" style="margin-top:0" onclick="if(confirm(t('c_cancelar_edit_ronda')))cerrarModal('modal-ronda')">Cancelar</button>
+      <button class="btn-danger" style="margin-top:0" onclick="if(confirm(t('c_cancelar_edit_ronda')))cerrarModal('modal-ronda')">${t('cancelar')}</button>
     </div>
   </div>
 </div>
@@ -517,7 +517,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <div id="edit-hoyos-campo"></div>
     <div class="modal-actions">
       <button class="btn" style="margin-top:0" id="btn-guardar-campo">Guardar</button>
-      <button class="btn-danger" style="margin-top:0" onclick="cancelarEditCampo()">Cancelar</button>
+      <button class="btn-danger" style="margin-top:0" onclick="cancelarEditCampo()">${t('cancelar')}</button>
     </div>
   </div>
 </div>
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.007-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.008-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -692,7 +692,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
     <div style="display:flex;gap:10px">
       <button class="btn" id="btn-add" type="button" style="flex:2;margin-top:0">+ Registrar Ronda</button>
-      <button class="btn-danger" onclick="if(confirm(t('c_cancelar_nueva_ronda')))cancelarNueva()" style="flex:1;margin-top:0">Cancelar</button>
+      <button class="btn-danger" onclick="if(confirm(t('c_cancelar_nueva_ronda')))cancelarNueva()" style="flex:1;margin-top:0">${t('cancelar')}</button>
     </div>
     <div class="info">Diferencial = (Golpes − CR) × 113 / Slope</div>
   </div>
@@ -732,7 +732,7 @@ nav.nav-hidden{transform:translateY(100%)}
       <div class="modal-err" id="nc-err" style="margin-top:10px"></div>
       <div style="display:flex;gap:10px;margin-top:12px">
         <button class="btn" id="btn-guardar-nc" style="flex:1">Guardar Campo</button>
-        <button class="btn-danger" onclick="cancelarNuevoCampo()" style="flex:1">Cancelar</button>
+        <button class="btn-danger" onclick="cancelarNuevoCampo()" style="flex:1">${t('cancelar')}</button>
       </div>
     </div>
   </div>
@@ -954,14 +954,45 @@ function t(key) { return (i18n[lang] && i18n[lang][key]) || (i18n.es[key]) || ke
 
 function applyLangDOM() {
   try {
-    // 1. Botón idioma
+    // Botón idioma
     const lb = document.getElementById('lang-btn-label');
     if (lb) lb.textContent = lang === 'es' ? '🌐 ES → PT' : '🌐 PT → ES';
-    // 2. Cambiar fondo body para confirmar que funciona
-    document.body.style.outline = lang === 'pt' ? '4px solid #c9a84c' : 'none';
-    // 3. Toast confirmación
-    toast(lang === 'pt' ? '🇵🇹 Português ativo' : '🇪🇸 Español activo', false);
-  } catch(e) { toast('Error: ' + e.message, true); }
+    toast(lang === 'pt' ? '🇵🇹 Português' : '🇪🇸 Español', false);
+
+    // Nav buttons text
+    const navMap = [['nav-inicio','nav_inicio'],['nav-nueva','nav_ronda'],
+      ['nav-historial','nav_historial'],['nav-campos','nav_campos'],['nav-formula','nav_info']];
+    navMap.forEach(([id,key]) => {
+      const el = document.getElementById(id); if (!el) return;
+      const tn = [...el.childNodes].filter(n => n.nodeType === 3 && n.textContent.trim());
+      if (tn.length) tn[tn.length-1].textContent = t(key);
+    });
+
+    // Menú desplegable
+    document.querySelectorAll('.nav-dd-item').forEach(el => {
+      const svgs = el.querySelectorAll('svg');
+      const span = el.querySelector('span#lang-btn-label');
+      if (span) return; // ya actualizado
+      const tn = [...el.childNodes].filter(n => n.nodeType === 3 && n.textContent.trim());
+      if (!tn.length) return;
+      const txt = tn[tn.length-1].textContent.trim();
+      const keyMap = {
+        'Info Hándicap':'menu_info_hcp','Info Handicap':'menu_info_hcp',
+        'Guía de inicio':'menu_guia','Guia inicial':'menu_guia',
+        'Cambiar clave':'menu_clave','Alterar senha':'menu_clave',
+        'Salir':'menu_salir','Sair':'menu_salir'
+      };
+      if (keyMap[txt]) tn[tn.length-1].textContent = ' ' + t(keyMap[txt]);
+    });
+
+    // Re-render contenido dinámico
+    if (state && state.user) {
+      renderResult();
+      renderHistory();
+      renderCampos();
+      renderSelectorCampos();
+    }
+  } catch(e) { console.error('applyLangDOM error:', e); }
 }
 
 function setLang(l) {
@@ -1491,9 +1522,9 @@ function renderHistory() {
     <tbody>${rows}</tbody>
   </table></div>
   <div style="margin-top:8px;font-size:9px;color:var(--muted);display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center">
-    <div><span class="used-badge" style="margin-right:6px;vertical-align:middle">✓</span>HCP✓ = diferencial usado en el cálculo</div>
-    <div><span style="background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);color:#3b82f6;font-size:7px;border-radius:50%;margin-right:6px;vertical-align:middle;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px">✓</span> Ronda de 9 hoyos combinada</div>
-    <div><span style="background:rgba(224,85,85,.15);border:1px solid rgba(224,85,85,.4);color:#e05555;font-size:7px;border-radius:50%;margin-right:6px;vertical-align:middle;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px">✓</span> Ronda de 9 hoyos pendiente de combinar</div>
+    <div><span class="used-badge" style="margin-right:6px;vertical-align:middle">✓</span>${lang==='pt'?'HCP✓ = diferencial usado no cálculo':'HCP✓ = diferencial usado en el cálculo'}</div>
+    <div><span style="background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);color:#3b82f6;font-size:7px;border-radius:50%;margin-right:6px;vertical-align:middle;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px">✓</span> ${lang==='pt'?'Volta de 9 buracos combinada':'Ronda de 9 hoyos combinada'}</div>
+    <div><span style="background:rgba(224,85,85,.15);border:1px solid rgba(224,85,85,.4);color:#e05555;font-size:7px;border-radius:50%;margin-right:6px;vertical-align:middle;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px">✓</span> ${lang==='pt'?'Volta de 9 buracos pendente':'Ronda de 9 hoyos pendiente de combinar'}</div>
   </div>`;
 }
 
@@ -1514,7 +1545,7 @@ function renderCampos() {
     return `<div class="campo-item">
       <div>
         <div class="campo-name">${campo.nombre}</div>
-        <div class="campo-meta">Par ${campo.par_total || '—'} · ${campo.hoyos?.length || 0} hoyos · ${dots || t('sin_barras')}</div>
+        <div class="campo-meta">Par ${campo.par_total || '—'} · ${campo.hoyos?.length || 0} buracos' : 'hoyos']} · ${dots || t('sin_barras')}</div>
       </div>
       <div style="display:flex;gap:8px">
         <button class="btn-edit" onclick="abrirEditCampo(${campo.id})">✏ Editar</button>
