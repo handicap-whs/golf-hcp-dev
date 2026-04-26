@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.013-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.014-DEV</div>
   </div>
 </div>
 
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.013-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.014-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -900,6 +900,19 @@ const i18n = {
     'e_9h_incompleto':'⚠️ Datos incompletos de 9 hoyos en ',
     'e_barras':'⚠️ Introduce CR y Slope de la barra Blanca o Amarilla como mínimo.',
     'g_continuar':'Continuar','pts':' pts','ver_guia':'📖 Ver guía de inicio',
+    'g_inicio_txt1':'Crea tu campo de golf con los 18 hoyos, par e índice y las barras de salida con su CR y Slope.',
+    'g_inicio_txt2':'Selecciona campo e introduce tu HCP real (si lo sabes) o teclea la cifra que desees. El cálculo de tu HCP de Campo y golpes objetivo se realizará a partir de este dato y se irá actualizando según las rondas creadas. Podrás probar diferentes valores de Hándicap.',
+    'g_inicio_txt3':'Registra tus golpes hoyo a hoyo. La app calcula automáticamente tu diferencial y Stableford.',
+    'g_hcp_txt1':'Se calcula con las últimas 20 rondas según el sistema WHS 2020.',
+    'g_hcp_txt2':'Cuantas más rondas registres, más preciso será tu handicap.',
+    'g_hcp_txt3':'Las rondas de 9 hoyos se combinan en parejas antes de entrar en el cálculo.',
+    'g_fmt_100':'100% — Juego informal entre amigos.',
+    'g_fmt_95':'95% — Medal play o Stableford oficial.',
+    'g_fmt_85':'85% — Four Ball (juego en parejas).',
+    'sin_barras':'sin barras','g_sub':'Calculadora WHS 2020','g_tagline':'Tu handicap siempre actualizado',
+    'g_como_empezar':'⛳ Cómo empezar','g_hcp_index':'📊 Handicap Index',
+    'g_formatos':'🏌️ Formatos de juego','g_simbolos':'💡 Símbolos en cada hoyo',
+    'g_nav':'🧭 Botones de navegación','f_titulo':'Fórmula WHS 2020',
   },
   pt: {
     'nav_inicio':'Início','nav_ronda':'Volta','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info',
@@ -947,6 +960,19 @@ const i18n = {
     'e_9h_incompleto':'⚠️ Dados incompletos de 9 buracos em ',
     'e_barras':'⚠️ Introduza CR e Slope da barra Branca ou Amarela no mínimo.',
     'g_continuar':'Continuar','pts':' pts','ver_guia':'📖 Ver guia inicial',
+    'g_inicio_txt1':'Cria o teu campo de golfe com os 18 buracos, par e índice e os tees de saída com CR e Slope.',
+    'g_inicio_txt2':'Seleciona campo e introduz o teu HCP real (se o souberes) ou escreve o valor que quiseres. O cálculo do teu HCP do Campo e pancadas objetivo será feito a partir deste dado e irá atualizando-se segundo as voltas criadas. Podes experimentar diferentes valores de Handicap.',
+    'g_inicio_txt3':'Regista as tuas pancadas buraco a buraco. A app calcula automaticamente o teu diferencial e Stableford.',
+    'g_hcp_txt1':'Calcula-se com as últimas 20 voltas segundo o sistema WHS 2020.',
+    'g_hcp_txt2':'Quanto mais voltas registares, mais preciso será o teu handicap.',
+    'g_hcp_txt3':'As voltas de 9 buracos combinam-se em pares antes de entrar no cálculo.',
+    'g_fmt_100':'100% — Jogo informal entre amigos.',
+    'g_fmt_95':'95% — Medal play ou Stableford oficial.',
+    'g_fmt_85':'85% — Four Ball (jogo em pares).',
+    'sin_barras':'sem barras','g_sub':'Calculadora WHS 2020','g_tagline':'O teu handicap sempre atualizado',
+    'g_como_empezar':'⛳ Como começar','g_hcp_index':'📊 Handicap Index',
+    'g_formatos':'🏌️ Formatos de jogo','g_simbolos':'💡 Símbolos em cada buraco',
+    'g_nav':'🧭 Botões de navegação','f_titulo':'Fórmula WHS 2020',
   }
 };
 let lang = localStorage.getItem('golf_lang') || 'es';
