@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.004</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.005-DEV</div>
   </div>
 </div>
 
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.004</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.005-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -703,7 +703,7 @@ nav.nav-hidden{transform:translateY(100%)}
   <div class="card">
     <div class="card-row">
       <div class="card-title" style="margin-bottom:0">Historial</div>
-      <button class="btn-sm" id="btn-borrar-todo" onclick="clearAll()" style="display:none">Borrar todo</button>
+      <button class="btn-sm" id="btn-borrar-todo" onclick="clearAll()" style="display:none">${t('borrar_todo')}</button>
     </div>
     <div id="hist-container"><div class="empty">Cargando…</div></div>
   </div>
@@ -1517,8 +1517,8 @@ function renderHistory() {
   c.innerHTML = `<div class="hist-wrap"><table class="hist-table">
     <thead><tr>
       <th class="col-fecha">Fecha</th>
-      <th class="col-campo-hdr">Campo</th>
-      <th>Golpes</th><th>Dif.</th>
+      <th class="col-campo-hdr">${t('campo_col')}</th>
+      <th>${t('golpes_col')}</th><th>${t('dif_col')}</th>
       <th>Barra</th><th>Stbl.</th><th>HCP✓</th><th></th>
     </tr></thead>
     <tbody>${rows}</tbody>
@@ -1547,7 +1547,7 @@ function renderCampos() {
     return `<div class="campo-item">
       <div>
         <div class="campo-name">${campo.nombre}</div>
-        <div class="campo-meta">Par ${campo.par_total || '—'} · ${campo.hoyos?.length || 0} hoyos · ${dots || 'sin barras'}</div>
+        <div class="campo-meta">Par ${campo.par_total || '—'} · ${campo.hoyos?.length || 0} hoyos · ${dots || t('sin_barras')}</div>
       </div>
       <div style="display:flex;gap:8px">
         <button class="btn-edit" onclick="abrirEditCampo(${campo.id})">✏ Editar</button>
@@ -2105,7 +2105,7 @@ async function addRound() {
     });
     cancelarNueva();
     renderAll();
-    toast(stableford != null ? `✓ Ronda guardada · ${stableford} pts Stableford` : '✓ Ronda guardada');
+    toast(stableford != null ? `✓ ${t('nav_ronda')} guardada · ${stableford} pts Stableford` : '✓ Ronda guardada');
     goTo('inicio', $('nav-inicio'));
   } catch(e) {
     toast('❌ Error al guardar: ' + (e.message || e), true);
@@ -2437,7 +2437,7 @@ function buildHoyosEditor(containerId, prefix, existingHoyos = []) {
   if (!wrap) return;
   let html = '';
   for (let half = 0; half < 2; half++) {
-    html += `<div class="hoyo-label" style="margin-bottom:6px">${half === 0 ? 'Hoyos 1–9' : 'Hoyos 10–18'}</div>`;
+    html += `<div class="hoyo-label" style="margin-bottom:6px">${half === 0 ? t('ida') : t('vuelta2')}</div>`;
     html += `<table class="tabla-hoyos"><thead><tr>
       <td style="font-size:7px;color:var(--muted);text-align:left;padding:3px 4px">#</td>`;
     for (let i = 1 + half*9; i <= 9 + half*9; i++) html += `<td style="font-size:8px;color:var(--muted)">${i}</td>`;
