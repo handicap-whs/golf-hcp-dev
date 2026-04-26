@@ -951,6 +951,32 @@ const i18n = {
 };
 let lang = localStorage.getItem('golf_lang') || 'es';
 function t(key) { return (i18n[lang] && i18n[lang][key]) || (i18n.es[key]) || key; }
+
+function applyLangDOM() {
+  // Actualizar label del botón de idioma
+  const lb = $('lang-btn-label');
+  if (lb) lb.textContent = lang === 'es' ? '🌐 ES → PT' : '🌐 PT → ES';
+  if (lang === 'es') return; // ES es el idioma base del HTML, no hay que cambiar nada
+
+  // Aplicar traducción PT a elementos clave
+  const map = {
+    'nav-inicio': 'nav_inicio', 'nav-nueva': 'nav_ronda',
+    'nav-historial': 'nav_historial', 'nav-campos': 'nav_campos',
+    'nav-formula': 'nav_info',
+  };
+  Object.entries(map).forEach(([id, key]) => {
+    const el = $(id);
+    if (el) {
+      // Solo cambiar el texto, no el SVG
+      const textNodes = [...el.childNodes].filter(n => n.nodeType === 3);
+      if (textNodes.length) textNodes[textNodes.length-1].textContent = t(key);
+    }
+  });
+  // Botón de registrar ronda
+  const btnAdd = $('btn-add'); if (btnAdd) btnAdd.textContent = t('registrar_ronda');
+  const btnBorrar = $('btn-borrar-todo'); if (btnBorrar) btnBorrar.textContent = t('borrar_todo');
+}
+
 function setLang(l) {
   lang = l;
   localStorage.setItem('golf_lang', l);
@@ -2890,11 +2916,8 @@ function maybeShowGuide() {
 }
 
 async function init() {
-  // Actualizar label idioma en menú
-  const lb = $('lang-btn-label');
-  if (lb) lb.textContent = lang === 'es' ? '🌐 ES → PT' : '🌐 PT → ES';
-  const ms = $('menu-salir-txt');
-  if (ms) ms.textContent = t('menu_salir');
+  // Aplicar idioma guardado
+  applyLangDOM();
   $('f-date').value = new Date().toISOString().split('T')[0];
 
   // Botones de la barra de usuario
