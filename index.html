@@ -278,7 +278,7 @@ nav.nav-hidden{transform:translateY(100%)}
         <div class="guide-card-title">⛳ Cómo empezar</div>
         <ul class="guide-card-body">
           <li>Ve a <strong style="color:#e8c96a">Campos</strong> y crea tu campo de golf con los 18 hoyos, par e índice de cada hoyo y las barras de salida con su CR y Slope.</li>
-          <li>En <strong style="color:#e8c96a">Inicio</strong> selecciona campo y barra para ver tu HCP de Campo y golpes objetivo.</li>
+          <li>En <strong style="color:#e8c96a">Inicio</strong> selecciona campo, introduce tu HCP real (si lo sabes) o teclea la cifra que desees. El cálculo de tu HCP de Campo y golpes objetivo se realizará a partir de este dato y posteriormente se irá actualizando según las rondas creadas.</li>
           <li>En <strong style="color:#e8c96a">Ronda</strong> registra tus golpes hoyo a hoyo. La app calcula automáticamente tu diferencial y Stableford.</li>
         </ul>
       </div>
@@ -353,7 +353,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="modal-err" id="pwd-err" style="margin-bottom:10px"></div>
     <div style="display:flex;gap:10px">
       <button class="btn" id="btn-guardar-pwd" onclick="guardarNuevaPwd()" style="flex:1">Cambiar</button>
-      <button class="btn-danger" onclick="cerrarModal('modal-pwd')" style="flex:1">${t('cancelar')}</button>
+      <button class="btn-danger" onclick="cerrarModal('modal-pwd')" style="flex:1">Cancelar</button>
     </div>
   </div>
 </div>
@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.008-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.009-DEV</div>
   </div>
 </div>
 
@@ -496,7 +496,7 @@ nav.nav-hidden{transform:translateY(100%)}
     </div>
     <div class="modal-actions">
       <button class="btn" style="margin-top:0" id="btn-guardar-ronda" onclick="guardarEditRonda()">Guardar</button>
-      <button class="btn-danger" style="margin-top:0" onclick="if(confirm(t('c_cancelar_edit_ronda')))cerrarModal('modal-ronda')">${t('cancelar')}</button>
+      <button class="btn-danger" style="margin-top:0" onclick="if(confirm(t('c_cancelar_edit_ronda')))cerrarModal('modal-ronda')">Cancelar</button>
     </div>
   </div>
 </div>
@@ -517,7 +517,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <div id="edit-hoyos-campo"></div>
     <div class="modal-actions">
       <button class="btn" style="margin-top:0" id="btn-guardar-campo">Guardar</button>
-      <button class="btn-danger" style="margin-top:0" onclick="cancelarEditCampo()">${t('cancelar')}</button>
+      <button class="btn-danger" style="margin-top:0" onclick="cancelarEditCampo()">Cancelar</button>
     </div>
   </div>
 </div>
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.008-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.009-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -692,7 +692,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
     <div style="display:flex;gap:10px">
       <button class="btn" id="btn-add" type="button" style="flex:2;margin-top:0">+ Registrar Ronda</button>
-      <button class="btn-danger" onclick="if(confirm(t('c_cancelar_nueva_ronda')))cancelarNueva()" style="flex:1;margin-top:0">${t('cancelar')}</button>
+      <button class="btn-danger" onclick="if(confirm(t('c_cancelar_nueva_ronda')))cancelarNueva()" style="flex:1;margin-top:0" data-i18n="cancelar">Cancelar</button>
     </div>
     <div class="info">Diferencial = (Golpes − CR) × 113 / Slope</div>
   </div>
@@ -703,7 +703,7 @@ nav.nav-hidden{transform:translateY(100%)}
   <div class="card">
     <div class="card-row">
       <div class="card-title" style="margin-bottom:0">Historial</div>
-      <button class="btn-sm" id="btn-borrar-todo" onclick="clearAll()" style="display:none">${t('borrar_todo')}</button>
+      <button class="btn-sm" id="btn-borrar-todo" onclick="clearAll()" style="display:none" data-i18n="borrar_todo">Borrar todo</button>
     </div>
     <div id="hist-container"><div class="empty">Cargando…</div></div>
   </div>
@@ -732,7 +732,7 @@ nav.nav-hidden{transform:translateY(100%)}
       <div class="modal-err" id="nc-err" style="margin-top:10px"></div>
       <div style="display:flex;gap:10px;margin-top:12px">
         <button class="btn" id="btn-guardar-nc" style="flex:1">Guardar Campo</button>
-        <button class="btn-danger" onclick="cancelarNuevoCampo()" style="flex:1">${t('cancelar')}</button>
+        <button class="btn-danger" onclick="cancelarNuevoCampo()" style="flex:1" data-i18n="cancelar">Cancelar</button>
       </div>
     </div>
   </div>
@@ -741,7 +741,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="card">
       <div class="card-row">
         <div class="card-title" style="margin-bottom:0">Mis Campos</div>
-        <button class="btn-sm" onclick="abrirNuevoCampo()">+ Nuevo</button>
+        <button class="btn-sm" onclick="abrirNuevoCampo()" data-i18n="nuevo_campo">+ Nuevo</button>
       </div>
       <div id="campos-list"><div class="empty">Cargando…</div></div>
     </div>
@@ -983,6 +983,14 @@ function applyLangDOM() {
         'Salir':'menu_salir','Sair':'menu_salir'
       };
       if (keyMap[txt]) tn[tn.length-1].textContent = ' ' + t(keyMap[txt]);
+    });
+
+    // Actualizar todos los elementos con data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      const val = t(key);
+      if (el.tagName === 'INPUT') el.placeholder = val;
+      else el.textContent = val;
     });
 
     // Re-render contenido dinámico
