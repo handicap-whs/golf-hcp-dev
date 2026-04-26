@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.015-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.016-DEV</div>
   </div>
 </div>
 
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.015-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.016-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -1384,7 +1384,6 @@ async function doReset() {
 
 
 function doLogout() {
-  if (!confirm('⚠️ ¿SALIR DE LA APLICACIÓN?\n\nSe cerrará tu sesión.')) return;
   state.user = null; state.rounds = []; state.campos = [];
   renderAll(); renderCampos(); renderSelectorCampos();
   $('player-bar').classList.add('hidden');
@@ -2916,6 +2915,7 @@ async function delCampo(id) {
 // ── NAV ───────────────────────────────────────────────────────────────────
 function goTo(id, btn) {
   closeNavMenu();
+  if (id === 'formula') applyLangDOM();
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   $('page-' + id).classList.add('active');
