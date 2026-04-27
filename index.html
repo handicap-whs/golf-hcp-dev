@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.031-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.032-DEV</div>
   </div>
 </div>
 
@@ -409,7 +409,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="auth-msg err" id="reset-err"></div>
     <div class="auth-msg ok" id="reset-ok"></div>
     <div class="auth-field"><label data-i18n="email">Email</label><input id="reset-email" type="email" inputmode="email" placeholder="tu@email.com"></div>
-    <button class="auth-btn" id="btn-reset" onclick="doReset()">Enviar enlace</button>
+    <button class="auth-btn" id="btn-reset" onclick="doReset()" data-i18n="enviar_enlace">Enviar enlace</button>
     <div class="auth-link"><span onclick="showAuth('login')">← Volver</span></div>
   </div>
 </div>
@@ -551,7 +551,7 @@ nav.nav-hidden{transform:translateY(100%)}
           <option value="">— Selecciona barra —</option>
         </select>
       </div>
-      <div id="p-barra-aviso">⚠️ Este campo no tiene barras definidas.<br><span style="color:var(--muted)">Ve a <strong style="color:var(--cream)">Campos → ✏ Editar</strong> para añadir barras con su CR y Slope.</span></div>
+      <div id="p-barra-aviso">${lang==='pt'?'⚠️ Este campo não tem barras definidas.<br><span style="color:var(--muted)">Vá a <strong style="color:var(--cream)">Campos → ✏ Editar</strong> para adicionar barras com CR e Slope.</span>':'⚠️ Este campo no tiene barras definidas.<br><span style="color:var(--muted)">Ve a <strong style="color:var(--cream)">Campos → ✏ Editar</strong> para añadir barras con su CR y Slope.</span>'}</div>
     </div>
     <div class="fields f2" style="margin-bottom:6px;gap:6px">
       <div class="field" style="gap:3px">
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.031-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.032-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -2998,7 +2998,7 @@ function goTo(id, btn) {
     // Avisar si no hay campos creados
     if (state.user && !state.campos.length) {
       setTimeout(() => {
-        if (confirm('No tienes campos creados.\n\n¿Ir a Campos para crear uno?')) {
+        if (confirm(t('c_sin_campos'))) {
           goTo('campos', $('nav-campos'));
         }
       }, 300);
@@ -3008,7 +3008,7 @@ function goTo(id, btn) {
     // Avisar si no hay campos creados
     if (state.user && !state.campos.length) {
       setTimeout(() => {
-        if (confirm('No tienes campos creados.\n\n¿Ir a Campos para crear uno?')) {
+        if (confirm(t('c_sin_campos'))) {
           goTo('campos', $('nav-campos'));
         }
       }, 300);
