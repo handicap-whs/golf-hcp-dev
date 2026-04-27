@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.019-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.021-DEV</div>
   </div>
 </div>
 
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.019-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.021-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -872,7 +872,7 @@ const i18n = {
     'ida':'1ª (1–9)','vuelta2':'2ª (10–18)','hoyos_18':'18 hoyos','hoyos_9':'9 hoyos',
     'barra_salida':'Barra de salida','hcp_idx':'HCP Index','registrar_ronda':'+ Registrar Ronda',
     'cancelar':'Cancelar','guardando':'Guardando…',
-    'historial':'Historial','fecha_col':'Fecha','campo_col':'Campo','golpes_col':'Golpes','dif_col':'Dif.','stbl_col':'Stbl',
+    'historial':'Historial','fecha_col':'Fecha','campo_col':'Campo','golpes_col':'Golpes','dif_col':'Dif.','barra_col':'Barra','stbl_col':'Stbl',
     'borrar_todo':'Borrar todo',
     'mis_campos':'Mis Campos','nuevo_campo':'+ Nuevo','nuevo_campo_title':'Nuevo Campo',
     'nombre_campo':'Nombre del campo','max15':'(máx. 15 caracteres)','barras_salida':'Barras de Salida',
@@ -960,7 +960,7 @@ const i18n = {
     'ida':'1ª (1–9)','vuelta2':'2ª (10–18)','hoyos_18':'18 buracos','hoyos_9':'9 buracos',
     'barra_salida':'Tee de saída','hcp_idx':'HCP Index','registrar_ronda':'+ Registar Volta',
     'cancelar':'Cancelar','guardando':'A guardar…',
-    'historial':'Histórico','fecha_col':'Data','campo_col':'Campo','golpes_col':'Pancadas','dif_col':'Dif.','stbl_col':'Stbl',
+    'historial':'Histórico','fecha_col':'Data','campo_col':'Campo','golpes_col':'Pancadas','dif_col':'Dif.','barra_col':'Tee','stbl_col':'Stbl',
     'borrar_todo':'Apagar tudo',
     'mis_campos':'Os Meus Campos','nuevo_campo':'+ Novo','nuevo_campo_title':'Novo Campo',
     'nombre_campo':'Nome do campo','max15':'(máx. 15 caracteres)','barras_salida':'Tees de Saída',
@@ -1611,10 +1611,10 @@ function renderHistory() {
   }).join('');
   c.innerHTML = `<div class="hist-wrap"><table class="hist-table">
     <thead><tr>
-      <th class="col-fecha">Fecha</th>
+      <th class="col-fecha">${t('fecha_col')}</th>
       <th class="col-campo-hdr">${t('campo_col')}</th>
       <th>${t('golpes_col')}</th><th>${t('dif_col')}</th>
-      <th>Barra</th><th>Stbl.</th><th>HCP✓</th><th></th>
+      <th>${t('barra_col')}</th><th>${t('stbl_col')}</th><th>HCP✓</th><th></th>
     </tr></thead>
     <tbody>${rows}</tbody>
   </table></div>
@@ -2200,7 +2200,7 @@ async function addRound() {
     });
     cancelarNueva();
     renderAll();
-    toast(stableford != null ? `✓ ${t('nav_ronda')} guardada · ${stableford} pts Stableford` : '✓ Ronda guardada');
+    toast(stableford != null ? `✓ ${t('nav_ronda')} ${lang==='pt'?'gravada':'guardada'} · ${stableford} pts Stableford` : `✓ ${t('nav_ronda')} ${lang==='pt'?'gravada':'guardada'}`);
     goTo('inicio', $('nav-inicio'));
   } catch(e) {
     toast('❌ Error al guardar: ' + (e.message || e), true);
