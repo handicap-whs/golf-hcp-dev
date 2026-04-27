@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.018-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.019-DEV</div>
   </div>
 </div>
 
@@ -484,11 +484,11 @@ nav.nav-hidden{transform:translateY(100%)}
 
     </div>
     <div id="edit-hoyos-wrap" style="display:none">
-      <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:10px 0 8px">Golpes por hoyo</div>
+      <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:10px 0 8px" data-i18n="golpes_hoyo">Golpes por hoyo</div>
       <div style="font-size:10px;color:var(--muted);margin-bottom:6px">Total: <strong id="edit-total" style="color:var(--cream)">—</strong> · Stableford: <strong id="edit-stbl-prev" style="color:var(--gold2)">—</strong></div>
       <div style="display:flex;gap:14px;margin-top:6px;font-size:9px;color:var(--muted);flex-wrap:wrap">
-        <span><span class="red-dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#e05555;margin-right:4px;vertical-align:middle"></span>Golpe de ventaja (HCP campo)</span>
-        <span><span class="stbl-dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:4px;vertical-align:middle"></span>Punto Stableford</span>
+        <span><span class="red-dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#e05555;margin-right:4px;vertical-align:middle"></span><span data-i18n="golpe_ventaja">Golpe de ventaja (HCP campo)</span></span>
+        <span><span class="stbl-dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:4px;vertical-align:middle"></span><span data-i18n="punto_stbl">Punto Stableford</span></span>
       </div>
       <div class="hoyo-section"><div class="hoyo-label">Salida 1–9</div><div class="hoyo-grid" id="edit-grid-out"></div></div>
       <div class="hoyo-separator"></div>
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.018-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.019-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -670,23 +670,23 @@ nav.nav-hidden{transform:translateY(100%)}
           </select>
         </div>
         <div class="field" style="gap:3px">
-          <label>HCP de Campo</label>
+          <label data-i18n="hcp_campo">HCP de Campo</label>
           <div id="nueva-chcp-val" style="background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:5px 8px;font-size:13px;color:var(--gold2);font-family:'DM Mono',monospace">—</div>
         </div>
       </div>
     </div>
     <div id="hoyos-wrap" style="display:none;margin-bottom:12px">
-      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Golpes por hoyo</div>
-      <div class="hoyo-section"><div class="hoyo-label">Salida 1–9</div><div class="hoyo-grid" id="grid-out"></div></div>
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px" data-i18n="golpes_hoyo">Golpes por hoyo</div>
+      <div class="hoyo-section"><div class="hoyo-label" id="grid-out-label" data-i18n="salida_19">Salida 1–9</div><div class="hoyo-grid" id="grid-out"></div></div>
       <div class="hoyo-separator"></div>
-      <div class="hoyo-section"><div class="hoyo-label" id="grid-in-label">Vuelta 10–18</div><div class="hoyo-grid" id="grid-in"></div></div>
+      <div class="hoyo-section"><div class="hoyo-label" id="grid-in-label" data-i18n="vuelta_1018">Vuelta 10–18</div><div class="hoyo-grid" id="grid-in"></div></div>
       <div style="display:flex;gap:10px;font-size:11px;color:var(--muted);margin-top:8px">
         <span>Total: <strong id="total-golpes" style="color:var(--cream)">—</strong></span>
         <span>Stableford: <strong id="preview-stbl" style="color:var(--gold2)">—</strong></span>
       </div>
       <div style="display:flex;gap:14px;margin-top:6px;font-size:9px;color:var(--muted);flex-wrap:wrap">
-        <span><span class="red-dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#e05555;margin-right:4px;vertical-align:middle"></span>Golpe de ventaja (HCP campo)</span>
-        <span><span class="stbl-dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:4px;vertical-align:middle"></span>Punto Stableford</span>
+        <span><span class="red-dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#e05555;margin-right:4px;vertical-align:middle"></span><span data-i18n="golpe_ventaja">Golpe de ventaja (HCP campo)</span></span>
+        <span><span class="stbl-dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:4px;vertical-align:middle"></span><span data-i18n="punto_stbl">Punto Stableford</span></span>
       </div>
     </div>
 
@@ -864,6 +864,10 @@ const i18n = {
     'selecciona_campo':'— Selecciona campo —','selecciona_campo_calc':'Selecciona un campo para calcular.','fi_dif_formula':'Diferencial = (Golpes − CR) × 113 / Slope','selecciona_barra':'— Selecciona barra —','selecciona_hoyos':'— Hoyos —',
     'hcp_jugador':'HCP Jugador','hcp_campo':'HCP de Campo','course_rating':'Course Rating','slope_rating':'Slope Rating',
     'total_golpes':'Total Golpes','formato':'Formato de juego',
+    'golpes_hoyo':'Golpes por hoyo','salida_19':'Salida 1–9','vuelta_1018':'Vuelta 10–18',
+    'golpe_ventaja':'Golpe de ventaja (HCP campo)','punto_stbl':'Punto Stableford',
+    'fmt_100':'100% — Informal','fmt_95':'95% — Medal / Stblf','fmt_85':'85% — Four Ball',
+    'total_label':'Total:','stbl_label':'Stableford:',
     'nueva_ronda':'Nueva Ronda','campo':'Campo','fecha':'Fecha','hoyos':'Hoyos','vuelta':'Vuelta',
     'ida':'1ª (1–9)','vuelta2':'2ª (10–18)','hoyos_18':'18 hoyos','hoyos_9':'9 hoyos',
     'barra_salida':'Barra de salida','hcp_idx':'HCP Index','registrar_ronda':'+ Registrar Ronda',
@@ -948,6 +952,10 @@ const i18n = {
     'selecciona_campo':'— Selecione campo —','selecciona_campo_calc':'Selecione um campo para calcular.','fi_dif_formula':'Diferencial = (Pancadas − CR) × 113 / Slope','selecciona_barra':'— Selecione barra —','selecciona_hoyos':'— Buracos —',
     'hcp_jugador':'HCP Jogador','hcp_campo':'HCP do Campo','course_rating':'Course Rating','slope_rating':'Slope Rating',
     'total_golpes':'Total Pancadas','formato':'Formato de jogo',
+    'golpes_hoyo':'Pancadas por buraco','salida_19':'Saída 1–9','vuelta_1018':'Volta 10–18',
+    'golpe_ventaja':'Golpe de vantagem (HCP campo)','punto_stbl':'Ponto Stableford',
+    'fmt_100':'100% — Informal','fmt_95':'95% — Medal / Stblf','fmt_85':'85% — Four Ball',
+    'total_label':'Total:','stbl_label':'Stableford:',
     'nueva_ronda':'Nova Volta','campo':'Campo','fecha':'Data','hoyos':'Buracos','vuelta':'Volta',
     'ida':'1ª (1–9)','vuelta2':'2ª (10–18)','hoyos_18':'18 buracos','hoyos_9':'9 buracos',
     'barra_salida':'Tee de saída','hcp_idx':'HCP Index','registrar_ronda':'+ Registar Volta',
@@ -1921,9 +1929,9 @@ function buildHoyoInputs(campo, numHoyos, vuelta) {
   // Etiqueta dinámica
   const outLbl = $('grid-out')?.previousElementSibling;
   if (outLbl && numHoyos === 9) {
-    outLbl.textContent = vuelta === 2 ? 'Vuelta 10–18' : 'Salida 1–9';
+    outLbl.textContent = vuelta === 2 ? t('vuelta_1018') : t('salida_19');
   } else if (outLbl) {
-    outLbl.textContent = 'Salida 1–9';
+    outLbl.textContent = t('salida_19');
   }
   for (let i = startIdx; i < endIdx; i++) {
     const h = campo.hoyos[i];
@@ -2221,7 +2229,7 @@ function abrirEditRonda(id) {
   const _fdEl = $('edit-r-fecha-disp'); if(_fdEl) _fdEl.textContent = r.date ? (d=>d[2]+'/'+d[1]+'/'+d[0])(r.date.split('-')) : '—';
   // Hidden inputs para guardar
   // Formato de juego (solo lectura)
-  const _fmtLabels = {'100':'100% — Informal','95':'95% — Medal / Stblf','85':'85% — Four Ball'};
+  const _fmtLabels = {'100':t('fmt_100'),'95':t('fmt_95'),'85':t('fmt_85')};
   const _fmtVal = String(r.juego_fmt || 100);
   $('edit-fmt').value = _fmtVal;
   const _fmtDisp = $('edit-fmt-disp');
