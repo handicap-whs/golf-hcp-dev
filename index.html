@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.028-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.029-DEV</div>
   </div>
 </div>
 
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.028-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.029-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -1485,7 +1485,7 @@ async function onLogin(user) {
     loadPre();
     autorellenarInicio();
   } catch(e) {
-    toast('❌ Error: ' + (e.message || JSON.stringify(e)), true);
+    toast(t('t_error') + (e.message || JSON.stringify(e)), true);
     console.error('onLogin error:', e);
   }
 }
@@ -2218,7 +2218,7 @@ async function addRound() {
     toast(stableford != null ? `✓ ${t('nav_ronda')} ${lang==='pt'?'gravada':'guardada'} · ${stableford} pts Stableford` : `✓ ${t('nav_ronda')} ${lang==='pt'?'gravada':'guardada'}`);
     goTo('inicio', $('nav-inicio'));
   } catch(e) {
-    toast('❌ Error al guardar: ' + (e.message || e), true);
+    toast(t('t_error_guardar') + (e.message || e), true);
   } finally {
     const b = $('btn-add');
     if (b) { b.textContent = '+ Registrar Ronda'; b.disabled = false; }
@@ -2525,7 +2525,7 @@ async function delRound(id) {
     if (error) throw error;
     state.rounds = state.rounds.filter(r => r.id !== id);
     renderAll();
-    toast('Ronda eliminada');
+    toast(t('t_ronda_eliminada'));
   } catch(e) { toast(t('t_error_eliminar'), true); }
 }
 
@@ -2537,7 +2537,7 @@ async function clearAll() {
     if (error) throw error;
     state.rounds = [];
     renderAll();
-    toast('Historial borrado');
+    toast(t('t_historial_borrado'));
   } catch(e) { toast(t('t_error_borrar'), true); }
 }
 
@@ -2962,7 +2962,7 @@ async function delCampo(id) {
     const { error } = await sb.from('campos').delete().eq('id', id);
     if (error) throw error;
     await loadData();
-    toast('Campo eliminado');
+    toast(t('t_campo_eliminado'));
   } catch(e) { toast(t('t_error_eliminar'), true); }
 }
 
