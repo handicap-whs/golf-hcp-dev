@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.021-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.022-DEV</div>
   </div>
 </div>
 
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.021-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.022-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -740,7 +740,7 @@ nav.nav-hidden{transform:translateY(100%)}
   <div id="campos-lista-wrap">
     <div class="card">
       <div class="card-row">
-        <div class="card-title" style="margin-bottom:0">Mis Campos</div>
+        <div class="card-title" style="margin-bottom:0" data-i18n="mis_campos">Mis Campos</div>
         <button class="btn-sm" onclick="abrirNuevoCampo()" data-i18n="nuevo_campo">+ Nuevo</button>
       </div>
       <div id="campos-list"><div class="empty">Cargando…</div></div>
@@ -1642,7 +1642,7 @@ function renderCampos() {
     return `<div class="campo-item">
       <div>
         <div class="campo-name">${campo.nombre}</div>
-        <div class="campo-meta">Par ${campo.par_total || '—'} · ${campo.hoyos?.length || 0} buracos' : 'hoyos']} · ${dots || t('sin_barras')}</div>
+        <div class="campo-meta">Par ${campo.par_total || '—'} · ${campo.hoyos?.length || 0} ${lang==='pt'?'buracos':'hoyos'} · ${dots || t('sin_barras')}</div>
       </div>
       <div style="display:flex;gap:8px">
         <button class="btn-edit" onclick="abrirEditCampo(${campo.id})">✏ Editar</button>
