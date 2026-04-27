@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.027-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.028-DEV</div>
   </div>
 </div>
 
@@ -391,10 +391,10 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="auth-title" data-i18n="crear_cuenta">Crear Cuenta</div>
     <div class="auth-msg err" id="reg-err"></div>
     <div class="auth-msg ok" id="reg-ok"></div>
-    <div class="auth-field"><label>Nombre</label><input id="reg-nombre" type="text" autocomplete="name" placeholder="Francisco"></div>
+    <div class="auth-field"><label data-i18n="nombre_label">Nombre</label><input id="reg-nombre" type="text" autocomplete="name" placeholder="Francisco"></div>
     <div class="auth-field"><label data-i18n="email">Email</label><input id="reg-email" type="email" inputmode="email" autocomplete="email" placeholder="tu@email.com"></div>
     <div class="auth-field"><label data-i18n="password">Contraseña</label><input id="reg-pass" type="password" autocomplete="new-password" placeholder="mínimo 6 caracteres"></div>
-    <div class="auth-field"><label>Confirmar</label><input id="reg-pass2" type="password" autocomplete="new-password" placeholder="repite la contraseña"></div>
+    <div class="auth-field"><label data-i18n="confirmar_label">Confirmar</label><input id="reg-pass2" type="password" autocomplete="new-password" placeholder="repite la contraseña"></div>
     <button class="auth-btn" id="btn-reg" onclick="doRegister()" data-i18n="crear_cuenta">Crear Cuenta</button>
     <div class="auth-link">¿Ya tienes cuenta? <span onclick="showAuth('login')">Inicia sesión</span></div>
   </div>
@@ -450,11 +450,11 @@ nav.nav-hidden{transform:translateY(100%)}
         <div id="edit-r-slope-disp" style="background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:5px 8px;font-size:13px;color:var(--gold2);font-family:'DM Mono',monospace">—</div>
         <input type="hidden" id="edit-r-slope">
       </div>
-      <div class="field" style="gap:3px"><label>Golpes brutos</label>
+      <div class="field" style="gap:3px"><label data-i18n="golpes_brutos">Golpes brutos</label>
         <div id="edit-r-gross-disp" style="background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:5px 8px;font-size:13px;color:var(--gold2);font-family:'DM Mono',monospace">—</div>
         <input type="hidden" id="edit-r-gross">
       </div>
-      <div class="field" style="gap:3px"><label>Stableford</label>
+      <div class="field" style="gap:3px"><label data-i18n="stbl_label_f">Stableford</label>
         <div id="edit-r-stbl-disp" style="background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:5px 8px;font-size:13px;color:var(--gold2);font-family:'DM Mono',monospace">—</div>
         <input type="hidden" id="edit-r-stbl">
       </div>
@@ -478,7 +478,7 @@ nav.nav-hidden{transform:translateY(100%)}
         <label data-i18n="vuelta">Vuelta</label>
         <div id="edit-r-vuelta-disp" style="background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:5px 8px;font-size:13px;color:var(--gold2);font-family:'DM Mono',monospace">—</div>
       </div>
-      <div class="field" style="gap:3px"><label>HCP de Campo</label>
+      <div class="field" style="gap:3px"><label data-i18n="hcp_campo">HCP de Campo</label>
         <div id="edit-chcp-val" style="background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:5px 8px;font-size:13px;color:var(--gold2);font-family:'DM Mono',monospace">—</div>
       </div>
 
@@ -508,7 +508,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <input type="hidden" id="edit-c-id">
     <div class="modal-err" id="edit-c-err"></div>
     <div class="field" style="gap:3px;margin-bottom:8px"><label data-i18n="nombre_campo">Nombre del campo</label> <span style="color:var(--muted);font-weight:normal;font-size:9px" data-i18n="max15">(máx. 15 caracteres)</span><input id="edit-c-nombre" placeholder="CLUB DE GOLF" maxlength="15" style="background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:4px;color:#fff;font-family:'DM Mono',monospace;font-size:13px;padding:5px 8px;width:100%;-webkit-appearance:none;outline:none;text-transform:uppercase;touch-action:manipulation" oninput="this.value=this.value.toUpperCase()"></div>
-    <div class="section-title">Barras de Salida</div>
+    <div class="section-title" data-i18n="barras_salida">Barras de Salida</div>
     <div id="edit-barras-wrap"></div>
     <div class="section-title" data-i18n="par_indice">Par e Índice por Hoyo</div>
     <div id="edit-c-par-total" style="display:none;text-align:center;padding:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:5px;font-size:12px;color:var(--cream);margin-bottom:10px">
@@ -516,7 +516,7 @@ nav.nav-hidden{transform:translateY(100%)}
     </div>
     <div id="edit-hoyos-campo"></div>
     <div class="modal-actions">
-      <button class="btn" style="margin-top:0" id="btn-guardar-campo">Guardar</button>
+      <button class="btn" style="margin-top:0" id="btn-guardar-campo" data-i18n="guardar">Guardar</button>
       <button class="btn-danger" style="margin-top:0" onclick="cancelarEditCampo()">Cancelar</button>
     </div>
   </div>
@@ -560,7 +560,7 @@ nav.nav-hidden{transform:translateY(100%)}
           style="background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:4px;color:#fff;font-family:'DM Mono',monospace;font-size:13px;padding:5px 8px;width:100%;-webkit-appearance:none;outline:none" oninput="calcCHCP()">
       </div>
       <div class="field" style="gap:3px">
-        <label>Par campo</label>
+        <label data-i18n="par_campo">Par campo</label>
         <div id="p-par-disp" style="background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:5px 8px;font-size:13px;color:var(--gold2);font-family:'DM Mono',monospace">—</div>
         <input type="hidden" id="p-par">
       </div>
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.027-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.028-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -876,7 +876,11 @@ const i18n = {
     'borrar_todo':'Borrar todo',
     'mis_campos':'Mis Campos','nuevo_campo':'+ Nuevo','nuevo_campo_title':'Nuevo Campo',
     'nombre_campo':'Nombre del campo','max15':'(máx. 15 caracteres)','barras_salida':'Barras de Salida',
-    'par_indice':'Par e Índice por Hoyo','guardar_campo':'Guardar Campo','guardar':'Guardar','ida_label':'IDA','vuelta_label':'VOLTA','opcional_9h':'OPCIONAL: 9 BURACOS','par_label':'Par','ind_label':'Índ','ida_label':'IDA','vuelta_label':'VUELTA','opcional_9h':'OPCIONAL: 9 BURACOS','par_label':'Par','ind_label':'Índ',
+    'par_indice':'Par e Índice por Hoyo',
+    'golpes_brutos':'Golpes brutos','par_campo':'Par campo','stbl_label_f':'Stableford',
+    'nombre_label':'Nombre','par_label':'Par','slope_label':'Slope',
+    'cr_18h':'CR 18H','slope_18h':'Slope 18H','confirmar_label':'Confirmar',
+    'hcp_campo_title':'Handicap de Campo','guardar_campo':'Guardar Campo','guardar':'Guardar','ida_label':'IDA','vuelta_label':'VOLTA','opcional_9h':'OPCIONAL: 9 BURACOS','par_label':'Par','ind_label':'Índ','ida_label':'IDA','vuelta_label':'VUELTA','opcional_9h':'OPCIONAL: 9 BURACOS','par_label':'Par','ind_label':'Índ',
     'editar':'Editar','eliminar':'Eliminar',
     'cambiar_clave':'Cambiar Contraseña','nueva_pass':'Nueva contraseña','confirmar_pass':'Confirmar contraseña',
     'min6':'mínimo 6 caracteres','repite_pass':'repite la contraseña','cambiar':'Cambiar',
@@ -964,7 +968,11 @@ const i18n = {
     'borrar_todo':'Apagar tudo',
     'mis_campos':'Os Meus Campos','nuevo_campo':'+ Novo','nuevo_campo_title':'Novo Campo',
     'nombre_campo':'Nome do campo','max15':'(máx. 15 caracteres)','barras_salida':'Tees de Saída',
-    'par_indice':'Par e Índice por Buraco','guardar_campo':'Guardar Campo','guardar':'Guardar',
+    'par_indice':'Par e Índice por Buraco',
+    'golpes_brutos':'Pancadas brutas','par_campo':'Par campo','stbl_label_f':'Stableford',
+    'nombre_label':'Nome','par_label':'Par','slope_label':'Slope',
+    'cr_18h':'CR 18H','slope_18h':'Slope 18H','confirmar_label':'Confirmar',
+    'hcp_campo_title':'Handicap do Campo','guardar_campo':'Guardar Campo','guardar':'Guardar',
     'editar':'Editar','eliminar':'Eliminar',
     'cambiar_clave':'Alterar Senha','nueva_pass':'Nova senha','confirmar_pass':'Confirmar senha',
     'min6':'mínimo 6 caracteres','repite_pass':'repita a senha','cambiar':'Alterar',
@@ -2583,18 +2591,18 @@ function buildBarrasEditor(containerId, prefix, existingBarras = []) {
         <span style="font-size:8px;color:var(--muted);min-width:28px">${t('ida_label')}</span>
         <div><label>CR</label><input type="number" step="0.1" inputmode="decimal"
           style="${iS}" id="${prefix}cr_out-${color}" value="${b?.cr_out||''}" placeholder="35.5"></div>
-        <div><label>Slope</label><input type="number" inputmode="numeric"
+        <div><label data-i18n="slope_label">Slope</label><input type="number" inputmode="numeric"
           style="${iS}" id="${prefix}slope_out-${color}" value="${b?.slope_out||''}" placeholder="125"></div>
-        <div><label>Par</label><input type="number" inputmode="numeric"
+        <div><label data-i18n="par_label">Par</label><input type="number" inputmode="numeric"
           style="${iS}" id="${prefix}par_out-${color}" value="${b?.par_out||''}" placeholder="36"></div>
       </div>
       <div class="barra-9h-row">
         <span style="font-size:8px;color:var(--muted);min-width:28px">${t('vuelta_label')}</span>
         <div><label>CR</label><input type="number" step="0.1" inputmode="decimal"
           style="${iS}" id="${prefix}cr_in-${color}" value="${b?.cr_in||''}" placeholder="36.0"></div>
-        <div><label>Slope</label><input type="number" inputmode="numeric"
+        <div><label data-i18n="slope_label">Slope</label><input type="number" inputmode="numeric"
           style="${iS}" id="${prefix}slope_in-${color}" value="${b?.slope_in||''}" placeholder="125"></div>
-        <div><label>Par</label><input type="number" inputmode="numeric"
+        <div><label data-i18n="par_label">Par</label><input type="number" inputmode="numeric"
           style="${iS}" id="${prefix}par_in-${color}" value="${b?.par_in||''}" placeholder="36"></div>
       </div>
     </div>` : '';
@@ -2604,10 +2612,10 @@ function buildBarrasEditor(containerId, prefix, existingBarras = []) {
         <div style="font-size:9px;color:var(--cream)">${BARRA_LABELS_PL[color]}</div>
       </div>
       <div class="barra-fields" style="gap:4px">
-        <div><label>CR 18H</label><input type="text" inputmode="decimal"
+        <div><label data-i18n="cr_18h">CR 18H</label><input type="text" inputmode="decimal"
           style="${iS}" id="${prefix}cr-${color}" value="${b?.cr||''}" placeholder="71.5"
           oninput="fmtCR(this,'${prefix}slope-${color}')"></div>
-        <div><label>Slope 18H</label><input type="text" inputmode="numeric"
+        <div><label data-i18n="slope_18h">Slope 18H</label><input type="text" inputmode="numeric"
           style="${iS}" id="${prefix}slope-${color}" value="${b?.slope||''}" placeholder="125"
           oninput="fmtSlope(this,'${color === 'roja' ? prefix+'par-1' : prefix+'cr-'+nextColor(color)}')"></div>
       </div>
@@ -2667,8 +2675,8 @@ function getHoyosFromEditor(prefix) {
     const iv = $(prefix + 'idx-' + i)?.value || '';
     if (pv === '' && iv === '') continue;
     const par = parseInt(pv), indice = parseInt(iv);
-    if (isNaN(par)||par<3||par>5) return { error: `Hoyo ${i}: par debe ser 3-5.` };
-    if (isNaN(indice)||indice<1||indice>18) return { error: `Hoyo ${i}: índice 1-18.` };
+    if (isNaN(par)||par<3||par>5) return { error: `${lang==='pt'?'Buraco':'Hoyo'} ${i}: par debe ser 3-5.` };
+    if (isNaN(indice)||indice<1||indice>18) return { error: `${lang==='pt'?'Buraco':'Hoyo'} ${i}: índice 1-18.` };
     parTotal += par;
     hoyos.push({ numero: i, par, indice });
   }
@@ -2946,7 +2954,7 @@ async function guardarEditCampo() {
 
 async function delCampo(id) {
   const campoNombre = state.campos.find(c => c.id === id)?.nombre || 'este campo';
-  if (!confirm(`¿Eliminar campo "${campoNombre}" y todos sus hoyos y barras?`)) return;
+  if (!confirm(`${lang==='pt'?'Eliminar campo "'+campoNombre+'" e todos os seus buracos e barras?':('¿Eliminar campo "'+campoNombre+'" y todos sus hoyos y barras?')}`)) return;
   const uid = state.user?.id;
   try {
     await sb.from('hoyos').delete().eq('campo_id', id).eq('user_id', uid);
