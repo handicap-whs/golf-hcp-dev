@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.024-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.027-DEV</div>
   </div>
 </div>
 
@@ -507,7 +507,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="modal-title">Editar Campo</div>
     <input type="hidden" id="edit-c-id">
     <div class="modal-err" id="edit-c-err"></div>
-    <div class="field" style="gap:3px;margin-bottom:8px"><label data-i18n="nombre_campo">Nombre del campo</label> <span style="color:var(--muted);font-weight:normal;font-size:9px" data-i18n="max15">(máx. 15 caracteres)</span><input id="edit-c-nombre" id="nc-nombre-ph" placeholder="CLUB DE GOLF" maxlength="15" style="background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:4px;color:#fff;font-family:'DM Mono',monospace;font-size:13px;padding:5px 8px;width:100%;-webkit-appearance:none;outline:none;text-transform:uppercase;touch-action:manipulation" oninput="this.value=this.value.toUpperCase()"></div>
+    <div class="field" style="gap:3px;margin-bottom:8px"><label data-i18n="nombre_campo">Nombre del campo</label> <span style="color:var(--muted);font-weight:normal;font-size:9px" data-i18n="max15">(máx. 15 caracteres)</span><input id="edit-c-nombre" placeholder="CLUB DE GOLF" maxlength="15" style="background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:4px;color:#fff;font-family:'DM Mono',monospace;font-size:13px;padding:5px 8px;width:100%;-webkit-appearance:none;outline:none;text-transform:uppercase;touch-action:manipulation" oninput="this.value=this.value.toUpperCase()"></div>
     <div class="section-title">Barras de Salida</div>
     <div id="edit-barras-wrap"></div>
     <div class="section-title" data-i18n="par_indice">Par e Índice por Hoyo</div>
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.024-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.027-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -715,11 +715,11 @@ nav.nav-hidden{transform:translateY(100%)}
   <div id="nuevo-campo-wrap" style="display:none">
     <div class="card">
       <div class="card-row" style="margin-bottom:10px">
-        <div class="card-title" style="margin-bottom:0">Nuevo Campo</div>
+        <div class="card-title" style="margin-bottom:0" data-i18n="nuevo_campo_title">Nuevo Campo</div>
       </div>
       <div class="field" style="gap:3px;margin-bottom:8px">
         <label data-i18n="nombre_campo">Nombre del campo</label> <span style="color:var(--muted);font-weight:normal;font-size:9px" data-i18n="max15">(máx. 15 caracteres)</span>
-        <input id="nc-nombre" id="nc-nombre-ph" placeholder="CLUB DE GOLF" maxlength="15"
+        <input id="nc-nombre" placeholder="CLUB DE GOLF" maxlength="15"
           style="background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:4px;color:#fff;font-family:'DM Mono',monospace;font-size:13px;padding:5px 8px;width:100%;-webkit-appearance:none;outline:none;text-transform:uppercase" oninput="this.value=this.value.toUpperCase()">
       </div>
       <div class="section-title" data-i18n="barras_salida">Barras de Salida</div>
@@ -1076,6 +1076,12 @@ function applyLangDOM() {
       else el.textContent = val;
     });
 
+    // Actualizar placeholders
+    const ncPh2 = document.getElementById('nc-nombre');
+    if (ncPh2) ncPh2.placeholder = lang==='pt'?'CLUBE DE GOLFE':'CLUB DE GOLF';
+    const ecPh2 = document.getElementById('edit-c-nombre');
+    if (ecPh2) ecPh2.placeholder = lang==='pt'?'CLUBE DE GOLFE':'CLUB DE GOLF';
+
     // Actualizar options de hoyos
     const optPh = document.getElementById('opt-hoyos-ph');
     if (optPh) optPh.textContent = t('selecciona_hoyos');
@@ -1111,6 +1117,7 @@ const BARRAS = ['blanca','amarilla','azul','roja'];
 const BARRA_COLORS = {blanca:'#e8e8e8',amarilla:'#f5c518',azul:'#3b82f6',roja:'#e05555'};
 const BARRA_LABELS = {blanca:'Blanca',amarilla:'Amarilla',azul:'Azul',roja:'Roja'};
 const BARRA_LABELS_PL = {blanca:'Blancas',amarilla:'Amarillas',azul:'Azules',roja:'Rojas'};
+const BARRA_LABELS_PL_PT = {blanca:'Brancas',amarilla:'Amarelas',azul:'Azuis',roja:'Vermelhas'};
 const PRE_KEY = 'golfhcp_pre_v1';
 
 // ── SUPABASE CLIENT ──────────────────────────────────────────────────────
@@ -2571,7 +2578,7 @@ function buildBarrasEditor(containerId, prefix, existingBarras = []) {
     const show9H = color === 'amarilla' || color === 'roja';
     const nineBlock = show9H ? `
     <div class="barra-9h">
-      <div class="barra-9h-title">OPCIONAL: 9 HOYOS ${BARRA_LABELS_PL[color].toUpperCase()}</div>
+      <div class="barra-9h-title">${lang==='pt'?'OPCIONAL: 9 BURACOS '+BARRA_LABELS_PL_PT[color].toUpperCase():'OPCIONAL: 9 HOYOS '+BARRA_LABELS_PL[color].toUpperCase()}</div>
       <div class="barra-9h-row">
         <span style="font-size:8px;color:var(--muted);min-width:28px">${t('ida_label')}</span>
         <div><label>CR</label><input type="number" step="0.1" inputmode="decimal"
