@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.030-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.031-DEV</div>
   </div>
 </div>
 
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.030-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.031-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -1103,6 +1103,23 @@ function applyLangDOM() {
       renderHistory();
       renderCampos();
       renderSelectorCampos();
+      // Rebuild barra selectors with correct language labels
+      const pCampoId = parseInt($('p-campo')?.value);
+      if (pCampoId) {
+        const pCampo = state.campos.find(c => c.id === pCampoId);
+        if (pCampo?.barras?.length > 0) {
+          const curBarra = $('p-barra')?.value;
+          buildBarraSelect('p-barra', pCampo, curBarra);
+        }
+      }
+      const fCampoId = parseInt($('f-campo')?.value);
+      if (fCampoId) {
+        const fCampo = state.campos.find(c => c.id === fCampoId);
+        if (fCampo?.barras?.length > 0) {
+          const curFBarra = $('f-barra')?.value;
+          buildBarraSelect('f-barra', fCampo, curFBarra);
+        }
+      }
     }
   } catch(e) { console.error('applyLangDOM error:', e); }
 }
