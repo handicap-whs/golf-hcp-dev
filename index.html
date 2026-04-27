@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.029-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.030-DEV</div>
   </div>
 </div>
 
@@ -527,7 +527,7 @@ nav.nav-hidden{transform:translateY(100%)}
 <!-- PAGE: INICIO -->
 <div class="page active" id="page-inicio">
   <div class="result">
-    <div class="r-sub">Handicap Jugador</div>
+    <div class="r-sub" data-i18n="handicap_jugador">Handicap Jugador</div>
     <div class="r-hcp" id="r-hcp">—</div>
     <div class="r-cat" id="r-cat">Añade rondas para calcular</div>
     <div class="r-stats" id="r-stats">
@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.029-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.030-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
@@ -862,7 +862,7 @@ const i18n = {
     'enviar_enlace':'Enviar enlace','volver':'← Volver','recuperar_pass':'Recuperar contraseña',
     'email_ph':'tu@email.com','pass_ph':'••••••••',
     'selecciona_campo':'— Selecciona campo —','selecciona_campo_calc':'Selecciona un campo para calcular.','fi_dif_formula':'Diferencial = (Golpes − CR) × 113 / Slope','selecciona_barra':'— Selecciona barra —','selecciona_hoyos':'— Hoyos —',
-    'hcp_jugador':'HCP Jugador','hcp_campo':'HCP de Campo','course_rating':'Course Rating','slope_rating':'Slope Rating',
+    'hcp_jugador':'HCP Jugador','handicap_jugador':'Handicap Jugador','hcp_campo':'HCP de Campo','course_rating':'Course Rating','slope_rating':'Slope Rating',
     'total_golpes':'Total Golpes','formato':'Formato de juego',
     'golpes_hoyo':'Golpes por hoyo','salida_19':'Salida 1–9','vuelta_1018':'Vuelta 10–18',
     'golpe_ventaja':'Golpe de ventaja (HCP campo)','punto_stbl':'Punto Stableford',
@@ -954,7 +954,7 @@ const i18n = {
     'enviar_enlace':'Enviar link','volver':'← Voltar','recuperar_pass':'Recuperar senha',
     'email_ph':'seu@email.com','pass_ph':'••••••••',
     'selecciona_campo':'— Selecione campo —','selecciona_campo_calc':'Selecione um campo para calcular.','fi_dif_formula':'Diferencial = (Pancadas − CR) × 113 / Slope','selecciona_barra':'— Selecione barra —','selecciona_hoyos':'— Buracos —',
-    'hcp_jugador':'HCP Jogador','hcp_campo':'HCP do Campo','course_rating':'Course Rating','slope_rating':'Slope Rating',
+    'hcp_jugador':'HCP Jogador','handicap_jugador':'Handicap Jogador','hcp_campo':'HCP do Campo','course_rating':'Course Rating','slope_rating':'Slope Rating',
     'total_golpes':'Total Pancadas','formato':'Formato de jogo',
     'golpes_hoyo':'Pancadas por buraco','salida_19':'Saída 1–9','vuelta_1018':'Volta 10–18',
     'golpe_ventaja':'Golpe de vantagem (HCP campo)','punto_stbl':'Ponto Stableford',
@@ -1125,6 +1125,7 @@ const BARRAS = ['blanca','amarilla','azul','roja'];
 const BARRA_COLORS = {blanca:'#e8e8e8',amarilla:'#f5c518',azul:'#3b82f6',roja:'#e05555'};
 const BARRA_LABELS = {blanca:'Blanca',amarilla:'Amarilla',azul:'Azul',roja:'Roja'};
 const BARRA_LABELS_PL = {blanca:'Blancas',amarilla:'Amarillas',azul:'Azules',roja:'Rojas'};
+const BARRA_LABELS_PT = {blanca:'Branca',amarilla:'Amarela',azul:'Azul',roja:'Vermelha'};
 const BARRA_LABELS_PL_PT = {blanca:'Brancas',amarilla:'Amarelas',azul:'Azuis',roja:'Vermelhas'};
 const PRE_KEY = 'golfhcp_pre_v1';
 
@@ -1735,7 +1736,8 @@ function buildBarraSelect(selId, campo, current) {
   sel.innerHTML = `<option value="">${t('selecciona_barra')}</option>` +
     campo.barras.map(b => {
       const has9H = (b.cr_out && b.slope_out) || (b.cr_in && b.slope_in);
-      return `<option value="${b.color}">${BARRA_LABELS_PL[b.color]}${has9H ? ' ✓9H' : ''}</option>`;
+      const lbl = lang==='pt' ? BARRA_LABELS_PT[b.color] : BARRA_LABELS_PL[b.color];
+      return `<option value="${b.color}">${lbl}${has9H ? ' ✓9H' : ''}</option>`;
     }).join('');
   if (current) sel.value = current;
 }
