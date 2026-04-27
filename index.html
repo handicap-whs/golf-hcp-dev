@@ -379,7 +379,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link">¿Sin cuenta? <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.017-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.018-DEV</div>
   </div>
 </div>
 
@@ -581,7 +581,7 @@ nav.nav-hidden{transform:translateY(100%)}
         <div class="chcp-sub">HCP Campo</div>
         <div class="chcp-num empty" id="chcp-num">—</div>
       </div>
-      <div class="chcp-detail" id="chcp-detail">Selecciona un campo para calcular.</div>
+      <div class="chcp-detail" id="chcp-detail" data-i18n="selecciona_campo_calc">Selecciona un campo para calcular.</div>
     </div>
     <div id="php-wrap" style="display:none;margin-top:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px">
       <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:5px;padding:5px 4px;text-align:center">
@@ -598,13 +598,13 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.017-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.018-DEV</div>
 </div>
 
 <!-- PAGE: NUEVA RONDA -->
 <div class="page" id="page-nueva">
   <div class="card">
-    <div class="card-title" style="margin-bottom:10px">Nueva Ronda</div>
+    <div class="card-title" style="margin-bottom:10px" data-i18n="nueva_ronda">Nueva Ronda</div>
     <input type="hidden" id="f-par-total">
     <div class="fields f2" style="margin-bottom:6px;gap:6px">
       <div class="field" style="gap:3px">
@@ -620,9 +620,9 @@ nav.nav-hidden{transform:translateY(100%)}
       <div class="field" style="gap:3px">
         <label data-i18n="hoyos">Hoyos</label>
         <select id="f-num-hoyos" onchange="onNumHoyosChange()" style="padding:5px 8px;font-size:13px;border-radius:4px">
-          <option value="">— Hoyos —</option>
-          <option value="18">18 hoyos</option>
-          <option value="9">9 hoyos</option>
+          <option value="" id="opt-hoyos-ph">— Hoyos —</option>
+          <option value="18" data-i18n-opt="hoyos_18">18 hoyos</option>
+          <option value="9" data-i18n-opt="hoyos_9">9 hoyos</option>
         </select>
       </div>
       <div id="f-vuelta-wrap" class="field" style="gap:3px;display:none">
@@ -694,7 +694,7 @@ nav.nav-hidden{transform:translateY(100%)}
       <button class="btn" id="btn-add" type="button" style="flex:2;margin-top:0">+ Registrar Ronda</button>
       <button class="btn-danger" onclick="if(confirm(t('c_cancelar_nueva_ronda')))cancelarNueva()" style="flex:1;margin-top:0" data-i18n="cancelar">Cancelar</button>
     </div>
-    <div class="info">Diferencial = (Golpes − CR) × 113 / Slope</div>
+    <div class="info" data-i18n="fi_dif_formula">Diferencial = (Golpes − CR) × 113 / Slope</div>
   </div>
 </div>
 
@@ -861,7 +861,7 @@ const i18n = {
     'ya_cuenta':'¿Ya tienes cuenta?','inicia_sesion':'Inicia sesión','crear_cuenta':'Crear Cuenta',
     'enviar_enlace':'Enviar enlace','volver':'← Volver','recuperar_pass':'Recuperar contraseña',
     'email_ph':'tu@email.com','pass_ph':'••••••••',
-    'selecciona_campo':'— Selecciona campo —','selecciona_barra':'— Selecciona barra —','selecciona_hoyos':'— Hoyos —',
+    'selecciona_campo':'— Selecciona campo —','selecciona_campo_calc':'Selecciona un campo para calcular.','fi_dif_formula':'Diferencial = (Golpes − CR) × 113 / Slope','selecciona_barra':'— Selecciona barra —','selecciona_hoyos':'— Hoyos —',
     'hcp_jugador':'HCP Jugador','hcp_campo':'HCP de Campo','course_rating':'Course Rating','slope_rating':'Slope Rating',
     'total_golpes':'Total Golpes','formato':'Formato de juego',
     'nueva_ronda':'Nueva Ronda','campo':'Campo','fecha':'Fecha','hoyos':'Hoyos','vuelta':'Vuelta',
@@ -945,7 +945,7 @@ const i18n = {
     'ya_cuenta':'Já tem conta?','inicia_sesion':'Iniciar sessão','crear_cuenta':'Criar Conta',
     'enviar_enlace':'Enviar link','volver':'← Voltar','recuperar_pass':'Recuperar senha',
     'email_ph':'seu@email.com','pass_ph':'••••••••',
-    'selecciona_campo':'— Selecione campo —','selecciona_barra':'— Selecione barra —','selecciona_hoyos':'— Buracos —',
+    'selecciona_campo':'— Selecione campo —','selecciona_campo_calc':'Selecione um campo para calcular.','fi_dif_formula':'Diferencial = (Pancadas − CR) × 113 / Slope','selecciona_barra':'— Selecione barra —','selecciona_hoyos':'— Buracos —',
     'hcp_jugador':'HCP Jogador','hcp_campo':'HCP do Campo','course_rating':'Course Rating','slope_rating':'Slope Rating',
     'total_golpes':'Total Pancadas','formato':'Formato de jogo',
     'nueva_ronda':'Nova Volta','campo':'Campo','fecha':'Data','hoyos':'Buracos','vuelta':'Volta',
@@ -1066,6 +1066,13 @@ function applyLangDOM() {
       if (el.tagName === 'INPUT') el.placeholder = val;
       else if (val.includes('<')) el.innerHTML = val;
       else el.textContent = val;
+    });
+
+    // Actualizar options de hoyos
+    const optPh = document.getElementById('opt-hoyos-ph');
+    if (optPh) optPh.textContent = t('selecciona_hoyos');
+    document.querySelectorAll('[data-i18n-opt]').forEach(el => {
+      el.textContent = t(el.dataset.i18nOpt);
     });
 
     // Re-render contenido dinámico
@@ -1642,7 +1649,7 @@ function renderSelectorCampos() {
   const sel1 = $('f-campo');
   if (sel1) {
     const cur1 = sel1.value;
-    sel1.innerHTML = '<option value="">— Selecciona un campo —</option>' +
+    sel1.innerHTML = `<option value="">${t('selecciona_campo')}</option>` +
       state.campos.map(c => `<option value="${c.id}">${c.nombre}</option>`).join('');
     if (cur1) sel1.value = cur1;
   }
@@ -1650,7 +1657,7 @@ function renderSelectorCampos() {
   const sel2 = $('p-campo');
   if (sel2) {
     const cur2 = sel2.value;
-    sel2.innerHTML = '<option value="">— Selecciona un campo —</option>' +
+    sel2.innerHTML = `<option value="">${t('selecciona_campo')}</option>` +
       state.campos.map(c => `<option value="${c.id}">${c.nombre}</option>`).join('');
     if (cur2) sel2.value = cur2;
   }
@@ -1702,7 +1709,7 @@ function onBarraAntes() {
 function buildBarraSelect(selId, campo, current) {
   const sel = $(selId);
   if (!sel) return;
-  sel.innerHTML = '<option value="">— Selecciona barra —</option>' +
+  sel.innerHTML = `<option value="">${t('selecciona_barra')}</option>` +
     campo.barras.map(b => {
       const has9H = (b.cr_out && b.slope_out) || (b.cr_in && b.slope_in);
       return `<option value="${b.color}">${BARRA_LABELS_PL[b.color]}${has9H ? ' ✓9H' : ''}</option>`;
