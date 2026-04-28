@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.039-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.040-DEV</div>
   <button onclick="abrirGestionCampos()" style="width:100%;margin-top:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;touch-action:manipulation">
     <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span data-i18n="gestionar_campos">Gestionar Campos</span>
@@ -1893,6 +1893,7 @@ function loadPre() {
 
 // ── NUEVA RONDA ───────────────────────────────────────────────────────────
 function onCampoChange() {
+  toast('onCampo: ' + $('f-campo').value, false);
   const id = parseInt($('f-campo').value);
   const campo = state.campos.find(c => c.id === id);
   const bs = $('barra-selector'), hW = $('hoyos-wrap'), mF = $('manual-fields');
@@ -1958,6 +1959,7 @@ function onVueltaChange() {
 }
 
 function onNumHoyosChange() {
+  toast('onNum: ' + $('f-num-hoyos').value, false);
   const id = parseInt($('f-campo').value);
   const campo = state.campos.find(c => c.id === id);
   if (!campo) return;
