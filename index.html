@@ -129,7 +129,7 @@ select option{background:#1a2f1a}
 .r-cat{font-size:11px;color:var(--green);margin-top:2px;letter-spacing:1px}
 .r-stats{display:none;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
 .r-stat{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center}
-.r-stat-n{font-size:18px;font-weight:600;color:var(--cream)}
+.r-stat-n{font-size:18px;color:var(--cream)}
 .r-stat-l{font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:2px}
 
 /* ── CHCP ── */
@@ -400,7 +400,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.050-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.054-DEV</div>
   </div>
 </div>
 
@@ -551,11 +551,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="r-sub" data-i18n="handicap_jugador">Handicap Jugador</div>
     <div class="r-hcp" id="r-hcp">—</div>
     <div class="r-cat" id="r-cat">Añade rondas para calcular</div>
-    <div class="r-stats" id="r-stats">
-      <div class="r-stat"><div class="r-stat-n" id="r-count">0</div><div class="r-stat-l">Rondas</div></div>
-      <div class="r-stat"><div class="r-stat-n" id="r-used">0</div><div class="r-stat-l">Usadas</div></div>
-      <div class="r-stat"><div class="r-stat-n" id="r-best">—</div><div class="r-stat-l">Mejor dif.</div></div>
-    </div>
+
   </div>
   <div class="card">
     <div class="card-title" style="font-size:11px;text-align:center">Handicap de Campo</div>
@@ -619,7 +615,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.050-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.054-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -748,15 +744,15 @@ nav.nav-hidden{transform:translateY(100%)}
 
 <!-- PAGE: ESTADÍSTICAS -->
 <div class="page" id="page-stats">
-  <div class="card">
-    <div class="card-title" style="margin-bottom:10px" data-i18n="estadisticas">Estadísticas</div>
-    <div id="stats-content"><div class="empty">Próximamente…</div></div>
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-title" style="margin-bottom:12px;font-weight:normal" data-i18n="estadisticas">Estadísticas</div>
+    <div id="stats-content"><div class="empty">Cargando…</div></div>
   </div>
 </div>
 
 <!-- PAGE: CAMPOS -->
 <div class="page" id="page-campos">
-  <div style="margin-bottom:6px"><button onclick="goTo('ajustes',$'nav-ajustes'))" style="background:none;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;padding:0;display:flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="15 18 9 12 15 6"/></svg><span data-i18n="nav_ajustes">Ajustes</span></button></div>
+  <div style="margin-bottom:6px"><button onclick="goTo('ajustes',$('nav-ajustes'))" style="background:none;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;padding:0;display:flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="15 18 9 12 15 6"/></svg><span data-i18n="nav_ajustes">Ajustes</span></button></div>
   <!-- Formulario Nuevo Campo — aparece primero cuando está abierto -->
   <div id="nuevo-campo-wrap" style="display:none">
     <div class="card">
@@ -860,7 +856,7 @@ nav.nav-hidden{transform:translateY(100%)}
 <!-- PAGE: AJUSTES -->
 <div class="page" id="page-ajustes">
   <div style="display:flex;flex-direction:column;gap:8px;padding:0 4px">
-      <button class="nav-dd-item" style="flex-direction:row!important;border-radius:12px;border:1px solid rgba(255,255,255,.12);padding:14px 16px;font-size:11px;letter-spacing:.5px" onclick="goTo('ajustes',null)">
+      <button class="nav-dd-item" style="flex-direction:row!important;border-radius:12px;border:1px solid rgba(255,255,255,.12);padding:14px 16px;font-size:11px;letter-spacing:.5px" onclick="goTo('campos',null)">
         <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <span data-i18n="gestionar_campos">Gestionar Campos</span>
       </button>
@@ -1662,6 +1658,9 @@ async function loadData() {
 function renderAll() {
   renderResult();
   renderHistory();
+  renderCampos();
+  renderSelectorCampos();
+  try { renderStats(); } catch(e) { console.error('renderStats:', e); }
 }
 
 function fmtDate(d) {
@@ -1767,18 +1766,62 @@ function renderMiniChart() {
 
 
 
+
+function renderStats() {
+  const el = $('stats-content');
+  if (!el) return;
+  const { combined } = combineNineHoleRounds(state.rounds);
+  const res = getHCP(state.rounds);
+  if (!combined || combined.length === 0) {
+    el.innerHTML = '<div class="empty">' + (lang==='pt'?'Sem voltas registadas':'Sin rondas registradas') + '</div>';
+    return;
+  }
+  const fmtD = v => (v >= 0 ? '+' : '') + v.toFixed(1);
+  const rounds18 = combined.filter(r => !r.is9H);
+  const bestDif = combined.length ? Math.min(...combined.map(r => r.diff)) : null;
+  const avgScore = combined.filter(r => r.gross > 0).length
+    ? (combined.filter(r=>r.gross>0).reduce((s,r)=>s+r.gross,0) / combined.filter(r=>r.gross>0).length).toFixed(1)
+    : '—';
+  const bestScore = combined.filter(r=>r.gross>0).length
+    ? Math.min(...combined.filter(r=>r.gross>0).map(r=>r.gross))
+    : '—';
+  const worstScore = combined.filter(r=>r.gross>0).length
+    ? Math.max(...combined.filter(r=>r.gross>0).map(r=>r.gross))
+    : '—';
+  const bestStbl = combined.filter(r=>r.stableford>0).length
+    ? Math.max(...combined.filter(r=>r.stableford>0).map(r=>r.stableford))
+    : '—';
+
+  const lbl = (es, pt) => lang==='pt' ? pt : es;
+  const row = (label, value) => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:10px;letter-spacing:.5px;color:var(--muted)">${label}</span>
+      <span style="font-size:14px;color:var(--cream);font-family:'DM Mono',monospace">${value}</span>
+    </div>`;
+
+  el.innerHTML = `
+    <div style="padding-bottom:4px">
+      ${row(lbl('Rondas jugadas','Voltas jogadas'), combined.length)}
+      ${row(lbl('Usadas en cálculo HCP','Usadas no cálculo HCP'), res ? res.numBest : '—')}
+      ${row(lbl('Mejor diferencial','Melhor diferencial'), bestDif !== null ? fmtD(bestDif) : '—')}
+      ${row(lbl('Media de golpes','Média de pancadas'), avgScore)}
+      ${row(lbl('Mejor score (golpes)','Melhor score (pancadas)'), bestScore)}
+      ${row(lbl('Peor score (golpes)','Pior score (pancadas)'), worstScore)}
+      ${row(lbl('Mejor Stableford','Melhor Stableford'), bestStbl !== '—' ? bestStbl + ' pts' : '—')}
+    </div>`;
+}
+
 function renderResult() {
   renderMiniChart();
   const { combined } = combineNineHoleRounds(state.rounds);
   const res = getHCP(state.rounds);
   $('r-hcp').textContent = res ? res.hcp.toFixed(1).replace('.',',') : '—';
   $('r-cat').textContent = res ? getCat(res.hcp) : 'Añade rondas para calcular';
-  $('r-stats').style.display = res ? 'grid' : 'none';
   if (res) {
-    $('r-count').textContent = combined.length; // rondas efectivas (9H combinadas)
-    $('r-used').textContent  = res.numBest;
+    if($('r-count')) $('r-count').textContent = combined.length;
+    if($('r-used')) $('r-used').textContent  = res.numBest;
     const rounds18 = state.rounds.filter(r => (r.num_hoyos || 18) === 18);
-    $('r-best').textContent = rounds18.length ? fmtD(Math.min(...rounds18.map(r => r.diff))) : '—';
+    if($('r-best')) $('r-best').textContent = rounds18.length ? fmtD(Math.min(...rounds18.map(r => r.diff))) : '—';
     $('p-hcp').value = res.hcp.toFixed(1);
     calcCHCP();
   }
