@@ -598,17 +598,23 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.046-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.047-DEV</div>
   <button onclick="abrirGestionCampos()" style="width:100%;margin-top:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;touch-action:manipulation">
     <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span data-i18n="gestionar_campos">Gestionar Campos</span>
   </button>
 </div>
 
-<!-- MODAL NUEVA RONDA -->
-<div class="modal-overlay hidden" id="modal-nueva-ronda"><div class="modal" style="max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch">
+<!-- PAGE: NUEVA RONDA -->
+<div class="page" id="page-nueva">
   <div class="card">
-    <div class="card-title" style="margin-bottom:10px" data-i18n="nueva_ronda">Nueva Ronda</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <button onclick="goTo('rondas',$('nav-rondas'))" style="background:none;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;padding:0;display:flex;align-items:center;gap:5px;touch-action:manipulation">
+        <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="15 18 9 12 15 6"/></svg>
+        <span data-i18n="nav_rondas">Rondas</span>
+      </button>
+      <div class="card-title" style="margin:0" data-i18n="nueva_ronda">Nueva Ronda</div>
+    </div>
     <input type="hidden" id="f-par-total">
     <div class="fields f2" style="margin-bottom:6px;gap:6px">
       <div class="field" style="gap:3px">
@@ -700,7 +706,8 @@ nav.nav-hidden{transform:translateY(100%)}
     </div>
     <div class="info" data-i18n="fi_dif_formula">Diferencial = (Golpes − CR) × 113 / Slope</div>
   </div>
-</div></div>
+
+</div>
 
 <!-- PAGE: RONDAS -->
 <div class="page" id="page-rondas">
@@ -2161,28 +2168,17 @@ function abrirGestionCampos() {
 }
 
 function abrirNuevaRonda() {
-  $('modal-nueva-ronda').classList.remove('hidden');
-  // Set today's date if not set
+  // Pre-fill fecha y HCP
   if (!$('f-fecha').value) {
     const now = new Date();
     $('f-fecha').value = now.toISOString().split('T')[0];
   }
-  // Pre-fill HCP: usar el valor calculado de getHCP o el campo p-hcp
   if (!$('f-hcp-idx').value) {
     const res = getHCP(state.rounds);
     if (res) $('f-hcp-idx').value = res.hcp.toFixed(1);
     else if ($('p-hcp')?.value) $('f-hcp-idx').value = $('p-hcp').value;
   }
-  // Trigger recalculation after modal is rendered
-  setTimeout(() => {
-    if ($('f-campo')?.value) {
-      onCampoChange();
-      if ($('f-num-hoyos')?.value) {
-        onNumHoyosChange();
-        calcNuevaChcp();
-      }
-    }
-  }, 100);
+  goTo('nueva', null);
 }
 function toggleFormulaSection() {
   const fs = $('formula-section');
@@ -2210,7 +2206,7 @@ function cancelarNueva() {
   $('total-golpes').textContent = '—';
   $('preview-stbl').textContent = '—';
   renderHoleDots('gh-', null);
-  $('modal-nueva-ronda').classList.add('hidden');
+  goTo('rondas', $('nav-rondas'));
 }
 
 async function addRound() {
