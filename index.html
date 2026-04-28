@@ -13,7 +13,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#1a2f1a;--bg2:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.09);--gold:#c9a84c;--gold2:#e8c96a;--green:#7bc67a;--cream:#f5f0e8;--muted:rgba(255,255,255,0.35);--red:#e05555;--text:#ffffff;--text2:rgba(255,255,255,0.65);--card-bg:rgba(255,255,255,0.04);--nav-bg:#0f1a0f;--input-bg:rgba(255,255,255,0.07);--splash-bg:#1a2f1a}
-:root.light{--bg:#f0f4f0;--bg2:rgba(0,0,0,0.03);--border:rgba(0,0,0,0.1);--gold:#8a6a1a;--gold2:#a07820;--green:#2a6a2a;--cream:#3a2a0a;--muted:rgba(0,0,0,0.45);--red:#c02020;--text:#1a2f1a;--text2:rgba(0,0,0,0.65);--card-bg:rgba(255,255,255,0.85);--nav-bg:#e8efe8;--input-bg:rgba(255,255,255,0.9);--splash-bg:#f0f4f0}
+:root.light{--bg:#f0f4f0;--bg2:rgba(0,0,0,0.03);--border:rgba(0,0,0,0.12);--gold:#7a5a10;--gold2:#8a6a18;--green:#1a4a1a;--cream:#2a1a00;--muted:rgba(0,0,0,0.5);--red:#b01010;--text:#000000;--text2:rgba(0,0,0,0.75);--card-bg:rgba(255,255,255,0.9);--nav-bg:#e0ebe0;--input-bg:#ffffff;--splash-bg:#f0f4f0}
+:root.light body,
+:root.light .page,
+:root.light .card,
+:root.light .card-title,
+:root.light nav button,
+:root.light label,
+:root.light input,
+:root.light select,
+:root.light .formula-row,
+:root.light .fk,
+:root.light .fv,
+:root.light .hist-table,
+:root.light .campo-name,
+:root.light .campo-meta,
+:root.light .r-hcp,
+:root.light .chcp-detail,
+:root.light .info,
+:root.light .empty { color: #000000 !important; }
+:root.light .barra-9h-title { color: #1a4a8a !important; }
+:root.light nav button.active { color: #1a4a1a !important; }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--cream);font-family:'DM Mono',monospace;overflow-x:hidden}
 body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-inset-top,0px)}
@@ -599,7 +619,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.040-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.041-DEV</div>
   <button onclick="goTo('campos',null)" style="width:100%;margin-top:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;touch-action:manipulation">
     <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span data-i18n="gestionar_campos">Gestionar Campos</span>
