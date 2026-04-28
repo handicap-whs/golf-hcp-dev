@@ -400,7 +400,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.054-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.056-DEV</div>
   </div>
 </div>
 
@@ -554,7 +554,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
   </div>
   <div class="card">
-    <div class="card-title" style="font-size:11px;text-align:center">Handicap de Campo</div>
+    <div class="card-title" style="font-size:17px;text-align:center">Handicap de Campo</div>
     <div class="field" style="margin-bottom:8px">
       <label data-i18n="campo">Campo</label>
       <select id="p-campo" onchange="onCampoAntes()" style="padding:5px 8px;font-size:13px;border-radius:4px">
@@ -615,7 +615,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.054-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.056-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -744,10 +744,8 @@ nav.nav-hidden{transform:translateY(100%)}
 
 <!-- PAGE: ESTADÍSTICAS -->
 <div class="page" id="page-stats">
-  <div class="card" style="margin-bottom:8px">
-    <div class="card-title" style="margin-bottom:12px;font-weight:normal" data-i18n="estadisticas">Estadísticas</div>
-    <div id="stats-content"><div class="empty">Cargando…</div></div>
-  </div>
+  <div style="font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);padding:4px 2px 16px;font-family:'DM Mono',monospace;text-align:center" data-i18n="estadisticas">Estadísticas</div>
+  <div id="stats-content"><div class="empty">Cargando…</div></div>
 </div>
 
 <!-- PAGE: CAMPOS -->
@@ -1777,39 +1775,55 @@ function renderStats() {
     return;
   }
   const fmtD = v => (v >= 0 ? '+' : '') + v.toFixed(1);
-  const rounds18 = combined.filter(r => !r.is9H);
-  const bestDif = combined.length ? Math.min(...combined.map(r => r.diff)) : null;
-  const avgScore = combined.filter(r => r.gross > 0).length
-    ? (combined.filter(r=>r.gross>0).reduce((s,r)=>s+r.gross,0) / combined.filter(r=>r.gross>0).length).toFixed(1)
-    : '—';
-  const bestScore = combined.filter(r=>r.gross>0).length
-    ? Math.min(...combined.filter(r=>r.gross>0).map(r=>r.gross))
-    : '—';
-  const worstScore = combined.filter(r=>r.gross>0).length
-    ? Math.max(...combined.filter(r=>r.gross>0).map(r=>r.gross))
-    : '—';
-  const bestStbl = combined.filter(r=>r.stableford>0).length
-    ? Math.max(...combined.filter(r=>r.stableford>0).map(r=>r.stableford))
-    : '—';
-
   const lbl = (es, pt) => lang==='pt' ? pt : es;
-  const row = (label, value) => `
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
-      <span style="font-size:10px;letter-spacing:.5px;color:var(--muted)">${label}</span>
-      <span style="font-size:14px;color:var(--cream);font-family:'DM Mono',monospace">${value}</span>
+
+  // Calcular métricas
+  const rounWithScore = combined.filter(r => r.gross > 0);
+  const rounWithStbl  = combined.filter(r => r.stableford > 0);
+  const bestDif    = combined.length ? Math.min(...combined.map(r => r.diff)) : null;
+  const avgScore   = rounWithScore.length ? (rounWithScore.reduce((s,r)=>s+r.gross,0)/rounWithScore.length).toFixed(1) : '—';
+  const bestScore  = rounWithScore.length ? Math.min(...rounWithScore.map(r=>r.gross)) : '—';
+  const worstScore = rounWithScore.length ? Math.max(...rounWithScore.map(r=>r.gross)) : '—';
+  const bestStbl   = rounWithStbl.length  ? Math.max(...rounWithStbl.map(r=>r.stableford)) + ' pts' : '—';
+  const avgStbl    = rounWithStbl.length  ? (rounWithStbl.reduce((s,r)=>s+r.stableford,0)/rounWithStbl.length).toFixed(1) + ' pts' : '—';
+
+  // Tendencia HCP (últimas 5 rondas)
+  let tendencia = '→';
+  if (combined.length >= 5) {
+    const sorted = [...combined].sort((a,b) => new Date(a.fecha||a.date) - new Date(b.fecha||b.date));
+    const last5 = sorted.slice(-5).map(r => r.diff);
+    const trend = last5[last5.length-1] - last5[0];
+    tendencia = trend < -0.5 ? '↘ ' + lbl('Mejorando','A melhorar') : trend > 0.5 ? '↗ ' + lbl('Subiendo','A subir') : '→ ' + lbl('Estable','Estável');
+  }
+
+  // Rondas este mes
+  const now = new Date();
+  const thisMon = combined.filter(r => {
+    const d = new Date(r.fecha || r.date);
+    return d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear();
+  }).length;
+
+  const card = (desc, val) => `
+    <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:14px 12px;display:flex;flex-direction:column;align-items:center;gap:6px">
+      <div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-align:center">${desc}</div>
+      <div style="font-size:20px;color:var(--cream);font-family:'DM Mono',monospace;text-align:center">${val}</div>
     </div>`;
 
-  el.innerHTML = `
-    <div style="padding-bottom:4px">
-      ${row(lbl('Rondas jugadas','Voltas jogadas'), combined.length)}
-      ${row(lbl('Usadas en cálculo HCP','Usadas no cálculo HCP'), res ? res.numBest : '—')}
-      ${row(lbl('Mejor diferencial','Melhor diferencial'), bestDif !== null ? fmtD(bestDif) : '—')}
-      ${row(lbl('Media de golpes','Média de pancadas'), avgScore)}
-      ${row(lbl('Mejor score (golpes)','Melhor score (pancadas)'), bestScore)}
-      ${row(lbl('Peor score (golpes)','Pior score (pancadas)'), worstScore)}
-      ${row(lbl('Mejor Stableford','Melhor Stableford'), bestStbl !== '—' ? bestStbl + ' pts' : '—')}
-    </div>`;
+  el.innerHTML = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    ${card(lbl('Rondas jugadas','Voltas jogadas'), combined.length)}
+    ${card(lbl('Usadas en HCP','Usadas no HCP'), res ? res.numBest : '—')}
+    ${card(lbl('Mejor diferencial','Melhor diferencial'), bestDif !== null ? fmtD(bestDif) : '—')}
+    ${card(lbl('Tendencia HCP','Tendência HCP'), tendencia)}
+    ${card(lbl('Media de golpes','Média de pancadas'), avgScore)}
+    ${card(lbl('Mejor resultado (golpes)','Melhor resultado (pancadas)'), bestScore)}
+    ${card(lbl('Peor resultado (golpes)','Pior resultado (pancadas)'), worstScore)}
+    ${card(lbl('Mejor Stableford','Melhor Stableford'), bestStbl)}
+    ${card(lbl('Media Stableford','Média Stableford'), avgStbl)}
+    ${card(lbl('Rondas este mes','Voltas este mês'), thisMon)}
+  </div>`;
 }
+
+
 
 function renderResult() {
   renderMiniChart();
