@@ -619,7 +619,12 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.041-DEV</div>
+  <div class="card" style="margin-bottom:8px;padding:12px 14px" id="mini-chart-wrap" style="display:none">
+    <div style="font-size:9px;letter-spacing:1px;color:var(--muted);margin-bottom:8px" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</div>
+    <canvas id="mini-hcp-chart" height="80" style="width:100%;display:block"></canvas>
+    <div id="mini-chart-labels" style="display:flex;justify-content:space-between;margin-top:4px;font-size:8px;color:var(--muted);font-family:'DM Mono',monospace"></div>
+  </div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.042-DEV</div>
   <button onclick="goTo('campos',null)" style="width:100%;margin-top:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;touch-action:manipulation">
     <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span data-i18n="gestionar_campos">Gestionar Campos</span>
@@ -745,7 +750,14 @@ nav.nav-hidden{transform:translateY(100%)}
 <div class="page" id="page-stats">
   <div class="card">
     <div class="card-title" style="margin-bottom:10px" data-i18n="estadisticas">Estadísticas</div>
-    <div id="stats-content"><div class="empty">Próximamente…</div></div>
+    <div id="stats-content">
+      <div class="empty" id="stats-empty" style="display:none">Sin rondas registradas</div>
+      <div id="stats-hcp-section" style="display:none">
+        <div style="font-size:9px;letter-spacing:1px;color:var(--muted);margin-bottom:8px" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</div>
+        <canvas id="hcp-chart" height="160" style="width:100%;display:block"></canvas>
+        <div id="hcp-chart-labels" style="display:flex;justify-content:space-between;margin-top:4px;font-size:8px;color:var(--muted);font-family:'DM Mono',monospace;flex-wrap:wrap;gap:2px"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -939,7 +951,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
 const i18n = {
   es: {
-    'nav_inicio':'Inicio','nav_ronda':'Ronda','nav_rondas':'Rondas','nav_historial':'Historial','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estadísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estadísticas','gestionar_campos':'Gestionar Campos',
+    'nav_inicio':'Inicio','nav_ronda':'Ronda','nav_rondas':'Rondas','nav_historial':'Historial','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estadísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estadísticas','evolucion_hcp':'EVOLUCIÓN HCP','gestionar_campos':'Gestionar Campos',
     'menu_info_hcp':'Info Hándicap','menu_guia':'Guía de inicio','menu_clave':'Cambiar clave','menu_salir':'Salir',
     'email':'Email','password':'Contraseña','btn_entrar':'Entrar','sin_cuenta':'¿Sin cuenta?','registrate':'Regístrate','politica_priv':'Política de Privacidad',
     'ya_cuenta':'¿Ya tienes cuenta?','inicia_sesion':'Inicia sesión','crear_cuenta':'Crear Cuenta',
@@ -1031,7 +1043,7 @@ const i18n = {
     'g_nav':'🧭 Botones de navegación','f_titulo':'Fórmula WHS 2020',
   },
   pt: {
-    'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','gestionar_campos':'Gerir Campos',
+    'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','evolucion_hcp':'EVOLUÇÃO HCP','gestionar_campos':'Gerir Campos',
     'menu_info_hcp':'Info Handicap','menu_guia':'Guia inicial','menu_clave':'Alterar senha','menu_salir':'Sair',
     'email':'Email','password':'Senha','btn_entrar':'Entrar','sin_cuenta':'Sem conta?','registrate':'Registe-se','politica_priv':'Política de Privacidade',
     'ya_cuenta':'Já tem conta?','inicia_sesion':'Iniciar sessão','crear_cuenta':'Criar Conta',
@@ -3098,6 +3110,7 @@ async function delCampo(id) {
 // ── NAV ───────────────────────────────────────────────────────────────────
 function goTo(id, btn) {
   closeNavMenu();
+  if (id === 'stats') setTimeout(renderStats, 50);
   if (id === 'formula') applyLangDOM();
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
