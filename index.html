@@ -400,7 +400,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.044-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.050-DEV</div>
   </div>
 </div>
 
@@ -619,7 +619,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.044-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.050-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -944,7 +944,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
 const i18n = {
   es: {
-    'nav_inicio':'Inicio','nav_ronda':'Ronda','nav_rondas':'Rondas','nav_historial':'Historial','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estadísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estadísticas','gestionar_campos':'Gestionar Campos',
+    'nav_inicio':'Inicio','nav_ronda':'Ronda','nav_rondas':'Rondas','nav_historial':'Historial','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estadísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estadísticas','gestionar_campos':'Gestionar Campos','evolucion_hcp':'EVOLUCIÓN HCP','ultimas_10':'10 últimas rondas',
     'menu_info_hcp':'Info Hándicap','menu_guia':'Guía de inicio','menu_clave':'Cambiar clave','menu_salir':'Salir',
     'email':'Email','password':'Contraseña','btn_entrar':'Entrar','sin_cuenta':'¿Sin cuenta?','registrate':'Regístrate','politica_priv':'Política de Privacidad',
     'ya_cuenta':'¿Ya tienes cuenta?','inicia_sesion':'Inicia sesión','crear_cuenta':'Crear Cuenta',
@@ -1036,7 +1036,7 @@ const i18n = {
     'g_nav':'🧭 Botones de navegación','f_titulo':'Fórmula WHS 2020',
   },
   pt: {
-    'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','gestionar_campos':'Gerir Campos',
+    'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','gestionar_campos':'Gerir Campos','evolucion_hcp':'EVOLUÇÃO HCP','ultimas_10':'10 últimas voltas',
     'menu_info_hcp':'Info Handicap','menu_guia':'Guia inicial','menu_clave':'Alterar senha','menu_salir':'Sair',
     'email':'Email','password':'Senha','btn_entrar':'Entrar','sin_cuenta':'Sem conta?','registrate':'Registe-se','politica_priv':'Política de Privacidade',
     'ya_cuenta':'Já tem conta?','inicia_sesion':'Iniciar sessão','crear_cuenta':'Criar Conta',
@@ -1192,6 +1192,15 @@ function applyLangDOM() {
     // Re-render contenido dinámico
     if (state && state.user) {
       renderResult();
+      // Re-apply data-i18n after renderResult (chart header)
+      setTimeout(() => {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const val = t(el.dataset.i18n);
+          if (el.tagName === 'INPUT') el.placeholder = val;
+          else if (val.includes('<')) el.innerHTML = val;
+          else el.textContent = val;
+        });
+      }, 50);
       renderHistory();
       renderCampos();
       renderSelectorCampos();
@@ -1668,8 +1677,10 @@ function renderMiniChart() {
   const canvas = $('mini-hcp-chart');
   const labelsEl = $('mini-chart-labels');
   if (!wrap || !canvas || !labelsEl) return;
+
   const rounds = [...(state.rounds || [])].sort((a,b) => new Date(a.fecha||a.date) - new Date(b.fecha||b.date));
   if (rounds.length < 2) { wrap.style.display = 'none'; return; }
+
   const points = [];
   for (let i = 1; i <= rounds.length; i++) {
     const res = getHCP(rounds.slice(0, i));
@@ -1677,63 +1688,84 @@ function renderMiniChart() {
   }
   const last10 = points.slice(-10);
   if (last10.length < 2) { wrap.style.display = 'none'; return; }
+
   wrap.style.display = 'block';
-  const dpr = window.devicePixelRatio || 1;
-  const W = canvas.offsetWidth || canvas.parentElement?.offsetWidth || 300;
-  const H = 100;
-  canvas.width = W * dpr; canvas.height = H * dpr;
-  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-  const ctx = canvas.getContext('2d');
-  ctx.scale(dpr, dpr);
-  ctx.clearRect(0, 0, W, H);
-  const vals = last10.map(p => p.hcp);
-  const min = Math.floor(Math.min(...vals) - 0.5);
-  const max = Math.ceil(Math.max(...vals) + 0.5);
-  const range = max - min || 1;
-  const pad = {top:8, bottom:8, left:4, right:4};
-  const chartW = W - pad.left - pad.right;
-  const chartH = H - pad.top - pad.bottom;
-  const xPos = i => pad.left + i * (chartW / (last10.length - 1));
-  const yScale = v => pad.top + chartH - ((v - min) / range) * chartH;
-  // Fill
-  const fillGrad = ctx.createLinearGradient(0,0,0,H);
-  fillGrad.addColorStop(0,'rgba(201,168,76,0.3)');
-  fillGrad.addColorStop(1,'rgba(201,168,76,0.02)');
-  ctx.beginPath();
-  last10.forEach((p,i) => i===0 ? ctx.moveTo(xPos(i),yScale(p.hcp)) : ctx.lineTo(xPos(i),yScale(p.hcp)));
-  ctx.lineTo(xPos(last10.length-1), H-pad.bottom);
-  ctx.lineTo(xPos(0), H-pad.bottom);
-  ctx.closePath(); ctx.fillStyle = fillGrad; ctx.fill();
-  // Line
-  const grad = ctx.createLinearGradient(0,0,W,0);
-  grad.addColorStop(0,'#c9a84c'); grad.addColorStop(1,'#e8c96a');
-  ctx.strokeStyle = grad; ctx.lineWidth = 2;
-  ctx.lineJoin = 'round'; ctx.lineCap = 'round';
-  ctx.beginPath();
-  last10.forEach((p,i) => i===0 ? ctx.moveTo(xPos(i),yScale(p.hcp)) : ctx.lineTo(xPos(i),yScale(p.hcp)));
-  ctx.stroke();
-  // Dots
-  last10.forEach((p,i) => {
-    ctx.beginPath(); ctx.arc(xPos(i),yScale(p.hcp),2.5,0,Math.PI*2);
-    ctx.fillStyle='#e8c96a'; ctx.fill();
-  });
-  // Last value label
-  ctx.fillStyle='#e8c96a'; ctx.font='bold 10px DM Mono,monospace';
-  ctx.textAlign='right';
-  ctx.fillText(last10[last10.length-1].hcp.toFixed(1), xPos(last10.length-1)-4, yScale(last10[last10.length-1].hcp)-5);
-  // Date labels under each point
-  const fmt = d => { if(!d) return ''; const dt=new Date(d); return dt.getDate()+'/'+(dt.getMonth()+1); };
-  labelsEl.innerHTML = '';
-  labelsEl.style.cssText = 'position:relative;height:14px;margin-top:2px';
-  last10.forEach((p, i) => {
-    const x = xPos(i);
-    const pct = (x / W) * 100;
-    const span = document.createElement('span');
-    span.textContent = fmt(p.fecha);
-    span.style.cssText = `position:absolute;left:${pct}%;transform:translateX(-50%);font-size:7px;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap`;
-    labelsEl.appendChild(span);
+
+  // Use requestAnimationFrame to ensure layout is computed
+  requestAnimationFrame(() => {
+    const dpr = window.devicePixelRatio || 1;
+    const W = canvas.offsetWidth > 10 ? canvas.offsetWidth : (wrap.offsetWidth - 28);
+    if (W < 10) return;
+    const H = 100;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, W, H);
+
+    const vals = last10.map(p => p.hcp);
+    const min = Math.floor(Math.min(...vals) - 0.5);
+    const max = Math.ceil(Math.max(...vals) + 0.5);
+    const range = max - min || 1;
+    const pad = {top:18, bottom:8, left:4, right:4};
+    const chartW = W - pad.left - pad.right;
+    const chartH = H - pad.top - pad.bottom;
+    const n = last10.length;
+    const xPos = i => pad.left + (n > 1 ? i * chartW / (n-1) : chartW/2);
+    const yScale = v => pad.top + chartH - ((v - min) / range) * chartH;
+
+    // Fill
+    const fillGrad = ctx.createLinearGradient(0,0,0,H);
+    fillGrad.addColorStop(0,'rgba(201,168,76,0.3)');
+    fillGrad.addColorStop(1,'rgba(201,168,76,0.02)');
+    ctx.beginPath();
+    last10.forEach((p,i) => i===0 ? ctx.moveTo(xPos(i),yScale(p.hcp)) : ctx.lineTo(xPos(i),yScale(p.hcp)));
+    ctx.lineTo(xPos(n-1), H-pad.bottom);
+    ctx.lineTo(xPos(0), H-pad.bottom);
+    ctx.closePath(); ctx.fillStyle=fillGrad; ctx.fill();
+
+    // Line
+    const grad = ctx.createLinearGradient(0,0,W,0);
+    grad.addColorStop(0,'#c9a84c'); grad.addColorStop(1,'#e8c96a');
+    ctx.strokeStyle=grad; ctx.lineWidth=2;
+    ctx.lineJoin='round'; ctx.lineCap='round';
+    ctx.beginPath();
+    last10.forEach((p,i) => i===0 ? ctx.moveTo(xPos(i),yScale(p.hcp)) : ctx.lineTo(xPos(i),yScale(p.hcp)));
+    ctx.stroke();
+
+    // Dots + HCP values at top
+    ctx.font = '8px DM Mono,monospace';
+    last10.forEach((p,i) => {
+      const x = xPos(i), y = yScale(p.hcp);
+      ctx.beginPath(); ctx.arc(x,y,2.5,0,Math.PI*2);
+      ctx.fillStyle='#e8c96a'; ctx.fill();
+      // Value label above dot
+      ctx.fillStyle='rgba(232,201,106,0.75)';
+      ctx.font='8px DM Mono,monospace';
+      ctx.textAlign = i === n-1 ? 'right' : i === 0 ? 'left' : 'center';
+      ctx.fillText(p.hcp.toFixed(1), x + (i===n-1?-2:i===0?2:0), y-5);
+    });
+
+    // Date labels below canvas
+    labelsEl.innerHTML = '';
+    labelsEl.style.cssText = 'position:relative;height:14px;margin-top:2px';
+    const fmt = d => { if(!d) return ''; const dt=new Date(d); return dt.getDate()+'/'+(dt.getMonth()+1); };
+    last10.forEach((p,i) => {
+      const pct = (xPos(i) / W * 100);
+      const span = document.createElement('span');
+      span.textContent = fmt(p.fecha);
+      const align = i===0?'left':i===n-1?'right':'center';
+      const tx = i===0?'0%':i===n-1?'-100%':'-50%';
+      span.style.cssText = `position:absolute;left:${pct}%;transform:translateX(${tx});font-size:7px;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap`;
+      labelsEl.appendChild(span);
+    });
   });
 }
+
+
 
 function renderResult() {
   renderMiniChart();
