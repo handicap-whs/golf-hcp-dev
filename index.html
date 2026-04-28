@@ -400,7 +400,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.042-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.033-DEV</div>
   </div>
 </div>
 
@@ -619,12 +619,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
-    <div style="font-size:9px;letter-spacing:1px;color:var(--muted);margin-bottom:8px" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</div>
-    <canvas id="mini-hcp-chart" height="80" style="width:100%;display:block"></canvas>
-    <div id="mini-chart-labels" style="display:flex;justify-content:space-between;margin-top:4px;font-size:8px;color:var(--muted);font-family:'DM Mono',monospace"></div>
-  </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.042-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.041-DEV</div>
   <button onclick="goTo('campos',null)" style="width:100%;margin-top:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;touch-action:manipulation">
     <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span data-i18n="gestionar_campos">Gestionar Campos</span>
@@ -750,14 +745,7 @@ nav.nav-hidden{transform:translateY(100%)}
 <div class="page" id="page-stats">
   <div class="card">
     <div class="card-title" style="margin-bottom:10px" data-i18n="estadisticas">Estadísticas</div>
-    <div id="stats-content">
-      <div class="empty" id="stats-empty" style="display:none">Sin rondas registradas</div>
-      <div id="stats-hcp-section" style="display:none">
-        <div style="font-size:9px;letter-spacing:1px;color:var(--muted);margin-bottom:8px" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</div>
-        <canvas id="hcp-chart" height="160" style="width:100%;display:block"></canvas>
-        <div id="hcp-chart-labels" style="display:flex;justify-content:space-between;margin-top:4px;font-size:8px;color:var(--muted);font-family:'DM Mono',monospace;flex-wrap:wrap;gap:2px"></div>
-      </div>
-    </div>
+    <div id="stats-content"><div class="empty">Próximamente…</div></div>
   </div>
 </div>
 
@@ -951,7 +939,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
 const i18n = {
   es: {
-    'nav_inicio':'Inicio','nav_ronda':'Ronda','nav_rondas':'Rondas','nav_historial':'Historial','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estadísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estadísticas','evolucion_hcp':'EVOLUCIÓN HCP','gestionar_campos':'Gestionar Campos','evolucion_hcp':'EVOLUCIÓN HCP',
+    'nav_inicio':'Inicio','nav_ronda':'Ronda','nav_rondas':'Rondas','nav_historial':'Historial','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estadísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estadísticas','gestionar_campos':'Gestionar Campos',
     'menu_info_hcp':'Info Hándicap','menu_guia':'Guía de inicio','menu_clave':'Cambiar clave','menu_salir':'Salir',
     'email':'Email','password':'Contraseña','btn_entrar':'Entrar','sin_cuenta':'¿Sin cuenta?','registrate':'Regístrate','politica_priv':'Política de Privacidad',
     'ya_cuenta':'¿Ya tienes cuenta?','inicia_sesion':'Inicia sesión','crear_cuenta':'Crear Cuenta',
@@ -1043,7 +1031,7 @@ const i18n = {
     'g_nav':'🧭 Botones de navegación','f_titulo':'Fórmula WHS 2020',
   },
   pt: {
-    'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','evolucion_hcp':'EVOLUÇÃO HCP','gestionar_campos':'Gerir Campos','evolucion_hcp':'EVOLUÇÃO HCP',
+    'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','gestionar_campos':'Gerir Campos',
     'menu_info_hcp':'Info Handicap','menu_guia':'Guia inicial','menu_clave':'Alterar senha','menu_salir':'Sair',
     'email':'Email','password':'Senha','btn_entrar':'Entrar','sin_cuenta':'Sem conta?','registrate':'Registe-se','politica_priv':'Política de Privacidade',
     'ya_cuenta':'Já tem conta?','inicia_sesion':'Iniciar sessão','crear_cuenta':'Criar Conta',
@@ -1668,113 +1656,6 @@ function fmtDate(d) {
   return `${day}/${m}/${y}`;
 }
 function fmtD(d) { return (d >= 0 ? '+' : '') + d.toFixed(1).replace('.',','); }
-
-
-function renderMiniChart() {
-  const wrap = $('mini-chart-wrap');
-  const canvas = $('mini-hcp-chart');
-  const labelsEl = $('mini-chart-labels');
-  if (!wrap || !canvas || !labelsEl) return;
-
-  // Get last 10 rounds with valid HCP differentials
-  const rounds = [...(state.rounds || [])].sort((a,b) => new Date(a.fecha||a.date) - new Date(b.fecha||b.date));
-  if (rounds.length < 2) { wrap.style.display = 'none'; return; }
-
-  // Calculate running HCP for each round using getHCP on subset
-  const points = [];
-  for (let i = 1; i <= rounds.length; i++) {
-    const res = getHCP(rounds.slice(0, i));
-    if (res) points.push({ hcp: res.hcp, fecha: rounds[i-1].fecha || rounds[i-1].date });
-  }
-  const last10 = points.slice(-10);
-  if (last10.length < 2) { wrap.style.display = 'none'; return; }
-
-  wrap.style.display = 'block';
-
-  // Draw on canvas
-  const dpr = window.devicePixelRatio || 1;
-  const W = canvas.offsetWidth || canvas.parentElement.offsetWidth || 300;
-  const H = 80;
-  canvas.width = W * dpr;
-  canvas.height = H * dpr;
-  canvas.style.width = W + 'px';
-  canvas.style.height = H + 'px';
-  const ctx = canvas.getContext('2d');
-  ctx.scale(dpr, dpr);
-  ctx.clearRect(0, 0, W, H);
-
-  const vals = last10.map(p => p.hcp);
-  const min = Math.floor(Math.min(...vals) - 0.5);
-  const max = Math.ceil(Math.max(...vals) + 0.5);
-  const range = max - min || 1;
-
-  const pad = { top: 8, bottom: 8, left: 4, right: 4 };
-  const chartW = W - pad.left - pad.right;
-  const chartH = H - pad.top - pad.bottom;
-
-  const xStep = chartW / (last10.length - 1);
-  const yScale = v => pad.top + chartH - ((v - min) / range) * chartH;
-  const xPos = i => pad.left + i * xStep;
-
-  // Grid line in the middle
-  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(pad.left, H / 2);
-  ctx.lineTo(W - pad.right, H / 2);
-  ctx.stroke();
-
-  // Line gradient
-  const grad = ctx.createLinearGradient(0, 0, W, 0);
-  grad.addColorStop(0, '#c9a84c');
-  grad.addColorStop(1, '#e8c96a');
-  ctx.strokeStyle = grad;
-  ctx.lineWidth = 2;
-  ctx.lineJoin = 'round';
-  ctx.lineCap = 'round';
-  ctx.beginPath();
-  last10.forEach((p, i) => {
-    const x = xPos(i), y = yScale(p.hcp);
-    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-  });
-  ctx.stroke();
-
-  // Fill under line
-  const fillGrad = ctx.createLinearGradient(0, 0, 0, H);
-  fillGrad.addColorStop(0, 'rgba(201,168,76,0.25)');
-  fillGrad.addColorStop(1, 'rgba(201,168,76,0.02)');
-  ctx.beginPath();
-  last10.forEach((p, i) => {
-    const x = xPos(i), y = yScale(p.hcp);
-    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-  });
-  ctx.lineTo(xPos(last10.length-1), H - pad.bottom);
-  ctx.lineTo(xPos(0), H - pad.bottom);
-  ctx.closePath();
-  ctx.fillStyle = fillGrad;
-  ctx.fill();
-
-  // Dots
-  last10.forEach((p, i) => {
-    ctx.beginPath();
-    ctx.arc(xPos(i), yScale(p.hcp), 2.5, 0, Math.PI * 2);
-    ctx.fillStyle = '#e8c96a';
-    ctx.fill();
-  });
-
-  // Last value label
-  const lastX = xPos(last10.length - 1);
-  const lastY = yScale(last10[last10.length-1].hcp);
-  ctx.fillStyle = '#e8c96a';
-  ctx.font = 'bold 10px DM Mono, monospace';
-  ctx.textAlign = 'right';
-  ctx.fillText(last10[last10.length-1].hcp.toFixed(1), lastX - 4, lastY - 5);
-
-  // Labels (first and last date)
-  labelsEl.innerHTML = '';
-  const fmtDate = d => { if (!d) return ''; const dt = new Date(d); return (dt.getDate()+'/'+(dt.getMonth()+1)); };
-  labelsEl.innerHTML = `<span>${fmtDate(last10[0].fecha)}</span><span>${fmtDate(last10[last10.length-1].fecha)}</span>`;
-}
 
 function renderResult() {
   const { combined } = combineNineHoleRounds(state.rounds);
@@ -3217,7 +3098,6 @@ async function delCampo(id) {
 // ── NAV ───────────────────────────────────────────────────────────────────
 function goTo(id, btn) {
   closeNavMenu();
-  if (id === 'stats') setTimeout(renderStats, 50);
   if (id === 'formula') applyLangDOM();
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
