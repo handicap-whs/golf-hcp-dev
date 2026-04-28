@@ -1,2 +1,7 @@
-// DEV: Sin caché — siempre red
-self.addEventListener('fetch', event => {});
+// DEV - sin cache
+self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', e => e.waitUntil(
+  caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))))
+    .then(() => self.clients.claim())
+));
+self.addEventListener('fetch', () => {});
