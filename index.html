@@ -598,7 +598,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.042-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.043-DEV</div>
   <button onclick="abrirGestionCampos()" style="width:100%;margin-top:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;touch-action:manipulation">
     <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span data-i18n="gestionar_campos">Gestionar Campos</span>
@@ -2125,7 +2125,6 @@ function calcNuevaChcp() {
   const hcp = parseFloat($('f-hcp-idx').value);
   const cr  = parseFloat($('f-cr').value);
   const sl  = parseFloat($('f-slope').value);
-  toast('chcp: hcp='+hcp+' cr='+cr+' sl='+sl, false);
   const wrap = $('nueva-chcp-wrap');
   if (!wrap) return;
   if (isNaN(hcp) || isNaN(cr) || isNaN(sl)) { wrap.style.display = 'none'; return; }
@@ -2167,6 +2166,12 @@ function abrirNuevaRonda() {
   if (!$('f-fecha').value) {
     const now = new Date();
     $('f-fecha').value = now.toISOString().split('T')[0];
+  }
+  // Pre-fill HCP from Inicio field or from state
+  if (!$('f-hcp-idx').value) {
+    const hcpInicio = $('p-hcp')?.value;
+    if (hcpInicio) $('f-hcp-idx').value = hcpInicio;
+    else if (state?.hcpIndex) $('f-hcp-idx').value = state.hcpIndex;
   }
   // Trigger recalculation after modal is rendered
   setTimeout(() => {
