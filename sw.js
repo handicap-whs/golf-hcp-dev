@@ -1,9 +1,8 @@
-// Golf HCP Service Worker v19 — cache forzado limpio
-const CACHE = 'golf-hcp-v19';
+// Golf HCP DEV Service Worker v1 — cache forzado limpio
+const CACHE = 'golf-hcp-dev-v1';
 const ASSETS = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', event => {
-  // skipWaiting inmediato para reemplazar SW viejo
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE).then(cache => cache.addAll(ASSETS))
@@ -20,7 +19,6 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Network first para index.html — siempre descarga versión más reciente
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
