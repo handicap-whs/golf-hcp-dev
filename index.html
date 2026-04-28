@@ -400,7 +400,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.058-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.059-DEV</div>
   </div>
 </div>
 
@@ -615,7 +615,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.058-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.059-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -3415,6 +3415,110 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   });
+}
+
+function drawStatsChart(canvasId, labelsId, data, color, minVal, maxVal, labelFn, valueFn, barMode) {
+  const canvas = document.getElementById(canvasId);
+  const labelsEl = document.getElementById(labelsId);
+  if (!canvas || !labelsEl || !data.length) return;
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.parentElement.getBoundingClientRect().width - 28 || 280;
+  const H = parseInt(canvas.getAttribute('height')) || 100;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+  const n = data.length;
+  const pad = {top:20, bottom:8, left:4, right:4};
+  const chartW = W - pad.left - pad.right;
+  const chartH = H - pad.top - pad.bottom;
+  const range = maxVal - minVal || 1;
+  const xPos = i => barMode
+    ? pad.left + (i + 0.5) * (chartW / n)
+    : pad.left + i * (chartW / Math.max(n-1,1));
+  const yScale = v => pad.top + chartH - ((v - minVal) / range) * chartH;
+
+  if (barMode) {
+    const bw = (chartW / n) * 0.6;
+    data.forEach((d, i) => {
+      const v = valueFn(d);
+      const x = xPos(i) - bw/2;
+      const y = yScale(Math.max(v, minVal));
+      const bh = Math.max(1, yScale(minVal) - y);
+      ctx.fillStyle = color; ctx.globalAlpha = 0.75;
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(x, y, bw, bh, 2); else ctx.rect(x, y, bw, bh);
+      ctx.fill(); ctx.globalAlpha = 1;
+      ctx.fillStyle = color; ctx.font = '8px DM Mono,monospace'; ctx.textAlign = 'center';
+      ctx.fillText(v.toFixed(1), xPos(i), y - 4);
+    });
+  } else {
+    const fill = ctx.createLinearGradient(0,0,0,H);
+    fill.addColorStop(0, color + '44'); fill.addColorStop(1, color + '08');
+    ctx.beginPath();
+    data.forEach((d,i) => i===0 ? ctx.moveTo(xPos(i),yScale(valueFn(d))) : ctx.lineTo(xPos(i),yScale(valueFn(d))));
+    ctx.lineTo(xPos(n-1),H-pad.bottom); ctx.lineTo(xPos(0),H-pad.bottom);
+    ctx.closePath(); ctx.fillStyle=fill; ctx.fill();
+    ctx.strokeStyle=color; ctx.lineWidth=2; ctx.lineJoin='round';
+    ctx.beginPath();
+    data.forEach((d,i) => i===0 ? ctx.moveTo(xPos(i),yScale(valueFn(d))) : ctx.lineTo(xPos(i),yScale(valueFn(d))));
+    ctx.stroke();
+    data.forEach((d,i) => {
+      const x=xPos(i), y=yScale(valueFn(d));
+      ctx.beginPath(); ctx.arc(x,y,2.5,0,Math.PI*2); ctx.fillStyle=color; ctx.fill();
+      ctx.fillStyle=color; ctx.font='8px DM Mono,monospace';
+      ctx.textAlign=i===n-1?'right':i===0?'left':'center';
+      ctx.fillText(valueFn(d).toFixed(1), x+(i===n-1?-2:i===0?2:0), y-5);
+    });
+  }
+  labelsEl.innerHTML='';
+  data.forEach((d,i) => {
+    const x=xPos(i), pct=(x/W*100);
+    const tx=i===0?'0%':i===n-1?'-100%':'-50%';
+    const span=document.createElement('span');
+    span.textContent=labelFn(d);
+    span.style.cssText=`position:absolute;left:${pct}%;transform:translateX(${tx});font-size:7px;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap`;
+    labelsEl.appendChild(span);
+  });
+}
+
+function renderStatsCharts() {
+  const { combined } = combineNineHoleRounds(state.rounds);
+  if (!combined || combined.length < 2) return;
+  const sorted = [...combined].sort((a,b) => new Date(a.fecha||a.date)-new Date(b.fecha||b.date));
+  const last10 = sorted.slice(-10);
+  const fmt = r => { const dt=new Date(r.fecha||r.date); return dt.getDate()+'/'+(dt.getMonth()+1); };
+
+  // Chart 1: HCP evolution
+  const points = [];
+  for (let i=1; i<=sorted.length; i++) {
+    const res = getHCP(sorted.slice(0,i).map(r=>({...r})));
+    if (res) points.push({hcp:res.hcp, fecha:sorted[i-1].fecha||sorted[i-1].date});
+  }
+  const hcpData = points.slice(-10);
+  if (hcpData.length >= 2) {
+    const hcpVals = hcpData.map(p=>p.hcp);
+    drawStatsChart('stats-hcp-chart','stats-hcp-labels', hcpData, '#e8c96a',
+      Math.floor(Math.min(...hcpVals)-0.5), Math.ceil(Math.max(...hcpVals)+0.5),
+      d => { const dt=new Date(d.fecha); return dt.getDate()+'/'+(dt.getMonth()+1); },
+      d => d.hcp, false);
+  }
+
+  // Chart 2: Diferenciales
+  const difVals = last10.map(r=>r.diff);
+  drawStatsChart('stats-dif-chart','stats-dif-labels', last10, '#7bc67a',
+    Math.floor(Math.min(...difVals)-1), Math.ceil(Math.max(...difVals)+1),
+    fmt, r=>r.diff, true);
+
+  // Chart 3: Stableford
+  const stblData = last10.filter(r=>r.stableford>0);
+  if (stblData.length) {
+    const stblVals = stblData.map(r=>r.stableford);
+    drawStatsChart('stats-stbl-chart','stats-stbl-labels', stblData, '#3b82f6',
+      Math.max(0,Math.min(...stblVals)-3), Math.ceil(Math.max(...stblVals)+2),
+      fmt, r=>r.stableford, true);
+  }
 }
 
 init();
