@@ -1727,6 +1727,7 @@ function renderMiniChart() {
 }
 
 function renderResult() {
+  renderMiniChart();
   const { combined } = combineNineHoleRounds(state.rounds);
   const res = getHCP(state.rounds);
   $('r-hcp').textContent = res ? res.hcp.toFixed(1).replace('.',',') : '—';
