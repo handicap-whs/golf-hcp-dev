@@ -400,7 +400,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.042-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.044-DEV</div>
   </div>
 </div>
 
@@ -619,10 +619,10 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.042-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.044-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
-    <div style="font-size:9px;letter-spacing:1px;color:var(--muted);margin-bottom:8px">EVOLUCIÓN HCP</div>
-    <canvas id="mini-hcp-chart" height="80" style="width:100%;display:block"></canvas>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
+    <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
     <div id="mini-chart-labels" style="display:flex;justify-content:space-between;margin-top:4px;font-size:8px;color:var(--muted);font-family:'DM Mono',monospace"></div>
   </div>
   <button onclick="goTo('campos',null)" style="width:100%;margin-top:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;touch-action:manipulation">
@@ -1680,7 +1680,7 @@ function renderMiniChart() {
   wrap.style.display = 'block';
   const dpr = window.devicePixelRatio || 1;
   const W = canvas.offsetWidth || canvas.parentElement?.offsetWidth || 300;
-  const H = 80;
+  const H = 100;
   canvas.width = W * dpr; canvas.height = H * dpr;
   canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
   const ctx = canvas.getContext('2d');
@@ -1721,9 +1721,18 @@ function renderMiniChart() {
   ctx.fillStyle='#e8c96a'; ctx.font='bold 10px DM Mono,monospace';
   ctx.textAlign='right';
   ctx.fillText(last10[last10.length-1].hcp.toFixed(1), xPos(last10.length-1)-4, yScale(last10[last10.length-1].hcp)-5);
-  // Date labels
+  // Date labels under each point
   const fmt = d => { if(!d) return ''; const dt=new Date(d); return dt.getDate()+'/'+(dt.getMonth()+1); };
-  labelsEl.innerHTML = `<span>${fmt(last10[0].fecha)}</span><span>${fmt(last10[last10.length-1].fecha)}</span>`;
+  labelsEl.innerHTML = '';
+  labelsEl.style.cssText = 'position:relative;height:14px;margin-top:2px';
+  last10.forEach((p, i) => {
+    const x = xPos(i);
+    const pct = (x / W) * 100;
+    const span = document.createElement('span');
+    span.textContent = fmt(p.fecha);
+    span.style.cssText = `position:absolute;left:${pct}%;transform:translateX(-50%);font-size:7px;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap`;
+    labelsEl.appendChild(span);
+  });
 }
 
 function renderResult() {
