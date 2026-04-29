@@ -73,22 +73,22 @@ body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-
 .pb-btn{background:none;border:1px solid rgba(201,168,76,.3);border-radius:4px;color:var(--gold);font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;padding:4px 8px;cursor:pointer}
 
 /* ── NAV ── */
-nav{position:fixed;bottom:0;left:0;right:0;background:var(--nav-bg);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom,0px);transition:transform .25s ease}
+nav{position:fixed;bottom:12px;left:16px;right:16px;background:rgba(30,50,30,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1);border-radius:28px;display:flex;z-index:100;padding:4px 6px calc(4px + env(safe-area-inset-bottom,0px));transition:transform .25s ease;box-shadow:0 4px 24px rgba(0,0,0,.4)}
 nav button{flex:1;background:none;border:none;color:var(--muted);padding:8px 4px 6px;font-size:14px;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:'DM Mono',monospace;min-height:58px;position:relative;border-radius:22px;transition:background .2s}
-nav button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-nav button.active{color:var(--gold)}
+nav button svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+nav button.active{color:var(--gold);background:rgba(201,168,76,.12)}
 nav button.active svg{stroke:var(--gold)}
 /* ── PAGES ── */
-.page{display:none;padding:16px 14px calc(80px + env(safe-area-inset-bottom,0px));max-width:700px;margin:0 auto;width:100%;box-sizing:border-box}
+.page{display:none;padding:16px 14px calc(70px + env(safe-area-inset-bottom,0px));max-width:700px;margin:0 auto;width:100%}
 .page.active{display:block}
 
 /* ── AJUSTES iOS STYLE ── */
-.ajuste-btn{width:100%;background:none;border:none;padding:13px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;color:var(--text,#fff);font-family:'DM Mono',monospace;font-size:20px;letter-spacing:.3px;min-height:60px;box-sizing:border-box}
+.ajuste-btn{width:100%;background:none;border:none;padding:13px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;color:var(--text,#fff);font-family:'DM Mono',monospace;font-size:20px;letter-spacing:.3px;min-height:60px}
 .ajuste-btn:active{background:rgba(255,255,255,.05)}
 .ajuste-icon{width:28px;height:28px;background:rgba(201,168,76,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ajuste-icon svg{width:14px;height:14px;stroke:var(--gold2);fill:none;stroke-width:2}
 .ajuste-text{flex:1;min-width:0}
-.ajuste-sub{font-size:13px;color:var(--muted);margin-top:2px;letter-spacing:.3px}
+.ajuste-sub{font-size:18px;color:var(--muted);margin-top:2px;letter-spacing:.3px}
 .ajuste-chevron{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2;flex-shrink:0}
 .ajuste-sep{height:1px;background:var(--border);margin:0 16px}
 /* Toggle switch */
@@ -418,7 +418,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.036-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.038-DEV</div>
   </div>
 </div>
 
@@ -634,7 +634,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.036-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.038-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -647,7 +647,7 @@ nav.nav-hidden{transform:translateY(100%)}
 </div>
 
   <!-- Fixed bottom action bar -->
-  <div id="rondas-action-bar" style="position:fixed;bottom:70px;left:0;right:0;padding:8px 14px;background:var(--bg);border-top:1px solid var(--border);display:none;gap:8px;align-items:center;z-index:100">
+  <div id="rondas-action-bar" style="position:fixed;bottom:88px;left:0;right:0;padding:8px 14px;background:var(--bg);border-top:1px solid var(--border);display:none;gap:8px;align-items:center;z-index:100">
     <button class="btn" onclick="goTo('nueva',null)" style="flex:3;height:36px;font-size:11px" data-i18n="nueva_ronda">+ Nueva</button>
     <button class="btn-danger" id="btn-borrar-todo" onclick="clearAll()" style="display:none;flex:1;height:36px;font-size:9px;letter-spacing:.3px;padding:0 8px" data-i18n="borrar_todo">Borrar todas las rondas</button>
   </div>
@@ -1823,11 +1823,7 @@ function renderAll() {
   renderCampos();
   renderSelectorCampos();
   try { renderStats(); } catch(e) { console.error('renderStats:', e); }
-  statsChartsDirty = true; // charts need redraw when stats page is visible
-}
-function renderAllAndCharts() {
-  renderAll();
-  setTimeout(() => { try { renderStatsCharts(); } catch(e) {} }, 100);
+  statsChartsDirty = true;
 }
 
 function fmtDate(d) {
@@ -3551,26 +3547,9 @@ function goTo(id, btn) {
   $('page-' + id).classList.add('active');
   if (btn) btn.classList.add('active');
   window.scrollTo(0,0);
-  if (id === 'stats') {
-    statsChartsDirty = true;
-    // Wait for page to be fully visible before drawing
+  if (id === 'stats' && statsChartsDirty) {
     setTimeout(() => {
-      try {
-        renderStats();
-        setTimeout(() => {
-          const c = document.getElementById('stats-hcp-chart');
-          if (c && c.parentElement) {
-            const w = c.parentElement.getBoundingClientRect().width;
-            if (w > 50) {
-              renderStatsCharts();
-              statsChartsDirty = false;
-            } else {
-              // Try again if width not ready
-              setTimeout(() => { renderStatsCharts(); statsChartsDirty = false; }, 300);
-            }
-          }
-        }, 150);
-      } catch(e) { console.error(e); }
+      try { renderStats(); setTimeout(() => { renderStatsCharts(); statsChartsDirty = false; }, 200); } catch(e) {}
     }, 50);
   }
   const _ab = $('rondas-action-bar'); if (_ab) _ab.style.display = (id === 'rondas') ? 'flex' : 'none';
@@ -3810,12 +3789,6 @@ function drawStatsChart(canvasId, labelsId, data, color, minVal, maxVal, labelFn
 }
 
 function renderStatsCharts() {
-  // Ensure stats content exists with canvas elements
-  if (!document.getElementById('stats-hcp-chart')) {
-    renderStats();
-    // renderStats already calls renderStatsCharts via setTimeout
-    return;
-  }
   const { combined } = combineNineHoleRounds(state.rounds);
   if (!combined || combined.length < 2) return;
   const sorted = [...combined].sort((a,b) => new Date(a.fecha||a.date)-new Date(b.fecha||b.date));
