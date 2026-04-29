@@ -78,7 +78,6 @@ nav button{flex:1;background:none;border:none;color:var(--muted);padding:8px 4px
 nav button svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 nav button.active{color:var(--gold);background:rgba(201,168,76,.12)}
 nav button.active svg{stroke:var(--gold)}
-nav button.active::after{content:'';position:absolute;bottom:5px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--gold)}
 /* ── PAGES ── */
 .page{display:none;padding:16px 14px calc(70px + env(safe-area-inset-bottom,0px));max-width:700px;margin:0 auto;width:100%}
 .page.active{display:block}
@@ -89,15 +88,17 @@ nav button.active::after{content:'';position:absolute;bottom:5px;left:50%;transf
 .ajuste-icon{width:28px;height:28px;background:rgba(201,168,76,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ajuste-icon svg{width:14px;height:14px;stroke:var(--gold2);fill:none;stroke-width:2}
 .ajuste-text{flex:1;min-width:0}
-.ajuste-sub{font-size:9px;color:var(--muted);margin-top:2px;letter-spacing:.3px}
+.ajuste-sub{font-size:18px;color:var(--muted);margin-top:2px;letter-spacing:.3px}
 .ajuste-chevron{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2;flex-shrink:0}
 .ajuste-sep{height:1px;background:var(--border);margin:0 16px}
 /* Toggle switch */
 .toggle-switch{position:relative;display:inline-block;width:44px;height:26px;flex-shrink:0}
 .toggle-switch input{opacity:0;width:0;height:0}
-.toggle-slider{position:absolute;cursor:pointer;inset:0;background:rgba(255,255,255,.15);border-radius:26px;transition:.3s}
+.toggle-slider{position:absolute;cursor:pointer;inset:0;background:rgba(0,0,0,.2);border-radius:26px;transition:.3s}
+:root.light .toggle-slider{background:rgba(0,0,0,.25)}
 .toggle-slider:before{position:absolute;content:"";height:20px;width:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
 input:checked+.toggle-slider{background:#2e7d32}
+:root.light input:checked+.toggle-slider{background:#1b5e20}
 input:checked+.toggle-slider:before{transform:translateX(18px)}
 
 /* ── CARDS ── */
@@ -417,7 +418,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.016-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.026-DEV</div>
   </div>
 </div>
 
@@ -633,7 +634,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.016-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.026-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -963,11 +964,33 @@ nav.nav-hidden{transform:translateY(100%)}
       <svg class="ajuste-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
     <div class="ajuste-sep"></div>
-    <button class="ajuste-btn" id="btn-lang-ajustes" onclick="var cur=localStorage.getItem('golf_lang')||'es';setLang(cur==='es'?'pt':'es')">
+    <div class="ajuste-btn" style="cursor:default">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-      <div class="ajuste-text"><div data-i18n="menu_idioma">Idioma</div><div class="ajuste-sub" id="lang-btn-ajustes">🌐 ES → PT</div></div>
-      <svg class="ajuste-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
+      <div class="ajuste-text"><div data-i18n="menu_idioma">Idioma</div></div>
+      <div style="display:flex;gap:36px;align-items:center">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+          <label class="toggle-switch" onclick="event.stopPropagation()">
+            <input type="checkbox" id="toggle-lang-es" onchange="setLangToggle('es',this)">
+            <span class="toggle-slider"></span>
+          </label>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)">ES</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+          <label class="toggle-switch" onclick="event.stopPropagation()">
+            <input type="checkbox" id="toggle-lang-pt" onchange="setLangToggle('pt',this)">
+            <span class="toggle-slider"></span>
+          </label>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)">PT</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;opacity:.35">
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle-lang-fr" disabled>
+            <span class="toggle-slider"></span>
+          </label>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)">FR</span>
+        </div>
+      </div>
+    </div>
     <div class="ajuste-sep"></div>
     <div class="ajuste-btn">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
@@ -1266,9 +1289,7 @@ function applyLangDOM() {
     const lb = document.getElementById('lang-btn-label');
     if (lb) lb.textContent = lang === 'es' ? '🌐 ES → PT' : '🌐 PT → ES';
   updateThemeLabel();
-  const lb2 = document.getElementById('lang-btn-ajustes');
-  if (lb2) lb2.textContent = lang === 'es' ? '🌐 ES → PT' : '🌐 PT → ES';
-    toast(lang === 'pt' ? '🇵🇹 Português' : '🇪🇸 Español', false);
+  updateLangToggles();
 
     // Nav buttons text
     const navMap = [['nav-inicio','nav_inicio'],['nav-rondas','nav_rondas'],
@@ -3309,6 +3330,25 @@ function compartirApp() {
 }
 function contactarGolfHCP() {
   window.open('mailto:golfhcp@example.com?subject=Golf HCP App', '_blank');
+}
+
+
+function setLangToggle(lang, checkbox) {
+  // Deactivate others
+  ['es','pt'].forEach(l => {
+    const cb = document.getElementById('toggle-lang-' + l);
+    if (cb) cb.checked = (l === lang);
+  });
+  // Prevent unchecking active lang
+  if (!checkbox.checked) { checkbox.checked = true; return; }
+  setLang(lang);
+}
+function updateLangToggles() {
+  const cur = localStorage.getItem('golf_lang') || 'es';
+  ['es','pt'].forEach(l => {
+    const cb = document.getElementById('toggle-lang-' + l);
+    if (cb) cb.checked = (l === cur);
+  });
 }
 
 function toggleTheme() {
