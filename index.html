@@ -79,7 +79,7 @@ nav button svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width
 nav button.active{color:var(--gold);background:rgba(201,168,76,.12)}
 nav button.active svg{stroke:var(--gold)}
 /* ── PAGES ── */
-.page{display:none;padding:16px 14px calc(70px + env(safe-area-inset-bottom,0px));max-width:700px;margin:0 auto;width:100%}
+.page{display:none;padding:16px 14px calc(70px + env(safe-area-inset-bottom,0px));max-width:700px;margin:0 auto;width:100%;box-sizing:border-box;overflow-x:hidden}
 .page.active{display:block}
 
 /* ── AJUSTES iOS STYLE ── */
@@ -88,7 +88,7 @@ nav button.active svg{stroke:var(--gold)}
 .ajuste-icon{width:28px;height:28px;background:rgba(201,168,76,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ajuste-icon svg{width:14px;height:14px;stroke:var(--gold2);fill:none;stroke-width:2}
 .ajuste-text{flex:1;min-width:0}
-.ajuste-sub{font-size:16px;color:var(--muted);margin-top:2px;letter-spacing:.3px}
+.ajuste-sub{font-size:13px;color:var(--muted);margin-top:2px;letter-spacing:.3px}
 .ajuste-chevron{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2;flex-shrink:0}
 .ajuste-sep{height:1px;background:var(--border);margin:0 16px}
 /* Toggle switch */
@@ -418,7 +418,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.028-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.032-DEV</div>
   </div>
 </div>
 
@@ -634,7 +634,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.028-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.032-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -1816,12 +1816,14 @@ async function loadData() {
 }
 
 // ── RENDER ────────────────────────────────────────────────────────────────
+let statsChartsDirty = true;
 function renderAll() {
   renderResult();
   renderHistory();
   renderCampos();
   renderSelectorCampos();
   try { renderStats(); } catch(e) { console.error('renderStats:', e); }
+  statsChartsDirty = true; // charts need redraw when stats page is visible
 }
 function renderAllAndCharts() {
   renderAll();
@@ -3549,7 +3551,10 @@ function goTo(id, btn) {
   $('page-' + id).classList.add('active');
   if (btn) btn.classList.add('active');
   window.scrollTo(0,0);
-  if (id === 'stats') setTimeout(() => { try { renderStatsCharts(); } catch(e) {} }, 80);
+  if (id === 'stats') {
+    statsChartsDirty = true;
+    setTimeout(() => { try { renderStats(); setTimeout(()=>{renderStatsCharts();statsChartsDirty=false;},100); } catch(e) {} }, 30);
+  }
   const _ab = $('rondas-action-bar'); if (_ab) _ab.style.display = (id === 'rondas') ? 'flex' : 'none';
   if (id === 'inicio') {
     // Avisar si no hay campos creados
@@ -3787,6 +3792,12 @@ function drawStatsChart(canvasId, labelsId, data, color, minVal, maxVal, labelFn
 }
 
 function renderStatsCharts() {
+  // Ensure stats content exists with canvas elements
+  if (!document.getElementById('stats-hcp-chart')) {
+    renderStats();
+    // renderStats already calls renderStatsCharts via setTimeout
+    return;
+  }
   const { combined } = combineNineHoleRounds(state.rounds);
   if (!combined || combined.length < 2) return;
   const sorted = [...combined].sort((a,b) => new Date(a.fecha||a.date)-new Date(b.fecha||b.date));
