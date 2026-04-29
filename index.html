@@ -400,7 +400,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.001-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.004-DEV</div>
   </div>
 </div>
 
@@ -616,7 +616,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.001-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.004-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -628,10 +628,16 @@ nav.nav-hidden{transform:translateY(100%)}
   </button>
 </div>
 
+  <!-- Fixed bottom action bar -->
+  <div id="rondas-action-bar" style="position:fixed;bottom:56px;left:0;right:0;padding:10px 16px;background:var(--bg);border-top:1px solid var(--border);display:flex;gap:8px;z-index:100">
+    <button class="btn" onclick="goTo('nueva',null)" style="flex:1" data-i18n="nueva_ronda">+ Nueva</button>
+    <button class="btn-sm" id="btn-borrar-todo" onclick="clearAll()" style="display:none;flex-shrink:0" data-i18n="borrar_todo">Borrar todo</button>
+  </div>
+
 <!-- PAGE: DETALLE RONDA -->
 <div class="page" id="page-detalle-ronda">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-    <button onclick="goTo('rondas',$('nav-rondas'))" style="background:none;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;padding:0;display:flex;align-items:center;gap:5px">
+    <button onclick="goTo('rondas',$('nav-rondas'))" style="background:none;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:14px;cursor:pointer;padding:0;display:flex;align-items:center;gap:5px">
       <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="15 18 9 12 15 6"/></svg>
       <span data-i18n="nav_rondas">Rondas</span>
     </button>
@@ -749,12 +755,8 @@ nav.nav-hidden{transform:translateY(100%)}
 
 <!-- PAGE: RONDAS -->
 <div class="page" id="page-rondas">
-  <div class="card">
-    <div class="card-row">
-      <div class="card-title" style="margin-bottom:0" data-i18n="historial">Historial</div>
-      <button class="btn-sm" onclick="goTo('nueva',null)" data-i18n="nueva_ronda">+ Nueva</button>
-      <button class="btn-sm" id="btn-borrar-todo" onclick="clearAll()" style="display:none" data-i18n="borrar_todo">Borrar todo</button>
-    </div>
+  <div style="font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);font-family:'DM Mono',monospace;padding:4px 2px 12px" data-i18n="historial">Historial</div>
+  <div class="card" style="margin-bottom:70px">
     <div id="hist-container"><div class="empty">Cargando…</div></div>
   </div>
 </div>
