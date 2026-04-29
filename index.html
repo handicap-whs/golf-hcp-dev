@@ -12,8 +12,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#1a2f1a;--bg2:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.09);--gold:#c9a84c;--gold2:#e8c96a;--green:#7bc67a;--cream:#f5f0e8;--muted:rgba(255,255,255,0.35);--red:#e05555;--text:#ffffff;--text2:rgba(255,255,255,0.65);--card-bg:rgba(255,255,255,0.04);--nav-bg:#0f1a0f;--input-bg:rgba(255,255,255,0.07);--splash-bg:#1a2f1a}
-:root.light{--bg:#f0f4f0;--bg2:rgba(0,0,0,0.03);--border:rgba(0,0,0,0.12);--gold:#7a5a10;--gold2:#8a6a18;--green:#1a4a1a;--cream:#2a1a00;--muted:rgba(0,0,0,0.5);--red:#b01010;--text:#000000;--text2:rgba(0,0,0,0.75);--card-bg:rgba(255,255,255,0.9);--nav-bg:#e0ebe0;--input-bg:#ffffff;--splash-bg:#f0f4f0}
+:root{--hist-sticky:#233723;--bg:#1a2f1a;--bg2:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.09);--gold:#c9a84c;--gold2:#e8c96a;--green:#7bc67a;--cream:#f5f0e8;--muted:rgba(255,255,255,0.35);--red:#e05555;--text:#ffffff;--text2:rgba(255,255,255,0.65);--card-bg:rgba(255,255,255,0.04);--nav-bg:#0f1a0f;--input-bg:rgba(255,255,255,0.07);--splash-bg:#1a2f1a}
+:root.light{--hist-sticky:#e8f0e8;--bg:#f0f4f0;--text:#000000;--bg2:rgba(0,0,0,0.03);--border:rgba(0,0,0,0.12);--gold:#7a5a10;--gold2:#8a6a18;--green:#1a4a1a;--cream:#2a1a00;--muted:rgba(0,0,0,0.5);--red:#b01010;--text:#000000;--text2:rgba(0,0,0,0.75);--card-bg:rgba(255,255,255,0.9);--nav-bg:#e0ebe0;--input-bg:#ffffff;--splash-bg:#f0f4f0}
 :root.light body,
 :root.light .page,
 :root.light .card,
@@ -78,6 +78,10 @@ nav button{flex:1;background:none;border:none;color:var(--muted);padding:5px 4px
 nav button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 nav button.active{color:var(--gold);background:rgba(201,168,76,.12)}
 nav button.active svg{stroke:var(--gold)}
+:root.light nav{background:rgba(240,244,240,0.95);border-top:1px solid rgba(0,0,0,.1)}
+:root.light nav button{color:rgba(0,0,0,.5)}
+:root.light nav button.active{color:#2e7d32;background:rgba(46,125,50,.1)}
+:root.light nav button.active svg{stroke:#2e7d32}
 /* ── PAGES ── */
 .page{display:none;padding:16px 14px calc(70px + env(safe-area-inset-bottom,0px));max-width:700px;margin:0 auto;width:100%}
 .page.active{display:block}
@@ -103,7 +107,7 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
 
 /* ── CARDS ── */
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:20px 16px;margin-bottom:16px}
-.card-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.card-title{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
 .card-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 
 /* ── FIELDS ── */
@@ -142,7 +146,7 @@ select option{background:#1a2f1a}
 
 /* ── RESULT ── */
 .result{background:linear-gradient(135deg,rgba(201,168,76,.13),rgba(74,140,63,.07));border:1px solid rgba(201,168,76,.28);border-radius:8px;padding:10px 12px;text-align:center;margin-bottom:10px}
-.r-hcp{font-family:'DM Mono',monospace;font-size:clamp(40px,11vw,62px);font-weight:500;color:#fff;line-height:1}
+.r-hcp{font-family:'DM Mono',monospace;font-size:clamp(40px,11vw,62px);font-weight:500;color:var(--cream);line-height:1}
 .r-sub{font-size:19px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:2px}
 .r-cat{font-size:11px;color:var(--green);margin-top:2px;letter-spacing:1px}
 .r-stats{display:none;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
@@ -152,7 +156,7 @@ select option{background:#1a2f1a}
 
 /* ── CHCP ── */
 .chcp-box{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:8px 10px;text-align:center;margin-top:6px}
-.chcp-num{font-family:'DM Mono',monospace;font-size:48px;font-weight:500;color:#fff;line-height:1}
+.chcp-num{font-family:'DM Mono',monospace;font-size:48px;font-weight:500;color:var(--cream);line-height:1}
 .chcp-num.empty{color:var(--muted);font-size:32px}
 .chcp-sub{font-size:19px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
 .chcp-detail{font-size:10px;color:var(--muted);margin-top:8px;line-height:1.5}
@@ -162,7 +166,7 @@ select option{background:#1a2f1a}
 /* ── HISTORY ── */
 .hist-table{width:100%;border-collapse:collapse;font-size:10px}
 .hist-table th{font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:3px 5px;text-align:left;border-bottom:1px solid var(--border)}
-.hist-table td{padding:6px 5px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--cream);vertical-align:middle}
+.hist-table td{padding:6px 5px;border-bottom:1px solid var(--border);color:var(--text,var(--cream));vertical-align:middle}
 .hist-table tr:last-child td{border-bottom:none}
 .used-badge{background:rgba(123,198,122,.15);border:1px solid rgba(123,198,122,.3);color:var(--green);font-size:7px;padding:2px 5px;border-radius:10px}
 .stbl-badge{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold2);font-size:7px;letter-spacing:1px;padding:2px 6px;border-radius:20px;white-space:nowrap}
@@ -200,7 +204,7 @@ select option{background:#1a2f1a}
 .formula-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)}
 .formula-row:last-child{border-bottom:none}
 .fk{font-size:9px;color:var(--gold);letter-spacing:1px;flex-shrink:0}
-.fv{font-size:10px;color:var(--cream);text-align:right}
+.fv{font-size:11px;color:var(--cream);text-align:right}
 
 /* ── MISC ── */
 .empty{text-align:center;color:var(--muted);font-size:11px;padding:24px;line-height:1.8}
@@ -227,7 +231,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
 /* Símbolos de resultado por hoyo */
 .score-wrap{position:relative;display:flex;align-items:center;justify-content:center;width:32px;height:32px;margin:0 auto}
-.score-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:600;color:#fff;position:relative;z-index:1;line-height:1}
+.score-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:600;color:var(--cream);position:relative;z-index:1;line-height:1}
 /* Albatros: triángulo rojo */
 /* Estilos de score aplicados directamente al input */
 /* Score styles aplicados al input directamente */
@@ -249,13 +253,13 @@ nav.nav-hidden{transform:translateY(100%)}
 #nav-dropdown .dd-danger{color:var(--red)}
 
 .hist-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;position:relative}
-.hist-table .col-fecha{position:sticky;left:0;background:#233723;opacity:1;z-index:2;min-width:68px;white-space:nowrap}
-.hist-table .col-campo{position:sticky;left:68px;background:#233723;z-index:2;min-width:100px;max-width:100px;opacity:1}
-.hist-table .col-campo-hdr{position:sticky;left:68px;background:#233723;z-index:2;min-width:100px;opacity:1}
+.hist-table .col-fecha{position:sticky;left:0;background:var(--hist-sticky,#233723);opacity:1;z-index:2;min-width:68px;white-space:nowrap}
+.hist-table .col-campo{position:sticky;left:68px;background:var(--hist-sticky,#233723);z-index:2;min-width:100px;max-width:100px;opacity:1}
+.hist-table .col-campo-hdr{position:sticky;left:68px;background:var(--hist-sticky,#233723);z-index:2;min-width:100px;opacity:1}
 
 
 
-.hist-table .col-fecha,.hist-table .col-campo,.hist-table .col-campo-hdr{background:#233723!important}
+.hist-table .col-fecha,.hist-table .col-campo,.hist-table .col-campo-hdr{background:var(--hist-sticky,#233723)!important}
 
 #guide-screen{position:fixed;inset:0;background:var(--splash-bg);z-index:8400;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) 0 0}
 #guide-screen.hidden{display:none}
@@ -418,7 +422,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.063-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.070-DEV</div>
   </div>
 </div>
 
@@ -626,19 +630,19 @@ nav.nav-hidden{transform:translateY(100%)}
     <div id="php-wrap" style="display:none;margin-top:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px">
       <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:5px;padding:5px 4px;text-align:center">
         <div style="font-size:7px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:2px">100%<br>Informal</div>
-        <div id="php-100" style="font-family:'DM Mono',monospace;font-size:20px;color:#fff">—</div>
+        <div id="php-100" style="font-family:'DM Mono',monospace;font-size:20px;color:var(--cream)">—</div>
       </div>
       <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:5px;padding:5px 4px;text-align:center">
         <div style="font-size:7px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:2px">95%<br>Medal/Stblf</div>
-        <div id="php-95" style="font-family:'DM Mono',monospace;font-size:20px;color:#fff">—</div>
+        <div id="php-95" style="font-family:'DM Mono',monospace;font-size:20px;color:var(--cream)">—</div>
       </div>
       <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:5px;padding:5px 4px;text-align:center">
         <div style="font-size:7px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:2px">85%<br>Four Ball</div>
-        <div id="php-85" style="font-family:'DM Mono',monospace;font-size:20px;color:#fff">—</div>
+        <div id="php-85" style="font-family:'DM Mono',monospace;font-size:20px;color:var(--cream)">—</div>
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.063-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.070-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -666,9 +670,9 @@ nav.nav-hidden{transform:translateY(100%)}
     <div id="detalle-titulo" style="font-size:12px;letter-spacing:1px;color:var(--gold2)"></div>
   </div>
   <div id="detalle-content"></div>
-  <div style="display:flex;gap:8px;margin-top:12px">
-    <button class="btn" id="btn-editar-desde-detalle" style="flex:1;height:40px" data-i18n="editar">Editar</button>
-    <button class="btn-danger" id="btn-borrar-desde-detalle" style="flex:1;height:40px" data-i18n="eliminar">Eliminar</button>
+  <div style="display:flex;gap:8px;margin-top:14px;align-items:stretch">
+    <button class="btn" id="btn-editar-desde-detalle" style="flex:1;height:44px;font-size:11px" data-i18n="editar">Editar</button>
+    <button class="btn-danger" id="btn-borrar-desde-detalle" style="flex:1;height:44px;font-size:11px" data-i18n="eliminar">Eliminar</button>
   </div>
 </div>
 
@@ -777,7 +781,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
 <!-- PAGE: RONDAS -->
 <div class="page" id="page-rondas">
-  <div style="font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);font-family:'DM Mono',monospace;padding:4px 2px 12px" data-i18n="historial">Historial</div>
+  <div style="font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);font-family:'DM Mono',monospace;padding:4px 2px 12px;text-align:center" data-i18n="historial">Historial de Rondas</div>
   <div class="card" style="margin-bottom:70px">
     <div id="hist-container"><div class="empty">Cargando…</div></div>
   </div>
@@ -932,7 +936,7 @@ nav.nav-hidden{transform:translateY(100%)}
 <div class="page" id="page-ajustes">
 
   <!-- SECTION: Campos y Juego -->
-  <div style="font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_campos_juego">Campos y Juego</div>
+  <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_campos_juego">Campos y Juego</div>
   <div style="background:var(--card-bg);border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)">
     <button class="ajuste-btn" onclick="goTo('campos',null)">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
@@ -942,11 +946,17 @@ nav.nav-hidden{transform:translateY(100%)}
   </div>
 
   <!-- SECTION: Guías -->
-  <div style="font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_guias">Guías</div>
+  <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_guias">Guías</div>
   <div style="background:var(--card-bg);border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)">
     <button class="ajuste-btn" onclick="localStorage.removeItem('golf_guide_seen');openGuide()">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
       <div class="ajuste-text"><div data-i18n="menu_guia">Guía de inicio</div><div class="ajuste-sub" data-i18n="sub_guia">Aprende a usar la app</div></div>
+      <svg class="ajuste-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="ajuste-sep"></div>
+    <button class="ajuste-btn" onclick="goTo('guia-didactica',null)">
+      <div class="ajuste-icon" style="margin-left:4px"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+      <div class="ajuste-text"><div data-i18n="menu_guia_didactica">Guía Didáctica del Jugador</div><div class="ajuste-sub" data-i18n="sub_guia_didactica">Aprende a gestionar tu hándicap</div></div>
       <svg class="ajuste-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
     <div class="ajuste-sep"></div>
@@ -958,7 +968,7 @@ nav.nav-hidden{transform:translateY(100%)}
   </div>
 
   <!-- SECTION: Cuenta -->
-  <div style="font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_cuenta">Cuenta</div>
+  <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_cuenta">Cuenta</div>
   <div style="background:var(--card-bg);border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)">
     <button class="ajuste-btn" onclick="goTo('pwd',null)">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
@@ -1005,7 +1015,7 @@ nav.nav-hidden{transform:translateY(100%)}
   </div>
 
   <!-- SECTION: Compartir y Soporte -->
-  <div style="font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_compartir">Compartir y Soporte</div>
+  <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_compartir">Compartir y Soporte</div>
   <div style="background:var(--card-bg);border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)">
     <button class="ajuste-btn" onclick="compartirApp()">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
@@ -1021,7 +1031,7 @@ nav.nav-hidden{transform:translateY(100%)}
   </div>
 
   <!-- SECTION: Sobre la App -->
-  <div style="font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_sobre">Sobre Golf HCP</div>
+  <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_sobre">Sobre Golf HCP</div>
   <div style="background:var(--card-bg);border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)">
     <button class="ajuste-btn" onclick="goTo('sobre',null)">
       <div class="ajuste-icon" style="margin-left:4px"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
@@ -1031,7 +1041,7 @@ nav.nav-hidden{transform:translateY(100%)}
   </div>
 
   <!-- SECTION: Legal -->
-  <div style="font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_legal">Legal</div>
+  <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_legal">Legal</div>
   <div style="background:var(--card-bg);border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)">
     <button class="ajuste-btn" onclick="goTo('legal',null)">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
@@ -1110,14 +1120,29 @@ nav.nav-hidden{transform:translateY(100%)}
   </div>
 </div>
 
+<!-- PAGE: GUÍA DIDÁCTICA -->
+<div class="page" id="page-guia-didactica">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+    <button onclick="goTo('ajustes',$('nav-ajustes'))" style="background:none;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:14px;cursor:pointer;padding:0;display:flex;align-items:center;gap:5px;height:40px">
+      <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>VOLVER</span>
+    </button>
+  </div>
+  <div style="font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);padding:4px 2px 16px;font-family:'DM Mono',monospace;text-align:center" data-i18n="menu_guia_didactica">Guía Didáctica del Jugador</div>
+  <div class="card" style="text-align:center;padding:40px 20px">
+    <div style="font-size:32px;margin-bottom:12px">📚</div>
+    <div style="font-size:12px;color:var(--muted);letter-spacing:1px" data-i18n="proximamente">Contenido próximamente</div>
+  </div>
+</div>
+
 
 <nav id="main-nav" style="display:none">
   <button class="active" onclick="closeNavMenu();goTo('inicio',this)" id="nav-inicio">
-    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
     <span data-i18n="nav_inicio">Inicio</span>
   </button>
   <button onclick="closeNavMenu();goTo('rondas',this)" id="nav-rondas">
-    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
     <span data-i18n="nav_rondas">Rondas</span>
   </button>
   <button onclick="closeNavMenu();goTo('stats',this)" id="nav-stats">
@@ -1135,7 +1160,7 @@ nav.nav-hidden{transform:translateY(100%)}
 const i18n = {
   es: {
     'nav_inicio':'Inicio','nav_ronda':'Ronda','nav_rondas':'Rondas','nav_historial':'Historial','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estadísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estadísticas','compartir_hcp':'Compartir mi HCP','gestionar_campos':'Gestionar Campos','evolucion_hcp':'EVOLUCIÓN HCP','ultimas_20':'20 últimas rondas','ultimas_10':'10 últimas rondas',
-    'menu_info_hcp':'Info Hándicap','menu_guia':'Guía de inicio','menu_clave':'Cambiar clave','sec_campos_juego':'Campos y Juego','sec_guias':'Guías','sec_cuenta':'Cuenta','sec_compartir':'Compartir y Soporte','sec_sobre':'Sobre Golf HCP','sub_sobre':'Versión, créditos y más','sobre_desc':'Calculadora de Hándicap WHS actualizada a 2024 para uso personal. Diseñada para jugadores de golf que quieren conocer su Hándicap Index de forma rápida y sencilla.','sobre_plataforma':'Plataforma','sec_legal':'Legal','menu_idioma':'Idioma','menu_tema':'Modo claro','sub_campos':'Añade y edita tus campos de golf','sub_guia':'Aprende a usar la app','sub_info_hcp':'Cómo se calcula el HCP WHS','sub_clave':'Actualiza tu contraseña','sub_compartir':'Comparte Golf HCP con tus compañeros','sub_contacto':'Envíanos tus sugerencias','sub_legal':'No afiliado a R&A / USGA','sub_privacidad':'Cómo usamos tus datos','sub_salir':'Cerrar sesión','sub_tema':'Cambia la apariencia','menu_salir':'Salir','legal_p1':'Golf HCP es una herramienta de cálculo de Hándicap de uso personal e informativo.','legal_p2':'Esta aplicación <strong style="font-weight:normal;color:var(--cream)">no está afiliada, asociada ni respaldada</strong> por The R&amp;A ni por la USGA (United States Golf Association).','legal_p3':'El sistema de Hándicap WHS (World Handicap System) es propiedad de The R&amp;A y la USGA. Los cálculos realizados por esta app son aproximados y tienen carácter orientativo.','legal_p4':'Para competiciones oficiales, consulta siempre con tu federación o club de golf.','priv_p1':'Golf HCP almacena tus datos de juego (rondas, campos, resultados) en una base de datos segura (Supabase) vinculada a tu cuenta de email.','priv_p2':'No compartimos tus datos con terceros. No mostramos publicidad. Tus datos son de uso exclusivo para el funcionamiento de la aplicación.','priv_p3':'Puedes eliminar tu cuenta y todos tus datos en cualquier momento contactando con nosotros.','priv_p4':'Esta aplicación no recopila datos de localización ni información sensible del dispositivo.','menu_legal':'Info Legal','menu_privacidad':'Política de Privacidad','menu_compartir_app':'Compartir App Golf HCP','menu_contacto':'Contacto Golf HCP',
+    'menu_info_hcp':'Info Hándicap','menu_guia_didactica':'Guía Didáctica del Jugador','sub_guia_didactica':'Aprende a gestionar tu hándicap','menu_guia':'Guía de inicio','menu_clave':'Cambiar clave','sec_campos_juego':'Campos y Juego','sec_guias':'Guías','sec_cuenta':'Cuenta','sec_compartir':'Compartir y Soporte','sec_sobre':'Sobre Golf HCP','sub_sobre':'Versión, créditos y más','sobre_desc':'Calculadora de Hándicap WHS actualizada a 2024 para uso personal. Diseñada para jugadores de golf que quieren conocer su Hándicap Index de forma rápida y sencilla.','sobre_plataforma':'Plataforma','sec_legal':'Legal','menu_idioma':'Idioma','menu_tema':'Modo claro','sub_campos':'Añade y edita tus campos de golf','sub_guia':'Aprende a usar la app','sub_info_hcp':'Cómo se calcula el HCP WHS','sub_clave':'Actualiza tu contraseña','sub_compartir':'Comparte Golf HCP con tus compañeros','sub_contacto':'Envíanos tus sugerencias','sub_legal':'No afiliado a R&A / USGA','sub_privacidad':'Cómo usamos tus datos','sub_salir':'Cerrar sesión','sub_tema':'Cambia la apariencia','menu_salir':'Salir','legal_p1':'Golf HCP es una herramienta de cálculo de Hándicap de uso personal e informativo.','legal_p2':'Esta aplicación <strong style="font-weight:normal;color:var(--cream)">no está afiliada, asociada ni respaldada</strong> por The R&amp;A ni por la USGA (United States Golf Association).','legal_p3':'El sistema de Hándicap WHS (World Handicap System) es propiedad de The R&amp;A y la USGA. Los cálculos realizados por esta app son aproximados y tienen carácter orientativo.','legal_p4':'Para competiciones oficiales, consulta siempre con tu federación o club de golf.','priv_p1':'Golf HCP almacena tus datos de juego (rondas, campos, resultados) en una base de datos segura (Supabase) vinculada a tu cuenta de email.','priv_p2':'No compartimos tus datos con terceros. No mostramos publicidad. Tus datos son de uso exclusivo para el funcionamiento de la aplicación.','priv_p3':'Puedes eliminar tu cuenta y todos tus datos en cualquier momento contactando con nosotros.','priv_p4':'Esta aplicación no recopila datos de localización ni información sensible del dispositivo.','menu_legal':'Info Legal','menu_privacidad':'Política de Privacidad','menu_compartir_app':'Compartir App Golf HCP','menu_contacto':'Contacto Golf HCP',
     'email':'Email','password':'Contraseña','btn_entrar':'Entrar','sin_cuenta':'¿Sin cuenta?','registrate':'Regístrate','politica_priv':'Política de Privacidad',
     'ya_cuenta':'¿Ya tienes cuenta?','inicia_sesion':'Inicia sesión','crear_cuenta':'Crear Cuenta',
     'enviar_enlace':'Enviar enlace','volver':'← Volver','recuperar_pass':'Recuperar contraseña',
@@ -1151,7 +1176,7 @@ const i18n = {
     'ida':'1ª (1–9)','vuelta2':'2ª (10–18)','hoyos_18':'18 hoyos','hoyos_9':'9 hoyos',
     'barra_salida':'Barra de salida','hcp_idx':'HCP Index','registrar_ronda':'+ Registrar Ronda',
     'cancelar':'Cancelar','guardando':'Guardando…',
-    'historial':'Historial','fecha_col':'Fecha','campo_col':'Campo','golpes_col':'Golpes','dif_col':'Dif.','barra_col':'Barra','stbl_col':'Stbl',
+    'historial':'Historial de Rondas','fecha_col':'Fecha','campo_col':'Campo','golpes_col':'Golpes','dif_col':'Dif.','barra_col':'Barra','stbl_col':'Stbl',
     'borrar_todo':'Borrar todas las rondas',
     'mis_campos':'Mis Campos','nuevo_campo':'+ Nuevo','nuevo_campo_title':'Nuevo Campo',
     'nombre_campo':'Nombre del campo','max15':'(máx. 15 caracteres)','barras_salida':'Barras de Salida',
@@ -1227,7 +1252,7 @@ const i18n = {
   },
   pt: {
     'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','compartir_hcp':'Partilhar o meu HCP','gestionar_campos':'Gerir Campos','evolucion_hcp':'EVOLUÇÃO HCP','ultimas_20':'20 últimas voltas','ultimas_10':'10 últimas voltas',
-    'menu_info_hcp':'Info Handicap','menu_guia':'Guia inicial','menu_clave':'Alterar senha','sec_campos_juego':'Campos e Jogo','sec_guias':'Guias','sec_cuenta':'Conta','sec_compartir':'Partilhar e Suporte','sec_sobre':'Sobre Golf HCP','sub_sobre':'Versão, créditos e mais','sobre_desc':'Calculadora de Handicap WHS atualizada a 2024 para uso pessoal. Desenhada para jogadores de golfe que querem conhecer o seu Handicap Index de forma rápida e simples.','sobre_plataforma':'Plataforma','sec_legal':'Legal','menu_idioma':'Idioma','menu_tema':'Modo claro','sub_campos':'Adiciona e edita os teus campos de golfe','sub_guia':'Aprende a usar a app','sub_info_hcp':'Como se calcula o HCP WHS','sub_clave':'Atualiza a tua palavra-passe','sub_compartir':'Partilha Golf HCP com os teus colegas','sub_contacto':'Envia-nos as tuas sugestões','sub_legal':'Não afiliado à R&A / USGA','sub_privacidad':'Como usamos os teus dados','sub_salir':'Terminar sessão','sub_tema':'Muda a aparência','menu_salir':'Sair','legal_p1':'Golf HCP é uma ferramenta de cálculo de Handicap de uso pessoal e informativo.','legal_p2':'Esta aplicação <strong style="font-weight:normal;color:var(--cream)">não está afiliada, associada nem apoiada</strong> pela R&amp;A nem pela USGA (United States Golf Association).','legal_p3':'O sistema de Handicap WHS (World Handicap System) é propriedade da R&amp;A e da USGA. Os cálculos realizados por esta app são aproximados e têm carácter orientativo.','legal_p4':'Para competições oficiais, consulta sempre a tua federação ou clube de golfe.','priv_p1':'Golf HCP armazena os teus dados de jogo (voltas, campos, resultados) numa base de dados segura (Supabase) associada à tua conta de email.','priv_p2':'Não partilhamos os teus dados com terceiros. Não mostramos publicidade. Os teus dados são de uso exclusivo para o funcionamento da aplicação.','priv_p3':'Podes eliminar a tua conta e todos os teus dados a qualquer momento contactando-nos.','priv_p4':'Esta aplicação não recolhe dados de localização nem informação sensível do dispositivo.','menu_legal':'Info Legal','menu_privacidad':'Política de Privacidade','menu_compartir_app':'Partilhar App Golf HCP','menu_contacto':'Contacto Golf HCP',
+    'menu_info_hcp':'Info Handicap','menu_guia_didactica':'Guia Didática do Jogador','sub_guia_didactica':'Aprende a gerir o teu handicap','menu_guia':'Guia inicial','menu_clave':'Alterar senha','sec_campos_juego':'Campos e Jogo','sec_guias':'Guias','sec_cuenta':'Conta','sec_compartir':'Partilhar e Suporte','sec_sobre':'Sobre Golf HCP','sub_sobre':'Versão, créditos e mais','sobre_desc':'Calculadora de Handicap WHS atualizada a 2024 para uso pessoal. Desenhada para jogadores de golfe que querem conhecer o seu Handicap Index de forma rápida e simples.','sobre_plataforma':'Plataforma','sec_legal':'Legal','menu_idioma':'Idioma','menu_tema':'Modo claro','sub_campos':'Adiciona e edita os teus campos de golfe','sub_guia':'Aprende a usar a app','sub_info_hcp':'Como se calcula o HCP WHS','sub_clave':'Atualiza a tua palavra-passe','sub_compartir':'Partilha Golf HCP com os teus colegas','sub_contacto':'Envia-nos as tuas sugestões','sub_legal':'Não afiliado à R&A / USGA','sub_privacidad':'Como usamos os teus dados','sub_salir':'Terminar sessão','sub_tema':'Muda a aparência','menu_salir':'Sair','legal_p1':'Golf HCP é uma ferramenta de cálculo de Handicap de uso pessoal e informativo.','legal_p2':'Esta aplicação <strong style="font-weight:normal;color:var(--cream)">não está afiliada, associada nem apoiada</strong> pela R&amp;A nem pela USGA (United States Golf Association).','legal_p3':'O sistema de Handicap WHS (World Handicap System) é propriedade da R&amp;A e da USGA. Os cálculos realizados por esta app são aproximados e têm carácter orientativo.','legal_p4':'Para competições oficiais, consulta sempre a tua federação ou clube de golfe.','priv_p1':'Golf HCP armazena os teus dados de jogo (voltas, campos, resultados) numa base de dados segura (Supabase) associada à tua conta de email.','priv_p2':'Não partilhamos os teus dados com terceiros. Não mostramos publicidade. Os teus dados são de uso exclusivo para o funcionamento da aplicação.','priv_p3':'Podes eliminar a tua conta e todos os teus dados a qualquer momento contactando-nos.','priv_p4':'Esta aplicação não recolhe dados de localização nem informação sensível do dispositivo.','menu_legal':'Info Legal','menu_privacidad':'Política de Privacidade','menu_compartir_app':'Partilhar App Golf HCP','menu_contacto':'Contacto Golf HCP',
     'email':'Email','password':'Senha','btn_entrar':'Entrar','sin_cuenta':'Sem conta?','registrate':'Registe-se','politica_priv':'Política de Privacidade',
     'ya_cuenta':'Já tem conta?','inicia_sesion':'Iniciar sessão','crear_cuenta':'Criar Conta',
     'enviar_enlace':'Enviar link','volver':'← Voltar','recuperar_pass':'Recuperar senha',
@@ -1243,7 +1268,7 @@ const i18n = {
     'ida':'1ª (1–9)','vuelta2':'2ª (10–18)','hoyos_18':'18 buracos','hoyos_9':'9 buracos',
     'barra_salida':'Tee de saída','hcp_idx':'HCP Index','registrar_ronda':'+ Registar Volta',
     'cancelar':'Cancelar','guardando':'A guardar…',
-    'historial':'Histórico','fecha_col':'Data','campo_col':'Campo','golpes_col':'Pancadas','dif_col':'Dif.','barra_col':'Tee','stbl_col':'Stbl',
+    'historial':'Histórico de Voltas','fecha_col':'Data','campo_col':'Campo','golpes_col':'Pancadas','dif_col':'Dif.','barra_col':'Tee','stbl_col':'Stbl',
     'borrar_todo':'Apagar todas as voltas',
     'mis_campos':'Os Meus Campos','nuevo_campo':'+ Novo','nuevo_campo_title':'Novo Campo',
     'nombre_campo':'Nome do campo','max15':'(máx. 15 caracteres)','barras_salida':'Tees de Saída',
@@ -2122,7 +2147,7 @@ function renderHistory() {
       ? `<span class="stbl-badge">⛳ ${r.stableford}</span>` : '—';
     const usedBadge = used ? '<span class="used-badge">✓</span>' : '';
     return `<tr onclick="abrirDetalleRonda(${r.id})" style="cursor:pointer" onmouseover="this.style.background='rgba(255,255,255,.03)'" onmouseout="this.style.background=''">
-      <td class="col-fecha" style="color:#fff">${fmtDate(r.date)}</td>
+      <td class="col-fecha">${fmtDate(r.date)}</td>
       <td class="col-campo" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.name||'—'}${nineTag}</td>
       <td style="text-align:center">${r.gross}</td>
       <td style="text-align:center">${fmtD(r.diff)}</td>
@@ -2751,8 +2776,8 @@ function abrirDetalleRonda(id) {
   titulo.textContent = fmtDate(r.date) + ' — ' + (r.name || '');
 
   const lbl = (es, pt) => lang === 'pt' ? pt : es;
-  const row = (k, v) => `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
-    <span style="font-size:10px;color:var(--muted)">${k}</span>
+  const row = (k, v) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)">
+    <span style="font-size:13px;color:var(--muted)">${k}</span>
     <span style="font-size:13px;color:var(--cream);font-family:'DM Mono',monospace">${v}</span>
   </div>`;
 
