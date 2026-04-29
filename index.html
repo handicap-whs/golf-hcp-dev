@@ -400,7 +400,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.062-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.064-DEV</div>
   </div>
 </div>
 
@@ -615,7 +615,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.062-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.064-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -1819,18 +1819,18 @@ function renderStats() {
         <span>${lbl('EVOLUCIÓN HCP','EVOLUÇÃO HCP')}</span>
         <span style="color:var(--muted);font-size:9px">${lbl('últimas 10 rondas','últimas 10 voltas')}</span>
       </div>
-      <canvas id="stats-hcp-chart" height="120" style="width:100%;display:block"></canvas>
-      <div id="stats-hcp-labels" style="position:relative;height:14px;margin-top:2px"></div>
+      <canvas id="stats-hcp-chart" height="130" style="width:100%;display:block"></canvas>
+      <div id="stats-hcp-labels"></div>
     </div>
     <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:8px">
       <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:8px">${lbl('DIFERENCIALES POR RONDA','DIFERENCIAIS POR VOLTA')}</div>
-      <canvas id="stats-dif-chart" height="100" style="width:100%;display:block"></canvas>
-      <div id="stats-dif-labels" style="position:relative;height:14px;margin-top:2px"></div>
+      <canvas id="stats-dif-chart" height="110" style="width:100%;display:block"></canvas>
+      <div id="stats-dif-labels"></div>
     </div>
     <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px">
       <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:8px">${lbl('STABLEFORD POR RONDA','STABLEFORD POR VOLTA')}</div>
-      <canvas id="stats-stbl-chart" height="100" style="width:100%;display:block"></canvas>
-      <div id="stats-stbl-labels" style="position:relative;height:14px;margin-top:2px"></div>
+      <canvas id="stats-stbl-chart" height="110" style="width:100%;display:block"></canvas>
+      <div id="stats-stbl-labels"></div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
     ${card(lbl('Rondas jugadas','Voltas jogadas'), combined.length)}
@@ -3443,9 +3443,10 @@ function drawStatsChart(canvasId, labelsId, data, color, minVal, maxVal, labelFn
   const labelsEl = document.getElementById(labelsId);
   if (!canvas || !labelsEl || !data.length) return;
   const dpr = window.devicePixelRatio || 1;
-  // Get width from canvas style or parent
-  canvas.style.width = '100%';
-  const W = canvas.clientWidth || canvas.offsetWidth || (canvas.parentElement ? canvas.parentElement.clientWidth - 28 : 280) || 280;
+  // Force layout - get parent width
+  const parentW = canvas.parentElement ? canvas.parentElement.offsetWidth || canvas.parentElement.clientWidth : 0;
+  const W = Math.max(parentW - 28, 200);
+  canvas.style.width = W + 'px';
   const H = parseInt(canvas.getAttribute('height')) || 100;
   canvas.width = W * dpr; canvas.height = H * dpr;
   canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
@@ -3516,8 +3517,9 @@ function renderStatsCharts() {
   // Chart 1: HCP evolution
   const points = [];
   for (let i=1; i<=sorted.length; i++) {
-    const res = getHCP(sorted.slice(0,i).map(r=>({...r})));
-    if (res) points.push({hcp:res.hcp, fecha:sorted[i-1].fecha||sorted[i-1].date});
+    const slice = sorted.slice(0,i);
+    const res = getHCP(slice);
+    if (res && res.hcp < 54 && res.hcp > -5) points.push({hcp:res.hcp, fecha:sorted[i-1].fecha||sorted[i-1].date});
   }
   const hcpData = points.slice(-10);
   if (hcpData.length >= 2) {
