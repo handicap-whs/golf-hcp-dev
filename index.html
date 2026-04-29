@@ -400,7 +400,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.064-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.068-DEV</div>
   </div>
 </div>
 
@@ -615,7 +615,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.064-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.068-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -1814,21 +1814,21 @@ function renderStats() {
     </div>`;
 
   el.innerHTML = `
-    <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:8px">
-      <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:8px;display:flex;justify-content:space-between">
-        <span>${lbl('EVOLUCIÓN HCP','EVOLUÇÃO HCP')}</span>
-        <span style="color:var(--muted);font-size:9px">${lbl('últimas 10 rondas','últimas 10 voltas')}</span>
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:6px;display:flex;justify-content:space-between">
+        <span>${lbl('EVOLUCIÓN HANDICAP INDEX','EVOLUÇÃO HANDICAP INDEX')}</span>
+        <span style="color:var(--muted);font-size:9px">${lbl('últimas 20 rondas','últimas 20 voltas')}</span>
       </div>
       <canvas id="stats-hcp-chart" height="130" style="width:100%;display:block"></canvas>
       <div id="stats-hcp-labels"></div>
     </div>
-    <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:8px">
-      <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:8px">${lbl('DIFERENCIALES POR RONDA','DIFERENCIAIS POR VOLTA')}</div>
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:6px">${lbl('DIFERENCIALES POR RONDA','DIFERENCIAIS POR VOLTA')}</div>
       <canvas id="stats-dif-chart" height="110" style="width:100%;display:block"></canvas>
       <div id="stats-dif-labels"></div>
     </div>
-    <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px">
-      <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:8px">${lbl('STABLEFORD POR RONDA','STABLEFORD POR VOLTA')}</div>
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:6px">${lbl('STABLEFORD POR RONDA','STABLEFORD POR VOLTA')}</div>
       <canvas id="stats-stbl-chart" height="110" style="width:100%;display:block"></canvas>
       <div id="stats-stbl-labels"></div>
     </div>
@@ -3440,70 +3440,95 @@ if ('serviceWorker' in navigator) {
 
 function drawStatsChart(canvasId, labelsId, data, color, minVal, maxVal, labelFn, valueFn, barMode) {
   const canvas = document.getElementById(canvasId);
-  const labelsEl = document.getElementById(labelsId);
-  if (!canvas || !labelsEl || !data.length) return;
+  if (!canvas || !data.length) return;
   const dpr = window.devicePixelRatio || 1;
-  // Force layout - get parent width
-  const parentW = canvas.parentElement ? canvas.parentElement.offsetWidth || canvas.parentElement.clientWidth : 0;
-  const W = Math.max(parentW - 28, 200);
-  canvas.style.width = W + 'px';
-  const H = parseInt(canvas.getAttribute('height')) || 100;
+  // Width from parent div (no padding now)
+  const p = canvas.parentElement;
+  let W = p ? (p.getBoundingClientRect().width || p.offsetWidth || window.innerWidth - 32) : window.innerWidth - 32;
+  if (W < 100) W = window.innerWidth - 32;
+  const H = barMode ? 110 : 130;
   canvas.width = W * dpr; canvas.height = H * dpr;
   canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
   const ctx = canvas.getContext('2d');
   ctx.scale(dpr, dpr);
   ctx.clearRect(0, 0, W, H);
+
   const n = data.length;
-  const pad = {top:20, bottom:8, left:4, right:4};
-  const chartW = W - pad.left - pad.right;
-  const chartH = H - pad.top - pad.bottom;
+  const padL = 28, padR = 8, padT = 20, padB = 16;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
   const range = maxVal - minVal || 1;
   const xPos = i => barMode
-    ? pad.left + (i + 0.5) * (chartW / n)
-    : pad.left + i * (chartW / Math.max(n-1,1));
-  const yScale = v => pad.top + chartH - ((v - minVal) / range) * chartH;
+    ? padL + (i + 0.5) * (chartW / n)
+    : padL + i * (chartW / Math.max(n-1, 1));
+  const yScale = v => padT + chartH - ((v - minVal) / range) * chartH;
+
+  // Y axis labels
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.font = '8px DM Mono,monospace';
+  ctx.textAlign = 'right';
+  [minVal, maxVal].forEach(v => {
+    ctx.fillText(v.toFixed(1), padL - 3, yScale(v) + 3);
+  });
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+  ctx.lineWidth = 1;
+  [minVal, (minVal+maxVal)/2, maxVal].forEach(v => {
+    const y = yScale(v);
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W-padR, y); ctx.stroke();
+  });
 
   if (barMode) {
-    const bw = (chartW / n) * 0.6;
+    const bw = Math.max(4, (chartW / n) * 0.5);
     data.forEach((d, i) => {
       const v = valueFn(d);
       const x = xPos(i) - bw/2;
-      const y = yScale(Math.max(v, minVal));
-      const bh = Math.max(1, yScale(minVal) - y);
-      ctx.fillStyle = color; ctx.globalAlpha = 0.75;
+      const y = yScale(Math.min(Math.max(v, minVal), maxVal));
+      const bh = Math.max(2, yScale(minVal) - y);
+      ctx.fillStyle = color; ctx.globalAlpha = 0.8;
       ctx.beginPath();
       if (ctx.roundRect) ctx.roundRect(x, y, bw, bh, 2); else ctx.rect(x, y, bw, bh);
       ctx.fill(); ctx.globalAlpha = 1;
       ctx.fillStyle = color; ctx.font = '8px DM Mono,monospace'; ctx.textAlign = 'center';
-      ctx.fillText(v.toFixed(1), xPos(i), y - 4);
+      ctx.fillText(v.toFixed(1), xPos(i), y - 3);
     });
   } else {
     const fill = ctx.createLinearGradient(0,0,0,H);
-    fill.addColorStop(0, color + '44'); fill.addColorStop(1, color + '08');
+    fill.addColorStop(0, color + '55'); fill.addColorStop(1, color + '05');
     ctx.beginPath();
-    data.forEach((d,i) => i===0 ? ctx.moveTo(xPos(i),yScale(valueFn(d))) : ctx.lineTo(xPos(i),yScale(valueFn(d))));
-    ctx.lineTo(xPos(n-1),H-pad.bottom); ctx.lineTo(xPos(0),H-pad.bottom);
+    data.forEach((d,i) => {
+      const x=xPos(i), y=yScale(valueFn(d));
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    });
+    ctx.lineTo(xPos(n-1), yScale(minVal));
+    ctx.lineTo(xPos(0), yScale(minVal));
     ctx.closePath(); ctx.fillStyle=fill; ctx.fill();
     ctx.strokeStyle=color; ctx.lineWidth=2; ctx.lineJoin='round';
     ctx.beginPath();
-    data.forEach((d,i) => i===0 ? ctx.moveTo(xPos(i),yScale(valueFn(d))) : ctx.lineTo(xPos(i),yScale(valueFn(d))));
+    data.forEach((d,i) => {
+      const x=xPos(i), y=yScale(valueFn(d));
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    });
     ctx.stroke();
     data.forEach((d,i) => {
       const x=xPos(i), y=yScale(valueFn(d));
       ctx.beginPath(); ctx.arc(x,y,2.5,0,Math.PI*2); ctx.fillStyle=color; ctx.fill();
       ctx.fillStyle=color; ctx.font='8px DM Mono,monospace';
-      ctx.textAlign=i===n-1?'right':i===0?'left':'center';
-      ctx.fillText(valueFn(d).toFixed(1), x+(i===n-1?-2:i===0?2:0), y-5);
+      ctx.textAlign = i===n-1?'right':i===0?'left':'center';
+      ctx.fillText(valueFn(d).toFixed(1), x, y-5);
     });
   }
-  labelsEl.innerHTML='';
-  data.forEach((d,i) => {
-    const x=xPos(i), pct=(x/W*100);
-    const tx=i===0?'0%':i===n-1?'-100%':'-50%';
-    const span=document.createElement('span');
-    span.textContent=labelFn(d);
-    span.style.cssText=`position:absolute;left:${pct}%;transform:translateX(${tx});font-size:7px;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap`;
-    labelsEl.appendChild(span);
+
+  // Date labels at bottom of canvas - aligned with data points
+  ctx.fillStyle = 'rgba(255,255,255,0.35)';
+  ctx.font = '7px DM Mono,monospace';
+  const step = n <= 4 ? 1 : n <= 7 ? 2 : 3;
+  data.forEach((d, i) => {
+    if (i % step !== 0 && i !== n-1) return;
+    const x = xPos(i);
+    ctx.textAlign = i === 0 ? 'left' : i === n-1 ? 'right' : 'center';
+    ctx.fillText(labelFn(d), x, H - 4);
   });
 }
 
@@ -3511,7 +3536,7 @@ function renderStatsCharts() {
   const { combined } = combineNineHoleRounds(state.rounds);
   if (!combined || combined.length < 2) return;
   const sorted = [...combined].sort((a,b) => new Date(a.fecha||a.date)-new Date(b.fecha||b.date));
-  const last10 = sorted.slice(-10);
+  const last20 = sorted.slice(-20);
   const fmt = r => { const dt=new Date(r.fecha||r.date); return dt.getDate()+'/'+(dt.getMonth()+1); };
 
   // Chart 1: HCP evolution
@@ -3531,13 +3556,13 @@ function renderStatsCharts() {
   }
 
   // Chart 2: Diferenciales
-  const difVals = last10.map(r=>r.diff);
-  drawStatsChart('stats-dif-chart','stats-dif-labels', last10, '#7bc67a',
+  const difVals = last20.map(r=>r.diff);
+  drawStatsChart('stats-dif-chart','stats-dif-labels', last20, '#7bc67a',
     Math.floor(Math.min(...difVals)-1), Math.ceil(Math.max(...difVals)+1),
     fmt, r=>r.diff, true);
 
   // Chart 3: Stableford
-  const stblData = last10.filter(r=>r.stableford>0);
+  const stblData = last20.filter(r=>r.stableford>0);
   if (stblData.length) {
     const stblVals = stblData.map(r=>r.stableford);
     drawStatsChart('stats-stbl-chart','stats-stbl-labels', stblData, '#3b82f6',
