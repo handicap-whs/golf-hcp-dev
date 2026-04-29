@@ -400,7 +400,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.071-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.29.073-DEV</div>
   </div>
 </div>
 
@@ -615,7 +615,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.071-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.29.073-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_10">10 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -1819,19 +1819,19 @@ function renderStats() {
   el.innerHTML = `
     <div style="margin-bottom:16px">
       <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:6px;display:flex;justify-content:space-between">
-        <span>${lbl('EVOLUCIÓN HANDICAP INDEX','EVOLUÇÃO HANDICAP INDEX')}</span>
+        <span>${lbl('EVOLUCIÓN HCP','EVOLUÇÃO HCP')}</span>
         <span style="color:var(--muted);font-size:9px">${lbl('últimas 20 rondas','últimas 20 voltas')}</span>
       </div>
       <canvas id="stats-hcp-chart" height="130" style="width:100%;display:block"></canvas>
       <div id="stats-hcp-labels"></div>
     </div>
     <div style="margin-bottom:16px">
-      <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:6px">${lbl('DIFERENCIALES POR RONDA','DIFERENCIAIS POR VOLTA')}</div>
+      <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:6px;display:flex;justify-content:space-between;align-items:baseline"><span>${lbl('DIFERENCIALES POR RONDA','DIFERENCIAIS POR VOLTA')}</span><span style="font-size:9px;letter-spacing:.5px;color:var(--muted)">${lbl('18 hoyos / combinadas 9H','18 buracos / combinadas 9B')}</span></div>
       <canvas id="stats-dif-chart" height="110" style="width:100%;display:block"></canvas>
       <div id="stats-dif-labels"></div>
     </div>
     <div style="margin-bottom:16px">
-      <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:6px">${lbl('STABLEFORD POR RONDA','STABLEFORD POR VOLTA')}</div>
+      <div style="font-size:11px;letter-spacing:1px;color:var(--gold2);margin-bottom:6px;display:flex;justify-content:space-between;align-items:baseline"><span>${lbl('STABLEFORD POR RONDA','STABLEFORD POR VOLTA')}</span><span style="font-size:9px;letter-spacing:.5px;color:var(--muted)">${lbl('18 hoyos / combinadas 9H','18 buracos / combinadas 9B')}</span></div>
       <canvas id="stats-stbl-chart" height="110" style="width:100%;display:block"></canvas>
       <div id="stats-stbl-labels"></div>
     </div>
