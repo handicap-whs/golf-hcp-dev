@@ -418,7 +418,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.049-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.059-DEV</div>
   </div>
 </div>
 
@@ -570,6 +570,10 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="r-hcp" id="r-hcp">—</div>
     <div class="r-cat" id="r-cat">Añade rondas para calcular</div>
     <div id="r-fecha-hcp" style="font-size:9px;color:var(--muted);margin-top:4px;letter-spacing:.5px"></div>
+    <button id="btn-compartir-hcp" onclick="compartirHCP()" style="display:none;margin-top:10px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);border-radius:8px;color:var(--gold2);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:8px 16px;cursor:pointer;display:flex;align-items:center;gap:8px;touch-action:manipulation;margin-left:auto;margin-right:auto">
+      <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      <span data-i18n="compartir_hcp">Compartir mi HCP</span>
+    </button>
 
   </div>
   <div class="card">
@@ -634,7 +638,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.049-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.059-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -896,14 +900,12 @@ nav.nav-hidden{transform:translateY(100%)}
       <span>VOLVER</span>
     </button>
   </div>
-  <div class="card">
-    <div style="font-size:13px;letter-spacing:1.5px;color:var(--gold2);margin-bottom:14px" data-i18n="menu_legal">INFO LEGAL</div>
-    <div style="font-size:11px;color:var(--muted);line-height:1.8">
-      <p style="margin:0 0 12px" id="legal-p1"></p>
-      <p style="margin:0 0 12px" id="legal-p2"></p>
-      <p style="margin:0 0 12px" id="legal-p3"></p>
-      <p style="margin:0" data-i18n="legal_p4">Para competiciones oficiales, consulta siempre con tu federación o club de golf.</p>
-    </div>
+  <div style="font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);padding:4px 2px 16px;font-family:'DM Mono',monospace;text-align:center" data-i18n="menu_legal">INFO LEGAL</div>
+  <div style="font-size:11px;color:var(--muted);line-height:1.9">
+    <p style="margin:0 0 14px" data-i18n="legal_p1"></p>
+    <p style="margin:0 0 14px" data-i18n="legal_p2"></p>
+    <p style="margin:0 0 14px" data-i18n="legal_p3"></p>
+    <p style="margin:0" data-i18n="legal_p4"></p>
   </div>
 </div>
 
@@ -930,7 +932,7 @@ nav.nav-hidden{transform:translateY(100%)}
 <div class="page" id="page-ajustes">
 
   <!-- SECTION: Campos y Juego -->
-  <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_campos_juego">Campos y Juego</div>
+  <div style="font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_campos_juego">Campos y Juego</div>
   <div style="background:var(--card-bg);border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)">
     <button class="ajuste-btn" onclick="goTo('campos',null)">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
@@ -940,7 +942,7 @@ nav.nav-hidden{transform:translateY(100%)}
   </div>
 
   <!-- SECTION: Guías -->
-  <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_guias">Guías</div>
+  <div style="font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_guias">Guías</div>
   <div style="background:var(--card-bg);border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)">
     <button class="ajuste-btn" onclick="localStorage.removeItem('golf_guide_seen');openGuide()">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
@@ -956,7 +958,7 @@ nav.nav-hidden{transform:translateY(100%)}
   </div>
 
   <!-- SECTION: Cuenta -->
-  <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_cuenta">Cuenta</div>
+  <div style="font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_cuenta">Cuenta</div>
   <div style="background:var(--card-bg);border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)">
     <button class="ajuste-btn" onclick="goTo('pwd',null)">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
@@ -1003,7 +1005,7 @@ nav.nav-hidden{transform:translateY(100%)}
   </div>
 
   <!-- SECTION: Compartir y Soporte -->
-  <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_compartir">Compartir y Soporte</div>
+  <div style="font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_compartir">Compartir y Soporte</div>
   <div style="background:var(--card-bg);border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)">
     <button class="ajuste-btn" onclick="compartirApp()">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
@@ -1019,7 +1021,7 @@ nav.nav-hidden{transform:translateY(100%)}
   </div>
 
   <!-- SECTION: Legal -->
-  <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_legal">Legal</div>
+  <div style="font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0 4px 6px" data-i18n="sec_legal">Legal</div>
   <div style="background:var(--card-bg);border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)">
     <button class="ajuste-btn" onclick="goTo('legal',null)">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
@@ -1096,7 +1098,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
 const i18n = {
   es: {
-    'nav_inicio':'Inicio','nav_ronda':'Ronda','nav_rondas':'Rondas','nav_historial':'Historial','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estadísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estadísticas','gestionar_campos':'Gestionar Campos','evolucion_hcp':'EVOLUCIÓN HCP','ultimas_20':'20 últimas rondas','ultimas_10':'10 últimas rondas',
+    'nav_inicio':'Inicio','nav_ronda':'Ronda','nav_rondas':'Rondas','nav_historial':'Historial','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estadísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estadísticas','compartir_hcp':'Compartir mi HCP','gestionar_campos':'Gestionar Campos','evolucion_hcp':'EVOLUCIÓN HCP','ultimas_20':'20 últimas rondas','ultimas_10':'10 últimas rondas',
     'menu_info_hcp':'Info Hándicap','menu_guia':'Guía de inicio','menu_clave':'Cambiar clave','sec_campos_juego':'Campos y Juego','sec_guias':'Guías','sec_cuenta':'Cuenta','sec_compartir':'Compartir y Soporte','sec_legal':'Legal','menu_idioma':'Idioma','menu_tema':'Modo claro','sub_campos':'Añade y edita tus campos de golf','sub_guia':'Aprende a usar la app','sub_info_hcp':'Cómo se calcula el HCP WHS','sub_clave':'Actualiza tu contraseña','sub_compartir':'Comparte Golf HCP con tus compañeros','sub_contacto':'Envíanos tus sugerencias','sub_legal':'No afiliado a R&A / USGA','sub_privacidad':'Cómo usamos tus datos','sub_salir':'Cerrar sesión','sub_tema':'Cambia la apariencia','menu_salir':'Salir','legal_p1':'Golf HCP es una herramienta de cálculo de Hándicap de uso personal e informativo.','legal_p2':'Esta aplicación <strong style="font-weight:normal;color:var(--cream)">no está afiliada, asociada ni respaldada</strong> por The R&amp;A ni por la USGA (United States Golf Association).','legal_p3':'El sistema de Hándicap WHS (World Handicap System) es propiedad de The R&amp;A y la USGA. Los cálculos realizados por esta app son aproximados y tienen carácter orientativo.','legal_p4':'Para competiciones oficiales, consulta siempre con tu federación o club de golf.','priv_p1':'Golf HCP almacena tus datos de juego (rondas, campos, resultados) en una base de datos segura (Supabase) vinculada a tu cuenta de email.','priv_p2':'No compartimos tus datos con terceros. No mostramos publicidad. Tus datos son de uso exclusivo para el funcionamiento de la aplicación.','priv_p3':'Puedes eliminar tu cuenta y todos tus datos en cualquier momento contactando con nosotros.','priv_p4':'Esta aplicación no recopila datos de localización ni información sensible del dispositivo.','menu_legal':'Info Legal','menu_privacidad':'Política de Privacidad','menu_compartir_app':'Compartir app','menu_contacto':'Contacto Golf HCP',
     'email':'Email','password':'Contraseña','btn_entrar':'Entrar','sin_cuenta':'¿Sin cuenta?','registrate':'Regístrate','politica_priv':'Política de Privacidad',
     'ya_cuenta':'¿Ya tienes cuenta?','inicia_sesion':'Inicia sesión','crear_cuenta':'Crear Cuenta',
@@ -1185,10 +1187,10 @@ const i18n = {
     'sin_barras':'sin barras','g_sub':'Calculadora WHS 2020','g_tagline':'Tu handicap siempre actualizado',
     'g_como_empezar':'⛳ Cómo empezar','g_hcp_index':'📊 Handicap Index',
     'g_formatos':'🏌️ Formatos de juego','g_simbolos':'💡 Símbolos en cada hoyo',
-    'g_nav':'🧭 Botones de navegación','f_titulo':'Fórmula WHS 2020',
+    'g_nav':'🧭 Botones de navegación','f_titulo':'Fórmula WHS 2020','fi_aviso_titulo':'ℹ️ FERRAMENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula o teu Handicap Index segundo a metodologia oficial do World Handicap System (WHS 2020), publicado conjuntamente pela R&A e USGA.<br><br>Este cálculo é orientativo e de uso pessoal. Golf HCP é uma aplicação independente, não afiliada nem apoiada pela R&A, USGA nem por nenhuma federação oficial de golfe.<br><br>Para Handicap oficial homologado, contacta a tua federação ou clube de golfe.','fi_aviso_titulo':'ℹ️ HERRAMIENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula tu Hándicap Index según la metodología oficial del World Handicap System (WHS 2020), publicado conjuntamente por R&A y USGA.<br><br>Este cálculo es orientativo y de uso personal. Golf HCP es una aplicación independiente, no afiliada ni respaldada por R&A, USGA ni ninguna federación oficial de golf.<br><br>Para Hándicap oficial homologado, contacta con tu federación o club de golf.',
   },
   pt: {
-    'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','gestionar_campos':'Gerir Campos','evolucion_hcp':'EVOLUÇÃO HCP','ultimas_20':'20 últimas voltas','ultimas_10':'10 últimas voltas',
+    'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','compartir_hcp':'Partilhar o meu HCP','gestionar_campos':'Gerir Campos','evolucion_hcp':'EVOLUÇÃO HCP','ultimas_20':'20 últimas voltas','ultimas_10':'10 últimas voltas',
     'menu_info_hcp':'Info Handicap','menu_guia':'Guia inicial','menu_clave':'Alterar senha','sec_campos_juego':'Campos e Jogo','sec_guias':'Guias','sec_cuenta':'Conta','sec_compartir':'Partilhar e Suporte','sec_legal':'Legal','menu_idioma':'Idioma','menu_tema':'Modo claro','sub_campos':'Adiciona e edita os teus campos de golfe','sub_guia':'Aprende a usar a app','sub_info_hcp':'Como se calcula o HCP WHS','sub_clave':'Atualiza a tua palavra-passe','sub_compartir':'Partilha Golf HCP com os teus colegas','sub_contacto':'Envia-nos as tuas sugestões','sub_legal':'Não afiliado à R&A / USGA','sub_privacidad':'Como usamos os teus dados','sub_salir':'Terminar sessão','sub_tema':'Muda a aparência','menu_salir':'Sair','legal_p1':'Golf HCP é uma ferramenta de cálculo de Handicap de uso pessoal e informativo.','legal_p2':'Esta aplicação <strong style="font-weight:normal;color:var(--cream)">não está afiliada, associada nem apoiada</strong> pela R&amp;A nem pela USGA (United States Golf Association).','legal_p3':'O sistema de Handicap WHS (World Handicap System) é propriedade da R&amp;A e da USGA. Os cálculos realizados por esta app são aproximados e têm carácter orientativo.','legal_p4':'Para competições oficiais, consulta sempre a tua federação ou clube de golfe.','priv_p1':'Golf HCP armazena os teus dados de jogo (voltas, campos, resultados) numa base de dados segura (Supabase) associada à tua conta de email.','priv_p2':'Não partilhamos os teus dados com terceiros. Não mostramos publicidade. Os teus dados são de uso exclusivo para o funcionamento da aplicação.','priv_p3':'Podes eliminar a tua conta e todos os teus dados a qualquer momento contactando-nos.','priv_p4':'Esta aplicação não recolhe dados de localização nem informação sensível do dispositivo.','menu_legal':'Info Legal','menu_privacidad':'Política de Privacidade','menu_compartir_app':'Partilhar app','menu_contacto':'Contacto Golf HCP',
     'email':'Email','password':'Senha','btn_entrar':'Entrar','sin_cuenta':'Sem conta?','registrate':'Registe-se','politica_priv':'Política de Privacidade',
     'ya_cuenta':'Já tem conta?','inicia_sesion':'Iniciar sessão','crear_cuenta':'Criar Conta',
@@ -1277,7 +1279,7 @@ const i18n = {
     'sin_barras':'sem barras','g_sub':'Calculadora WHS 2020','g_tagline':'O teu handicap sempre atualizado',
     'g_como_empezar':'⛳ Como começar','g_hcp_index':'📊 Handicap Index',
     'g_formatos':'🏌️ Formatos de jogo','g_simbolos':'💡 Símbolos em cada buraco',
-    'g_nav':'🧭 Botões de navegação','f_titulo':'Fórmula WHS 2020',
+    'g_nav':'🧭 Botões de navegação','f_titulo':'Fórmula WHS 2020','fi_aviso_titulo':'ℹ️ FERRAMENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula o teu Handicap Index segundo a metodologia oficial do World Handicap System (WHS 2020), publicado conjuntamente pela R&A e USGA.<br><br>Este cálculo é orientativo e de uso pessoal. Golf HCP é uma aplicação independente, não afiliada nem apoiada pela R&A, USGA nem por nenhuma federação oficial de golfe.<br><br>Para Handicap oficial homologado, contacta a tua federação ou clube de golfe.','fi_aviso_titulo':'ℹ️ HERRAMIENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula tu Hándicap Index según la metodología oficial del World Handicap System (WHS 2020), publicado conjuntamente por R&A y USGA.<br><br>Este cálculo es orientativo y de uso personal. Golf HCP es una aplicación independiente, no afiliada ni respaldada por R&A, USGA ni ninguna federación oficial de golf.<br><br>Para Hándicap oficial homologado, contacta con tu federación o club de golf.',
   }
 };
 let lang = localStorage.getItem('golf_lang') || 'es';
@@ -2031,6 +2033,8 @@ function renderResult() {
       }
     } else { fechaEl.textContent = ''; }
   }
+  const shareBtn = $('btn-compartir-hcp');
+  if (shareBtn) shareBtn.style.display = res ? 'flex' : 'none';
   if (res) {
     if($('r-count')) $('r-count').textContent = combined.length;
     if($('r-used')) $('r-used').textContent  = res.numBest;
@@ -3323,6 +3327,22 @@ async function guardarNuevoCampo() {
 
 
 
+function compartirHCP() {
+  const hcp = $('r-hcp')?.textContent;
+  const cat = $('r-cat')?.textContent;
+  if (!hcp || hcp === '—') return;
+  const text = lang === 'pt'
+    ? `O meu Handicap Index WHS é ${hcp} (${cat}) — calculado com Golf HCP`
+    : `Mi Handicap Index WHS es ${hcp} (${cat}) — calculado con Golf HCP`;
+  const url = 'https://handicap-whs.github.io/golf-hcp';
+  if (navigator.share) {
+    navigator.share({ title: 'Golf HCP', text, url }).catch(() => {});
+  } else {
+    navigator.clipboard?.writeText(text + ' ' + url)
+      .then(() => toast(lang==='pt'?'HCP copiado':'HCP copiado al portapapeles'));
+  }
+}
+
 function compartirApp() {
   const url = 'https://handicap-whs.github.io/golf-hcp';
   if (navigator.share) {
@@ -3772,8 +3792,16 @@ function drawStatsChart(canvasId, labelsId, data, color, minVal, maxVal, labelFn
       const x=xPos(i), y=yScale(valueFn(d));
       ctx.beginPath(); ctx.arc(x,y,2.5,0,Math.PI*2); ctx.fillStyle=color; ctx.fill();
       ctx.fillStyle=color; ctx.font='8px DM Mono,monospace';
-      ctx.textAlign = i===n-1?'right':i===0?'left':'center';
-      ctx.fillText(valueFn(d).toFixed(1), x, y-5);
+      if (i === n-1) {
+        ctx.textAlign = 'right';
+        ctx.fillText(valueFn(d).toFixed(1), W - padR, y-5);
+      } else if (i === 0) {
+        ctx.textAlign = 'left';
+        ctx.fillText(valueFn(d).toFixed(1), padL, y-5);
+      } else {
+        ctx.textAlign = 'center';
+        ctx.fillText(valueFn(d).toFixed(1), x, y-5);
+      }
     });
   }
 
@@ -3783,9 +3811,17 @@ function drawStatsChart(canvasId, labelsId, data, color, minVal, maxVal, labelFn
   const step = n <= 4 ? 1 : n <= 7 ? 2 : 3;
   data.forEach((d, i) => {
     if (i % step !== 0 && i !== n-1) return;
-    const x = xPos(i);
-    ctx.textAlign = i === 0 ? 'left' : i === n-1 ? 'right' : 'center';
-    ctx.fillText(labelFn(d), x, H - 4);
+    const label = labelFn(d);
+    if (i === 0) {
+      ctx.textAlign = 'left';
+      ctx.fillText(label, padL, H - 4);
+    } else if (i === n-1) {
+      ctx.textAlign = 'right';
+      ctx.fillText(label, W - padR, H - 4);
+    } else {
+      ctx.textAlign = 'center';
+      ctx.fillText(label, xPos(i), H - 4);
+    }
   });
 }
 
