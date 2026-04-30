@@ -455,7 +455,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.101-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.102-DEV</div>
   </div>
 </div>
 
@@ -675,7 +675,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.101-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.102-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -814,11 +814,11 @@ nav.nav-hidden{transform:translateY(100%)}
 
 <!-- PAGE: RONDAS -->
 <div class="page" id="page-rondas">
-  <div style="position:relative;padding:8px 2px 4px;text-align:center">
-    <div style="font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);font-family:'DM Mono',monospace" data-i18n="historial">Historial</div>
-    <button class="btn" onclick="goTo('nueva',null)" style="position:absolute;left:0;top:6px;font-size:8px;padding:3px 7px;height:22px;border-radius:4px;letter-spacing:.5px" data-i18n="nueva_ronda">+ Nueva</button>
-    <button class="btn-danger" id="btn-borrar-todo" onclick="clearAll()" style="display:none;position:absolute;right:0;top:6px;font-size:8px;padding:3px 7px;height:22px;border-radius:4px;letter-spacing:.3px" data-i18n="borrar_todo">Borrar</button>
+  <div style="display:flex;gap:8px;margin-bottom:10px">
+    <button class="btn" onclick="goTo('nueva',null)" style="flex:1;height:48px;font-size:11px;border-radius:12px;letter-spacing:1px" data-i18n="nueva_ronda">NUEVA RONDA</button>
+    <button class="btn-danger" id="btn-borrar-todo" onclick="clearAll()" style="display:none;flex:1;height:48px;font-size:11px;border-radius:12px;letter-spacing:1px" data-i18n="borrar_todo">BORRAR TODO</button>
   </div>
+  <div style="font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);font-family:'DM Mono',monospace;text-align:center;padding:2px 0 6px" data-i18n="historial">Historial de Rondas</div>
   <div style="font-size:9px;letter-spacing:.5px;color:var(--muted);text-align:center;padding-bottom:10px" data-i18n="toca_ronda">Toca una ronda para más detalles</div>
   <div class="card" style="margin-bottom:70px">
     <div id="hist-container"><div class="empty">Cargando…</div></div>
@@ -2151,11 +2151,10 @@ function renderHistory() {
   const c = $('hist-container'), btn = $('btn-borrar-todo');
   if (!state.rounds.length) {
     c.innerHTML = `<div class="empty">${lang==='pt'?'Sem voltas registadas':'No hay rondas registradas'}</div>`;
-    btn.style.display = 'none'; if($('btn-borrar-placeholder')) $('btn-borrar-placeholder').style.display='block';
+    btn.style.display = 'none';
     return;
   }
-  btn.style.display = 'inline-flex';
-  if($('btn-borrar-placeholder')) $('btn-borrar-placeholder').style.display='none';
+  btn.style.display = 'flex';
   const { combined, pending9Ids } = combineNineHoleRounds(state.rounds);
   const pending9Set = new Set(pending9Ids);
   const res = getHCP(state.rounds);
