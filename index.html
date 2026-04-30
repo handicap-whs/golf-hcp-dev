@@ -455,7 +455,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.095-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.096-DEV</div>
   </div>
 </div>
 
@@ -675,7 +675,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.095-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.096-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -689,8 +689,8 @@ nav.nav-hidden{transform:translateY(100%)}
 
   <!-- Fixed bottom action bar -->
   <div id="rondas-action-bar" style="position:fixed;bottom:88px;left:0;right:0;padding:8px 14px;background:var(--bg);border-top:1px solid var(--border);display:none;gap:8px;align-items:center;z-index:100">
-    <button class="btn" onclick="goTo('nueva',null)" style="flex:3;height:36px;font-size:11px" data-i18n="nueva_ronda">+ Nueva</button>
-    <button id="btn-borrar-todo" onclick="clearAll()" style="display:none;flex:1;height:36px;font-size:9px;letter-spacing:.3px;padding:0 8px" data-i18n="borrar_todo">Borrar todas las rondas</button>
+    <button class="btn" onclick="goTo('nueva',null)" style="flex:3;height:36px;font-size:11px;border-radius:8px" data-i18n="nueva_ronda">+ Nueva</button>
+    <button id="btn-borrar-todo" onclick="clearAll()" style="display:none;flex:1;height:36px;font-size:9px;letter-spacing:.3px;padding:0 8px;border-radius:8px" data-i18n="borrar_todo">Borrar todas las rondas</button>
   </div>
 
 <!-- PAGE: DETALLE RONDA -->
