@@ -514,7 +514,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.31.021-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.31.025-DEV</div>
   </div>
 </div>
 
@@ -630,8 +630,8 @@ nav.nav-hidden{transform:translateY(100%)}
       <div class="hoyo-section"><div class="hoyo-label" id="edit-grid-in-label">Vuelta 10–18</div><div class="hoyo-grid" id="edit-grid-in"></div></div>
     </div>
     <div class="modal-actions">
-      <button class="btn" style="margin-top:0" id="btn-guardar-ronda" onclick="guardarEditRonda()">Guardar</button>
-      <button class="btn-danger" style="margin-top:0" onclick="if(confirm(t('c_cancelar_edit_ronda')))cerrarModal('modal-ronda')">Cancelar</button>
+      <button class="btn" style="margin-top:0" id="btn-guardar-ronda" onclick="guardarEditRonda()" data-i18n="guardar">Guardar</button>
+      <button class="btn-danger" style="margin-top:0" onclick="if(confirm(t('c_cancelar_edit_ronda')))cerrarModal('modal-ronda')" data-i18n="cancelar">Cancelar</button>
     </div>
   </div>
 </div>
@@ -734,7 +734,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.31.021-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.31.025-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -2293,9 +2293,9 @@ function renderHistory() {
     <tbody>${rows}</tbody>
   </table></div>
   <div style="margin-top:8px;font-size:9px;color:var(--muted);display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center">
-    <div><span class="used-badge" style="margin-right:6px;vertical-align:middle">✓</span>${lang==='pt'?'HCP✓ = diferencial usado no cálculo':'HCP✓ = diferencial usado en el cálculo'}</div>
-    <div><span style="background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);color:#3b82f6;font-size:7px;border-radius:50%;margin-right:6px;vertical-align:middle;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px">✓</span> ${lang==='pt'?'Volta de 9 buracos combinada':'Ronda de 9 hoyos combinada'}</div>
-    <div><span style="background:rgba(224,85,85,.15);border:1px solid rgba(224,85,85,.4);color:#e05555;font-size:7px;border-radius:50%;margin-right:6px;vertical-align:middle;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px">✓</span> ${lang==='pt'?'Volta de 9 buracos pendente':'Ronda de 9 hoyos pendiente de combinar'}</div>
+    <div><span class="used-badge" style="margin-right:6px;vertical-align:middle">✓</span>${lang==='fr'?'HCP✓ = différentiel utilisé dans le calcul':lang==='pt'?'HCP✓ = diferencial usado no cálculo':'HCP✓ = diferencial usado en el cálculo'}</div>
+    <div><span style="background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);color:#3b82f6;font-size:7px;border-radius:50%;margin-right:6px;vertical-align:middle;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px">✓</span> ${lang==='fr'?'Partie de 9 trous combinée':lang==='pt'?'Volta de 9 buracos combinada':'Ronda de 9 hoyos combinada'}</div>
+    <div><span style="background:rgba(224,85,85,.15);border:1px solid rgba(224,85,85,.4);color:#e05555;font-size:7px;border-radius:50%;margin-right:6px;vertical-align:middle;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px">✓</span> ${lang==='fr'?'Partie de 9 trous en attente':lang==='pt'?'Volta de 9 buracos pendente':'Ronda de 9 hoyos pendiente de combinar'}</div>
   </div>`;
 }
 
@@ -2394,7 +2394,7 @@ function buildBarraSelect(selId, campo, current) {
   sel.innerHTML = `<option value="">${t('selecciona_barra')}</option>` +
     campo.barras.map(b => {
       const has9H = (b.cr_out && b.slope_out) || (b.cr_in && b.slope_in);
-      const lbl = lang==='pt' ? BARRA_LABELS_PT[b.color] : BARRA_LABELS_PL[b.color];
+      const lbl = lang==='fr' ? (BARRA_LABELS_FR[b.color]||b.color) : lang==='pt' ? BARRA_LABELS_PT[b.color] : BARRA_LABELS_PL[b.color];
       return `<option value="${b.color}">${lbl}${has9H ? ' ✓9H' : ''}</option>`;
     }).join('');
   if (current) sel.value = current;
@@ -2923,27 +2923,27 @@ function abrirDetalleRonda(id) {
 
   titulo.textContent = fmtDate(r.date) + ' — ' + (r.name || '');
 
-  const lbl = (es, pt) => lang === 'pt' ? pt : es;
+  const lbl = (es, pt, fr) => lang === 'fr' ? (fr||es) : lang === 'pt' ? pt : es;
   const row = (k, v) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)">
     <span style="font-size:13px;color:var(--muted)">${k}</span>
     <span style="font-size:13px;color:var(--cream);font-family:'DM Mono',monospace">${v}</span>
   </div>`;
 
-  const barraName = r.barra_color ? (lang==='pt'?BARRA_LABELS_PT[r.barra_color]:BARRA_LABELS[r.barra_color]) : '—';
+  const barraName = r.barra_color ? (lang==='fr'?(BARRA_LABELS_FR[r.barra_color]||r.barra_color):lang==='pt'?BARRA_LABELS_PT[r.barra_color]:BARRA_LABELS[r.barra_color]) : '—';
   const hoyosStr = r.num_hoyos === 9
-    ? '9 ' + lbl('hoyos','buracos') + (r.vuelta===2?' (10-18)':' (1-9)')
-    : '18 ' + lbl('hoyos','buracos');
+    ? '9 ' + lbl('hoyos','buracos','trous') + (r.vuelta===2?' (10-18)':' (1-9)')
+    : '18 ' + lbl('hoyos','buracos','trous');
 
   el.innerHTML = `<div style="padding-bottom:8px">
-    ${row(lbl('Campo','Campo'), r.name || '—')}
-    ${row(lbl('Fecha','Data'), fmtDate(r.date))}
-    ${row(lbl('Hoyos','Buracos'), hoyosStr)}
-    ${row(lbl('Barra','Tee'), barraName)}
-    ${row(lbl('Golpes brutos','Pancadas brutas'), r.gross || '—')}
-    ${row(lbl('Diferencial','Diferencial'), r.diff != null ? fmtD(r.diff) : '—')}
-    ${row(lbl('Stableford','Stableford'), r.stableford != null ? r.stableford + ' pts' : '—')}
-    ${row(lbl('HCP Index usado','HCP Index usado'), r.hcp_idx != null ? r.hcp_idx.toFixed(1) : '—')}
-    ${row(lbl('Formato','Formato'), (r.juego_fmt || 100) + '%')}
+    ${row(lbl('Campo','Campo','Parcours'), r.name || '—')}
+    ${row(lbl('Fecha','Data','Date'), fmtDate(r.date))}
+    ${row(lbl('Hoyos','Buracos','Trous'), hoyosStr)}
+    ${row(lbl('Barra','Tee','Départ'), barraName)}
+    ${row(lbl('Golpes brutos','Pancadas brutas','Coups bruts'), r.gross || '—')}
+    ${row(lbl('Diferencial','Diferencial','Différentiel'), r.diff != null ? fmtD(r.diff) : '—')}
+    ${row(lbl('Stableford','Stableford','Stableford'), r.stableford != null ? r.stableford + ' pts' : '—')}
+    ${row(lbl('HCP Index usado','HCP Index usado','HCP Index utilisé'), r.hcp_idx != null ? r.hcp_idx.toFixed(1) : '—')}
+    ${row(lbl('Formato','Formato','Format'), (r.juego_fmt || 100) + '%')}
     ${row('CR', r.cr != null ? r.cr : '—')}
     ${row('Slope', r.slope != null ? r.slope : '—')}
   </div>`;
