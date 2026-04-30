@@ -68,7 +68,7 @@ body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-
 .auth-msg.show{display:block}
 
 /* ── PLAYER BAR ── */
-#player-bar{background:#0f1a0f;border-bottom:1px solid rgba(201,168,76,.3);padding:calc(env(safe-area-inset-top,0px) + 7px) 14px 7px;display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:50}
+#player-bar{background:var(--card-bg);border-bottom:1px solid rgba(201,168,76,.3);padding:calc(env(safe-area-inset-top,0px) + 7px) 14px 7px;display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:50}
 #player-bar{display:none!important}
 .pb-name{color:var(--gold2);font-family:'DM Mono',monospace;font-size:20px;font-style:normal}
 .pb-btn{background:none;border:1px solid rgba(201,168,76,.3);border-radius:4px;color:var(--gold);font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;padding:4px 8px;cursor:pointer}
@@ -115,6 +115,23 @@ nav button.active svg{stroke:var(--gold)}
 :root.light .modal{color:var(--text)}
 :root.light .modal label{color:var(--muted)}
 :root.light .modal .card-title{color:var(--muted)}
+
+:root.light .nav-dropdown-menu{background:var(--card-bg);border-color:rgba(0,0,0,.15)}
+:root.light .nav-dd-item{color:rgba(0,0,0,.7)}
+:root.light .nav-dd-item.danger{color:#b01010}
+:root.light #nav-dropdown{background:var(--card-bg);border-color:rgba(0,0,0,.15)}
+:root.light #nav-dropdown button{color:var(--text)}
+
+
+:root.light .result{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.1)}
+:root.light .chcp-box{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.1)}
+:root.light .r-stat{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.1)}
+:root.light .r-stats{display:grid}
+:root.light .target-box{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1)}
+:root.light .used-badge{background:rgba(40,120,40,.15);color:#1a5c1a}
+:root.light .stbl-badge{color:var(--gold)}
+:root.light .barra-9h{background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.2)}
+
 /* ── GUÍA DIDÁCTICA ── */
 .guia-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden}
 .guia-card-header{padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer}
@@ -185,7 +202,7 @@ input:focus,select:focus{border-color:var(--gold);background:rgba(201,168,76,.09
 :root.light input.s-peor,:root.light .s-peor{background:#222!important;border:2px solid rgba(0,0,0,.5)!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
 
 input.err{border-color:var(--red)!important;background:rgba(224,85,85,.08)!important}
-select option{background:#1a2f1a}
+select option{background:var(--bg)}
 
 /* ── BUTTONS ── */
 .btn{background:rgba(201,168,76,.2);color:#e8c96a;border:1px solid rgba(201,168,76,.4);border-radius:8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:13px 16px;cursor:pointer;margin-top:14px;width:100%}
@@ -234,8 +251,8 @@ select option{background:#1a2f1a}
 .hist-table th{font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:3px 5px;text-align:left;border-bottom:1px solid var(--border)}
 .hist-table td{padding:6px 5px;border-bottom:1px solid var(--border);color:var(--text,var(--cream));vertical-align:middle}
 .hist-table tr:last-child td{border-bottom:none}
-.used-badge{background:rgba(123,198,122,.15);border:1px solid rgba(123,198,122,.3);color:var(--green);font-size:7px;padding:2px 5px;border-radius:10px}
-.stbl-badge{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold2);font-size:7px;letter-spacing:1px;padding:2px 6px;border-radius:20px;white-space:nowrap}
+.used-badge{background:rgba(123,198,122,.15);border:1px solid var(--border);color:var(--green);font-size:7px;padding:2px 5px;border-radius:10px}
+.stbl-badge{background:rgba(201,168,76,.15);border:1px solid var(--border);color:var(--gold2);font-size:7px;letter-spacing:1px;padding:2px 6px;border-radius:20px;white-space:nowrap}
 .barra-dot{display:inline-block;width:8px;height:8px;border-radius:50%;border:1px solid rgba(0,0,0,.2)}
 .hist-actions{display:flex;gap:4px}
 .hist-actions button{background:none;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-size:12px;padding:2px 6px}
@@ -311,7 +328,7 @@ nav.nav-hidden{transform:translateY(100%)}
 #nav-menu-wrap{position:relative;flex:1}
 #nav-menu-btn{width:100%;background:none;border:none;color:var(--muted);padding:9px 2px 7px;font-size:8px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:'DM Mono',monospace;min-height:52px}
 #nav-menu-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-#nav-dropdown{display:none;position:absolute;bottom:100%;right:0;background:#0f1a0f;border:1px solid rgba(201,168,76,.3);border-radius:8px;min-width:150px;overflow:hidden;z-index:200;box-shadow:0 -4px 20px rgba(0,0,0,.5)}
+#nav-dropdown{display:none;position:absolute;bottom:100%;right:0;background:var(--card-bg);border:1px solid rgba(201,168,76,.3);border-radius:8px;min-width:150px;overflow:hidden;z-index:200;box-shadow:0 -4px 20px rgba(0,0,0,.5)}
 #nav-dropdown.open{display:block}
 #nav-dropdown button{display:block;width:100%;background:none;border:none;border-bottom:1px solid var(--border);color:var(--cream);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;padding:14px 16px;text-align:left;cursor:pointer}
 #nav-dropdown button:last-child{border-bottom:none}
@@ -351,7 +368,7 @@ nav.nav-hidden{transform:translateY(100%)}
 .barra-9h-row label{font-size:7px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
 
 .nav-dropdown{display:none}
-.nav-dropdown>button{flex:1;width:100%}.nav-dropdown-menu{position:fixed;bottom:62px;right:6px;background:#162916;border:1px solid rgba(255,255,255,.14);border-radius:8px;min-width:148px;z-index:400;box-shadow:0 -2px 16px rgba(0,0,0,.5);display:none;flex-direction:column;overflow:hidden}
+.nav-dropdown>button{flex:1;width:100%}.nav-dropdown-menu{position:fixed;bottom:62px;right:6px;background:var(--card-bg);border:1px solid rgba(255,255,255,.14);border-radius:8px;min-width:148px;z-index:400;box-shadow:0 -2px 16px rgba(0,0,0,.5);display:none;flex-direction:column;overflow:hidden}
 .nav-dropdown-menu.open{display:flex}
 .nav-dd-item{display:flex;flex-direction:row!important;align-items:center;gap:6px;padding:5px 13px;font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.75);cursor:pointer;border:none;background:none;width:100%;text-align:left;touch-action:manipulation;border-bottom:1px solid rgba(255,255,255,.08);font-family:'DM Mono',monospace;white-space:nowrap;min-height:28px}
 .nav-dd-item:last-child{border-bottom:none}
@@ -361,7 +378,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
 
 .nav-dropdown{position:relative;display:inline-block}
-.nav-dropdown-menu{position:absolute;bottom:100%;right:0;background:#1e3d1e;border:1px solid rgba(255,255,255,.12);border-radius:10px;min-width:150px;box-shadow:0 -4px 20px rgba(0,0,0,.4);overflow:hidden;display:none;flex-direction:column;z-index:900;margin-bottom:6px}
+.nav-dropdown-menu{position:absolute;bottom:100%;right:0;background:var(--card-bg);border:1px solid rgba(255,255,255,.12);border-radius:10px;min-width:150px;box-shadow:0 -4px 20px rgba(0,0,0,.4);overflow:hidden;display:none;flex-direction:column;z-index:900;margin-bottom:6px}
 .nav-dropdown-menu.open{display:flex}
 .nav-dropdown-item{display:flex;align-items:center;gap:10px;padding:12px 16px;font-size:11px;letter-spacing:.5px;color:var(--text2);cursor:pointer;border:none;background:none;width:100%;text-align:left;touch-action:manipulation}
 .nav-dropdown-item:not(:last-child){border-bottom:1px solid rgba(255,255,255,.07)}
@@ -488,7 +505,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.112-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.113-DEV</div>
   </div>
 </div>
 
@@ -708,7 +725,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.112-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.113-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
