@@ -357,7 +357,7 @@ nav.nav-hidden{transform:translateY(100%)}
 .guide-card-title{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#c9a84c;margin-bottom:8px}
 .guide-card-body{font-size:11px;color:var(--text2);line-height:1.7}
 .guide-card-body li{margin-bottom:4px;padding-left:10px;position:relative}
-.guide-card-body li::before{content:'⛳';position:absolute;left:-4px;font-size:9px}
+.guide-card-body li::before{content:'·';position:absolute;left:-4px;font-size:9px}
 .guide-footer{flex-shrink:0;background:var(--bg);padding:16px 20px calc(env(safe-area-inset-bottom,0px) + 20px);text-align:center;border-top:1px solid var(--border)}
 .guide-btn{width:100%;background:var(--gold);color:var(--bg);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;padding:16px;cursor:pointer}
 .guide-skip{font-size:9px;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase;margin-top:12px;display:block;background:none;border:none;cursor:pointer;width:100%}
@@ -402,19 +402,21 @@ nav.nav-hidden{transform:translateY(100%)}
     </div>
     <div class="guide-sections">
       <div class="guide-card">
-        <div class="guide-card-title" data-i18n="g_como_empezar">⛳ Cómo empezar</div>
+        <div class="guide-card-title" data-i18n="g_como_empezar">Cómo empezar</div>
         <ul class="guide-card-body">
-          <li><span data-i18n="g_inicio_txt1">Crea tu campo de golf con los 18 hoyos, par e índice y las barras de salida con su CR y Slope.</span></li>
-          <li><span data-i18n="g_inicio_txt2">Selecciona campo e introduce tu HCP real (si lo sabes) o teclea la cifra que desees. El cálculo de tu HCP de Campo y golpes objetivo se realizará a partir de este dato y se irá actualizando según las rondas creadas. Podrás probar diferentes valores de Hándicap.</span></li>
-          <li><span data-i18n="g_inicio_txt3">Registra tus golpes hoyo a hoyo. La app calcula automáticamente tu diferencial y Stableford.</span></li>
+          <li><span data-i18n="g_inicio_txt1">Ve a Ajustes → Gestionar Campos y crea tu campo con los 18 hoyos, par e índice, y las barras de salida con su CR y Slope.</span></li>
+          <li><span data-i18n="g_inicio_txt2">En Inicio, selecciona campo y barra. Introduce tu HCP real o el valor que quieras probar. El HCP de Campo se calcula al instante y se actualiza automáticamente con cada ronda.</span></li>
+          <li><span data-i18n="g_inicio_txt3">Pulsa Nueva Ronda, selecciona campo, hoyos y barra, e introduce los golpes hoyo a hoyo. La app calcula diferencial y Stableford en tiempo real.</span></li>
+          <li><span data-i18n="g_inicio_txt4">Puedes registrar rondas de 9 hoyos: se combinan en parejas para el cálculo del hándicap.</span></li>
         </ul>
       </div>
       <div class="guide-card">
         <div class="guide-card-title" data-i18n="g_hcp_index">📊 Handicap Index</div>
         <ul class="guide-card-body">
-          <li><span data-i18n="g_hcp_txt1">Se calcula con las últimas 20 rondas según el sistema WHS 2020.</span></li>
-          <li><span data-i18n="g_hcp_txt2">Cuantas más rondas registres, más preciso será tu handicap.</span></li>
-          <li><span data-i18n="g_hcp_txt3">Las rondas de 9 hoyos se combinan en parejas antes de entrar en el cálculo.</span></li>
+          <li><span data-i18n="g_hcp_txt1">Se calcula con las últimas 20 rondas según el sistema WHS, actualizado a 2024.</span></li>
+          <li><span data-i18n="g_hcp_txt2">Cuantas más rondas registres, más preciso será tu hándicap.</span></li>
+          <li><span data-i18n="g_hcp_txt3">Las rondas de 9 hoyos se combinan en parejas antes del cálculo.</span></li>
+          <li><span data-i18n="g_hcp_txt4">El HCP de campo incluye ajuste por CR y Slope de la barra elegida.</span></li>
         </ul>
       </div>
       <div class="guide-card">
@@ -439,12 +441,12 @@ nav.nav-hidden{transform:translateY(100%)}
       <div class="guide-card">
         <div class="guide-card-title" data-i18n="g_nav">🧭 Botones de navegación</div>
         <ul class="guide-card-body">
-          <li><span data-i18n="g_nav_inicio"><strong style="color:#e8c96a">Inicio</strong> — Tu HCP Index, selección de campo y barra, cálculo de golpes objetivo.</span></li>
-          <li><span data-i18n="g_nav_ronda"><strong style="color:#e8c96a">Ronda</strong> — Registra una nueva ronda. Golpes hoyo a hoyo con cálculo en tiempo real.</span></li>
-          <li><span data-i18n="g_nav_hist"><strong style="color:#e8c96a">Historial</strong> — Todas tus rondas ordenadas por fecha. Editar y eliminar rondas.</span></li>
-          <li><span data-i18n="g_nav_campos"><strong style="color:#e8c96a">Campos</strong> — Gestiona tus campos de golf: crear, editar, barras de salida y datos de 9 hoyos.</span></li>
-          <li><span data-i18n="g_nav_clave"><strong style="color:#e8c96a">🛡️ Clave</strong> — Cambia tu contraseña de acceso a la app.</span></li>
-          <li><span data-i18n="g_nav_salir"><strong style="color:#e8c96a">Salir</strong> — Cierra tu sesión en la app.</span></li>
+          <li><span data-i18n="g_nav_inicio">Inicio — HCP Index, campo y barra, HCP de campo y golpes objetivo.</span></li>
+          <li><span data-i18n="g_nav_ronda">Rondas — Historial de rondas. Toca cualquiera para ver detalles, editar o eliminar.</span></li>
+          <li><span data-i18n="g_nav_hist">Nueva Ronda — Registra una ronda con golpes hoyo a hoyo.</span></li>
+          <li><span data-i18n="g_nav_campos">Estadísticas — Gráficas de evolución y métricas de tu juego.</span></li>
+          <li><span data-i18n="g_nav_clave">Ajustes — Campos, guías, idioma, apariencia y más.</span></li>
+          <li><span data-i18n="g_nav_salir">Compartir — Comparte tu HCP Index con un toque desde la pantalla de Inicio.</span></li>
         </ul>
       </div>
     </div>
@@ -506,7 +508,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.115-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.118-DEV</div>
   </div>
 </div>
 
@@ -726,7 +728,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.115-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.118-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -1304,12 +1306,12 @@ const i18n = {
     'e_9h_incompleto':'⚠️ Datos incompletos de 9 hoyos en ',
     'e_barras':'⚠️ Introduce CR y Slope de la barra Blanca o Amarilla como mínimo.',
     'g_continuar':'Continuar','pts':' pts','ver_guia':'📖 Ver guía de inicio',
-    'g_nav_inicio':'<strong style="color:#e8c96a">Inicio</strong> — Tu HCP Index, selección de campo y barra, cálculo de golpes objetivo.',
-    'g_nav_ronda':'<strong style="color:#e8c96a">Ronda</strong> — Registra una nueva ronda. Golpes hoyo a hoyo con cálculo en tiempo real.',
-    'g_nav_hist':'<strong style="color:#e8c96a">Historial</strong> — Todas tus rondas ordenadas por fecha. Editar y eliminar rondas.',
-    'g_nav_campos':'<strong style="color:#e8c96a">Campos</strong> — Gestiona tus campos de golf: crear, editar, barras de salida y datos de 9 hoyos.',
-    'g_nav_clave':'<strong style="color:#e8c96a">🛡️ Clave</strong> — Cambia tu contraseña de acceso a la app.',
-    'g_nav_salir':'<strong style="color:#e8c96a">Salir</strong> — Cierra tu sesión en la app.',
+    'g_nav_inicio':'Inicio — HCP Index, campo y barra, HCP de campo y golpes objetivo.',
+    'g_nav_ronda':'Rondas — Historial de rondas. Toca cualquiera para ver detalles, editar o eliminar.',
+    'g_nav_hist':'Nueva Ronda — Registra una ronda con golpes hoyo a hoyo.',
+    'g_nav_campos':'Estadísticas — Gráficas de evolución y métricas de tu juego.',
+    'g_nav_clave':'Ajustes — Campos, guías, idioma, apariencia y más.',
+    'g_nav_salir':'Compartir — Comparte tu HCP Index desde la pantalla de Inicio.',
     'fi_dif':'Diferencial','fi_dif_f':'(Golpes − CR) × 113 / Slope',
     'fi_hcp_jug':'HCP Jugador','fi_hcp_jug_f':'Promedio mejores diferenciales × 0.95',
     'fi_max':'Máximo','fi_eagle':'Eagle o mejor','fi_bogey':'Bogey','fi_dbogey':'Doble bogey +',
@@ -1328,19 +1330,19 @@ const i18n = {
     'fi_r14':'1–4 rondas','fi_r56':'5–6 rondas','fi_r78':'7–8 rondas',
     'fi_r911':'9–11 rondas','fi_r1214':'12–14 rondas','fi_r1516':'15–16 rondas',
     'fi_r17':'17 rondas','fi_r18':'18 rondas','fi_r19':'19 rondas','fi_r20':'20 rondas',
-    'g_inicio_txt1':'Crea tu campo de golf con los 18 hoyos, par e índice y las barras de salida con su CR y Slope.',
-    'g_inicio_txt2':'Selecciona campo e introduce tu HCP real (si lo sabes) o teclea la cifra que desees. El cálculo de tu HCP de Campo y golpes objetivo se realizará a partir de este dato y se irá actualizando según las rondas creadas. Podrás probar diferentes valores de Hándicap.',
-    'g_inicio_txt3':'Registra tus golpes hoyo a hoyo. La app calcula automáticamente tu diferencial y Stableford.',
-    'g_hcp_txt1':'Se calcula con las últimas 20 rondas según el sistema WHS 2020.',
-    'g_hcp_txt2':'Cuantas más rondas registres, más preciso será tu handicap.',
-    'g_hcp_txt3':'Las rondas de 9 hoyos se combinan en parejas antes de entrar en el cálculo.',
+    'g_inicio_txt1':'Ve a Ajustes → Gestionar Campos y crea tu campo con los 18 hoyos, par e índice, y las barras de salida con su CR y Slope.',
+    'g_inicio_txt2':'En Inicio, selecciona campo y barra. Introduce tu HCP real o el valor que quieras probar. El HCP de Campo se calcula al instante y se actualiza automáticamente con cada ronda.',
+    'g_inicio_txt4':'Puedes registrar rondas de 9 hoyos: se combinan en parejas para el cálculo del hándicap.','g_inicio_txt3':'Pulsa Nueva Ronda, selecciona campo, hoyos y barra, e introduce los golpes hoyo a hoyo. La app calcula diferencial y Stableford en tiempo real.',
+    'g_hcp_txt1':'Se calcula con las últimas 20 rondas según el sistema WHS, actualizado a 2024.',
+    'g_hcp_txt2':'Cuantas más rondas registres, más preciso será tu hándicap.',
+    'g_hcp_txt4':'El HCP de campo incluye ajuste por CR y Slope de la barra elegida.','g_hcp_txt3':'Las rondas de 9 hoyos se combinan en parejas antes del cálculo.',
     'g_fmt_100':'100% — Juego informal entre amigos.',
     'g_fmt_95':'95% — Medal play o Stableford oficial.',
     'g_fmt_85':'85% — Four Ball (juego en parejas).',
-    'sin_barras':'sin barras','g_sub':'Calculadora WHS 2020','g_tagline':'Tu handicap siempre actualizado',
-    'g_como_empezar':'⛳ Cómo empezar','g_hcp_index':'📊 Handicap Index',
+    'sin_barras':'sin barras','g_sub':'Calculadora WHS 2020 · actualizada 2024','g_tagline':'Tu hándicap siempre actualizado',
+    'g_como_empezar':'Cómo empezar','g_hcp_index':'📊 Hándicap Index (WHS 2024)',
     'g_formatos':'🏌️ Formatos de juego','g_simbolos':'💡 Símbolos en cada hoyo',
-    'g_nav':'🧭 Botones de navegación','f_titulo':'Fórmula WHS 2020','fi_aviso_titulo':'ℹ️ FERRAMENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula o teu Handicap Index segundo a metodologia oficial do World Handicap System (WHS 2020), publicado conjuntamente pela R&A e USGA.<br><br>Este cálculo é orientativo e de uso pessoal. Golf HCP é uma aplicação independente, não afiliada nem apoiada pela R&A, USGA nem por nenhuma federação oficial de golfe.<br><br>Para Handicap oficial homologado, contacta a tua federação ou clube de golfe.','fi_aviso_titulo':'ℹ️ HERRAMIENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula tu Hándicap Index según la metodología oficial del World Handicap System (WHS 2020), publicado conjuntamente por R&A y USGA.<br><br>Este cálculo es orientativo y de uso personal. Golf HCP es una aplicación independiente, no afiliada ni respaldada por R&A, USGA ni ninguna federación oficial de golf.<br><br>Para Hándicap oficial homologado, contacta con tu federación o club de golf.',
+    'g_nav':'🧭 Navegación','f_titulo':'Fórmula WHS 2020','fi_aviso_titulo':'ℹ️ FERRAMENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula o teu Handicap Index segundo a metodologia oficial do World Handicap System (WHS 2020), publicado conjuntamente pela R&A e USGA.<br><br>Este cálculo é orientativo e de uso pessoal. Golf HCP é uma aplicação independente, não afiliada nem apoiada pela R&A, USGA nem por nenhuma federação oficial de golfe.<br><br>Para Handicap oficial homologado, contacta a tua federação ou clube de golfe.','fi_aviso_titulo':'ℹ️ HERRAMIENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula tu Hándicap Index según la metodología oficial del World Handicap System (WHS 2020), publicado conjuntamente por R&A y USGA.<br><br>Este cálculo es orientativo y de uso personal. Golf HCP es una aplicación independiente, no afiliada ni respaldada por R&A, USGA ni ninguna federación oficial de golf.<br><br>Para Hándicap oficial homologado, contacta con tu federación o club de golf.',
   },
   pt: {
     'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','compartir_hcp':'Partilhar o meu HCP','gestionar_campos':'Gerir Campos','evolucion_hcp':'EVOLUÇÃO HCP','ultimas_20':'20 últimas voltas','ultimas_10':'10 últimas voltas',
@@ -1396,12 +1398,12 @@ const i18n = {
     'e_9h_incompleto':'⚠️ Dados incompletos de 9 buracos em ',
     'e_barras':'⚠️ Introduza CR e Slope da barra Branca ou Amarela no mínimo.',
     'g_continuar':'Continuar','pts':' pts','ver_guia':'📖 Ver guia inicial',
-    'g_nav_inicio':'<strong style="color:#e8c96a">Início</strong> — O teu HCP Index, seleção de campo e tee, cálculo de pancadas objetivo.',
-    'g_nav_ronda':'<strong style="color:#e8c96a">Volta</strong> — Regista uma nova volta. Pancadas buraco a buraco com cálculo em tempo real.',
-    'g_nav_hist':'<strong style="color:#e8c96a">Histórico</strong> — Todas as tuas voltas ordenadas por data. Editar e eliminar voltas.',
-    'g_nav_campos':'<strong style="color:#e8c96a">Campos</strong> — Gere os teus campos de golfe: criar, editar, tees de saída e dados de 9 buracos.',
-    'g_nav_clave':'<strong style="color:#e8c96a">🛡️ Senha</strong> — Altera a tua senha de acesso à app.',
-    'g_nav_salir':'<strong style="color:#e8c96a">Sair</strong> — Fecha a tua sessão na app.',
+    'g_nav_inicio':'Início — HCP Index, campo e tee, HCP do campo e pancadas objetivo.',
+    'g_nav_ronda':'Voltas — Histórico de voltas. Toca em qualquer uma para ver detalhes, editar ou eliminar.',
+    'g_nav_hist':'Nova Volta — Regista uma volta com pancadas buraco a buraco.',
+    'g_nav_campos':'Estatísticas — Gráficos de evolução e métricas do teu jogo.',
+    'g_nav_clave':'Ajustes — Campos, guias, idioma, aparência e mais.',
+    'g_nav_salir':'Partilhar — Partilha o teu HCP Index a partir do ecrã de Início.',
     'fi_dif':'Diferencial','fi_dif_f':'(Pancadas − CR) × 113 / Slope',
     'fi_hcp_jug':'HCP Jogador','fi_hcp_jug_f':'Média melhores diferenciais × 0.95',
     'fi_max':'Máximo','fi_eagle':'Eagle ou melhor','fi_bogey':'Bogey','fi_dbogey':'Double bogey +',
@@ -1420,19 +1422,19 @@ const i18n = {
     'fi_r14':'1–4 voltas','fi_r56':'5–6 voltas','fi_r78':'7–8 voltas',
     'fi_r911':'9–11 voltas','fi_r1214':'12–14 voltas','fi_r1516':'15–16 voltas',
     'fi_r17':'17 voltas','fi_r18':'18 voltas','fi_r19':'19 voltas','fi_r20':'20 voltas',
-    'g_inicio_txt1':'Cria o teu campo de golfe com os 18 buracos, par e índice e os tees de saída com CR e Slope.',
-    'g_inicio_txt2':'Seleciona campo e introduz o teu HCP real (se o souberes) ou escreve o valor que quiseres. O cálculo do teu HCP do Campo e pancadas objetivo será feito a partir deste dado e irá atualizando-se segundo as voltas criadas. Podes experimentar diferentes valores de Handicap.',
-    'g_inicio_txt3':'Regista as tuas pancadas buraco a buraco. A app calcula automaticamente o teu diferencial e Stableford.',
-    'g_hcp_txt1':'Calcula-se com as últimas 20 voltas segundo o sistema WHS 2020.',
+    'g_inicio_txt1':'Vai a Ajustes → Gerir Campos e cria o teu campo com os 18 buracos, par e índice, e os tees de saída com CR e Slope.',
+    'g_inicio_txt2':'Em Início, seleciona campo e tee. Introduz o teu HCP real ou o valor que quiseres testar. O HCP do Campo calcula-se instantaneamente e atualiza-se com cada volta.',
+    'g_inicio_txt4':'Podes registar voltas de 9 buracos: combinam-se em pares para o cálculo do handicap.','g_inicio_txt3':'Prime Nova Volta, seleciona campo, buracos e tee, e introduz as pancadas buraco a buraco. A app calcula diferencial e Stableford em tempo real.',
+    'g_hcp_txt1':'Calcula-se com as últimas 20 voltas segundo o sistema WHS, atualizado a 2024.',
     'g_hcp_txt2':'Quanto mais voltas registares, mais preciso será o teu handicap.',
-    'g_hcp_txt3':'As voltas de 9 buracos combinam-se em pares antes de entrar no cálculo.',
+    'g_hcp_txt4':'O HCP do campo inclui ajuste por CR e Slope do tee escolhido.','g_hcp_txt3':'As voltas de 9 buracos combinam-se em pares antes do cálculo.',
     'g_fmt_100':'100% — Jogo informal entre amigos.',
     'g_fmt_95':'95% — Medal play ou Stableford oficial.',
     'g_fmt_85':'85% — Four Ball (jogo em pares).',
-    'sin_barras':'sem barras','g_sub':'Calculadora WHS 2020','g_tagline':'O teu handicap sempre atualizado',
-    'g_como_empezar':'⛳ Como começar','g_hcp_index':'📊 Handicap Index',
+    'sin_barras':'sem barras','g_sub':'Calculadora WHS 2020 · atualizada 2024','g_tagline':'O teu handicap sempre atualizado',
+    'g_como_empezar':'Como começar','g_hcp_index':'📊 Handicap Index (WHS 2024)',
     'g_formatos':'🏌️ Formatos de jogo','g_simbolos':'💡 Símbolos em cada buraco',
-    'g_nav':'🧭 Botões de navegação','f_titulo':'Fórmula WHS 2020','fi_aviso_titulo':'ℹ️ FERRAMENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula o teu Handicap Index segundo a metodologia oficial do World Handicap System (WHS 2020), publicado conjuntamente pela R&A e USGA.<br><br>Este cálculo é orientativo e de uso pessoal. Golf HCP é uma aplicação independente, não afiliada nem apoiada pela R&A, USGA nem por nenhuma federação oficial de golfe.<br><br>Para Handicap oficial homologado, contacta a tua federação ou clube de golfe.','fi_aviso_titulo':'ℹ️ HERRAMIENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula tu Hándicap Index según la metodología oficial del World Handicap System (WHS 2020), publicado conjuntamente por R&A y USGA.<br><br>Este cálculo es orientativo y de uso personal. Golf HCP es una aplicación independiente, no afiliada ni respaldada por R&A, USGA ni ninguna federación oficial de golf.<br><br>Para Hándicap oficial homologado, contacta con tu federación o club de golf.',
+    'g_nav':'🧭 Navegação','f_titulo':'Fórmula WHS 2020','fi_aviso_titulo':'ℹ️ FERRAMENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula o teu Handicap Index segundo a metodologia oficial do World Handicap System (WHS 2020), publicado conjuntamente pela R&A e USGA.<br><br>Este cálculo é orientativo e de uso pessoal. Golf HCP é uma aplicação independente, não afiliada nem apoiada pela R&A, USGA nem por nenhuma federação oficial de golfe.<br><br>Para Handicap oficial homologado, contacta a tua federação ou clube de golfe.','fi_aviso_titulo':'ℹ️ HERRAMIENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula tu Hándicap Index según la metodología oficial del World Handicap System (WHS 2020), publicado conjuntamente por R&A y USGA.<br><br>Este cálculo es orientativo y de uso personal. Golf HCP es una aplicación independiente, no afiliada ni respaldada por R&A, USGA ni ninguna federación oficial de golf.<br><br>Para Hándicap oficial homologado, contacta con tu federación o club de golf.',
   }
 };
 let lang = localStorage.getItem('golf_lang') || 'es';
