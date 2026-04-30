@@ -359,7 +359,7 @@ nav.nav-hidden{transform:translateY(100%)}
 .guide-card-body li{margin-bottom:4px;padding-left:10px;position:relative}
 .guide-card-body li::before{content:'·';position:absolute;left:-4px;font-size:9px}
 .guide-footer{flex-shrink:0;background:var(--bg);padding:16px 20px calc(env(safe-area-inset-bottom,0px) + 20px);text-align:center;border-top:1px solid var(--border)}
-.guide-btn{width:100%;background:var(--gold);color:var(--bg);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;padding:16px;cursor:pointer}
+.guide-btn{width:100%;background:rgba(201,168,76,.2);color:#e8c96a;border:1px solid rgba(201,168,76,.4);border-radius:8px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:16px;cursor:pointer}
 .guide-skip{font-size:9px;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase;margin-top:12px;display:block;background:none;border:none;cursor:pointer;width:100%}
 
 
@@ -508,7 +508,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.118-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.120-DEV</div>
   </div>
 </div>
 
@@ -728,7 +728,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.118-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.120-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -928,7 +928,7 @@ nav.nav-hidden{transform:translateY(100%)}
 <div class="page" id="page-formula">
 
   <div class="card" style="margin-bottom:8px">
-    <div class="card-title" style="margin-bottom:6px" data-i18n="f_titulo">Fórmula WHS 2020</div>
+    <div class="card-title" style="margin-bottom:6px" data-i18n="f_titulo">Fórmula WHS (actualizado 2024)</div>
     <div class="formula-grid">
       <div class="formula-row"><span class="fk" data-i18n="fi_dif">Diferencial</span><span class="fv" data-i18n="fi_dif_f">(Golpes − CR) × 113 / Slope</span></div>
       <div class="formula-row"><span class="fk" data-i18n="fi_hcp_jug">HCP Jugador</span><span class="fv" data-i18n="fi_hcp_jug_f">Promedio mejores diferenciales × 0.95</span></div>
@@ -983,6 +983,13 @@ nav.nav-hidden{transform:translateY(100%)}
         <span style="color:var(--cream)" data-i18n="fi_roja_desc">Damas, principiantes y niños</span>
       </div>
     </div>
+  </div>
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-title" style="margin-bottom:8px" data-i18n="fi_aviso_titulo">ℹ️ HERRAMIENTA INFORMATIVA</div>
+    <div style="font-size:11px;color:var(--muted);line-height:1.8" data-i18n="fi_aviso_texto">Golf HCP calcula tu Hándicap Index según la metodología oficial del World Handicap System (WHS 2020), publicado conjuntamente por R&A y USGA.<br><br>Este cálculo es orientativo y de uso personal. Golf HCP es una aplicación independiente, no afiliada ni respaldada por R&A, USGA ni ninguna federación oficial de golf.<br><br>Para Hándicap oficial homologado, contacta con tu federación o club de golf.</div>
+  </div>
+  <div style="padding-bottom:16px">
+    <button class="guide-btn" onclick="goTo('ajustes',$('nav-ajustes'))" style="margin-top:0" data-i18n="g_continuar">Continuar</button>
   </div>
 </div>
 
@@ -1342,7 +1349,7 @@ const i18n = {
     'sin_barras':'sin barras','g_sub':'Calculadora WHS 2020 · actualizada 2024','g_tagline':'Tu hándicap siempre actualizado',
     'g_como_empezar':'Cómo empezar','g_hcp_index':'📊 Hándicap Index (WHS 2024)',
     'g_formatos':'🏌️ Formatos de juego','g_simbolos':'💡 Símbolos en cada hoyo',
-    'g_nav':'🧭 Navegación','f_titulo':'Fórmula WHS 2020','fi_aviso_titulo':'ℹ️ FERRAMENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula o teu Handicap Index segundo a metodologia oficial do World Handicap System (WHS 2020), publicado conjuntamente pela R&A e USGA.<br><br>Este cálculo é orientativo e de uso pessoal. Golf HCP é uma aplicação independente, não afiliada nem apoiada pela R&A, USGA nem por nenhuma federação oficial de golfe.<br><br>Para Handicap oficial homologado, contacta a tua federação ou clube de golfe.','fi_aviso_titulo':'ℹ️ HERRAMIENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula tu Hándicap Index según la metodología oficial del World Handicap System (WHS 2020), publicado conjuntamente por R&A y USGA.<br><br>Este cálculo es orientativo y de uso personal. Golf HCP es una aplicación independiente, no afiliada ni respaldada por R&A, USGA ni ninguna federación oficial de golf.<br><br>Para Hándicap oficial homologado, contacta con tu federación o club de golf.',
+    'g_nav':'🧭 Navegación','f_titulo':'Fórmula WHS (actualizado 2024)','fi_aviso_titulo':'ℹ️ FERRAMENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula o teu Handicap Index segundo a metodologia oficial do World Handicap System (WHS 2020), publicado conjuntamente pela R&A e USGA.<br><br>Este cálculo é orientativo e de uso pessoal. Golf HCP é uma aplicação independente, não afiliada nem apoiada pela R&A, USGA nem por nenhuma federação oficial de golfe.<br><br>Para Handicap oficial homologado, contacta a tua federação ou clube de golfe.','fi_aviso_titulo':'ℹ️ HERRAMIENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula tu Hándicap Index según la metodología oficial del World Handicap System (WHS 2020), publicado conjuntamente por R&A y USGA.<br><br>Este cálculo es orientativo y de uso personal. Golf HCP es una aplicación independiente, no afiliada ni respaldada por R&A, USGA ni ninguna federación oficial de golf.<br><br>Para Hándicap oficial homologado, contacta con tu federación o club de golf.',
   },
   pt: {
     'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','compartir_hcp':'Partilhar o meu HCP','gestionar_campos':'Gerir Campos','evolucion_hcp':'EVOLUÇÃO HCP','ultimas_20':'20 últimas voltas','ultimas_10':'10 últimas voltas',
@@ -1434,7 +1441,7 @@ const i18n = {
     'sin_barras':'sem barras','g_sub':'Calculadora WHS 2020 · atualizada 2024','g_tagline':'O teu handicap sempre atualizado',
     'g_como_empezar':'Como começar','g_hcp_index':'📊 Handicap Index (WHS 2024)',
     'g_formatos':'🏌️ Formatos de jogo','g_simbolos':'💡 Símbolos em cada buraco',
-    'g_nav':'🧭 Navegação','f_titulo':'Fórmula WHS 2020','fi_aviso_titulo':'ℹ️ FERRAMENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula o teu Handicap Index segundo a metodologia oficial do World Handicap System (WHS 2020), publicado conjuntamente pela R&A e USGA.<br><br>Este cálculo é orientativo e de uso pessoal. Golf HCP é uma aplicação independente, não afiliada nem apoiada pela R&A, USGA nem por nenhuma federação oficial de golfe.<br><br>Para Handicap oficial homologado, contacta a tua federação ou clube de golfe.','fi_aviso_titulo':'ℹ️ HERRAMIENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula tu Hándicap Index según la metodología oficial del World Handicap System (WHS 2020), publicado conjuntamente por R&A y USGA.<br><br>Este cálculo es orientativo y de uso personal. Golf HCP es una aplicación independiente, no afiliada ni respaldada por R&A, USGA ni ninguna federación oficial de golf.<br><br>Para Hándicap oficial homologado, contacta con tu federación o club de golf.',
+    'g_nav':'🧭 Navegação','f_titulo':'Fórmula WHS (actualizado 2024)','fi_aviso_titulo':'ℹ️ FERRAMENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula o teu Handicap Index segundo a metodologia oficial do World Handicap System (WHS 2020), publicado conjuntamente pela R&A e USGA.<br><br>Este cálculo é orientativo e de uso pessoal. Golf HCP é uma aplicação independente, não afiliada nem apoiada pela R&A, USGA nem por nenhuma federação oficial de golfe.<br><br>Para Handicap oficial homologado, contacta a tua federação ou clube de golfe.','fi_aviso_titulo':'ℹ️ HERRAMIENTA INFORMATIVA','fi_aviso_texto':'Golf HCP calcula tu Hándicap Index según la metodología oficial del World Handicap System (WHS 2020), publicado conjuntamente por R&A y USGA.<br><br>Este cálculo es orientativo y de uso personal. Golf HCP es una aplicación independiente, no afiliada ni respaldada por R&A, USGA ni ninguna federación oficial de golf.<br><br>Para Hándicap oficial homologado, contacta con tu federación o club de golf.',
   }
 };
 let lang = localStorage.getItem('golf_lang') || 'es';
