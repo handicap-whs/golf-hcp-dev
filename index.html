@@ -514,7 +514,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.31.017-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.31.021-DEV</div>
   </div>
 </div>
 
@@ -734,7 +734,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.31.017-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.31.021-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -2509,6 +2509,13 @@ function onCampoChange() {
       buildBarraSelect('f-barra', campo, '');
       // Reset num-hoyos and clear CR/Slope — user must choose barra and hoyos
       if ($('f-num-hoyos')) $('f-num-hoyos').value = '';
+      // Disable 9H if no barra has 9H data
+      const has9H = campo.barras.some(b => (b.cr_out && b.slope_out) || (b.cr_in && b.slope_in));
+      const opt9 = document.querySelector('#f-num-hoyos option[value="9"]');
+      if (opt9) {
+        if (has9H) { opt9.disabled = false; opt9.style.display = ''; }
+        else { opt9.disabled = true; opt9.style.display = 'none'; }
+      }
       if ($('f-vuelta-wrap')) $('f-vuelta-wrap').style.display = 'none';
       $('f-cr').value = ''; $('f-slope').value = '';
       const crD=$('f-cr-disp'), slD=$('f-slope-disp');
@@ -2546,6 +2553,18 @@ function onBarraChange() {
   const campo = state.campos.find(c => c.id === id);
   const barra = campo?.barras?.find(b => b.color === $('f-barra').value);
   if (barra) {
+    // Show/hide 9H option based on selected barra
+    const barraHas9H = (barra.cr_out && barra.slope_out) || (barra.cr_in && barra.slope_in);
+    const opt9 = document.querySelector('#f-num-hoyos option[value="9"]');
+    if (opt9) {
+      if (barraHas9H) {
+        opt9.disabled = false; opt9.style.display = '';
+        $('f-num-hoyos').value = '9'; onNumHoyosChange();
+      } else {
+        opt9.disabled = true; opt9.style.display = 'none';
+        if ($('f-num-hoyos').value === '9') { $('f-num-hoyos').value = '18'; onNumHoyosChange(); }
+      }
+    }
     const rawN = $('f-num-hoyos')?.value;
     if (!rawN) return; // esperar a que el usuario elija hoyos
     const numH = parseInt(rawN);
