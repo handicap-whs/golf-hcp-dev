@@ -176,12 +176,13 @@ input:focus,select:focus{border-color:var(--gold);background:rgba(201,168,76,.09
   border-color:var(--gold) !important;
   background:#fffff8 !important;
 }
-:root.light input.s-eagle,:root.light .s-eagle{background:#6a3fc8!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+/* Score colors same in both modes */
+:root.light input.s-eagle,:root.light .s-eagle{background:#c9a84c!important;color:#000!important;-webkit-text-fill-color:#000!important}
 :root.light input.s-birdie,:root.light .s-birdie{background:#e05555!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
 :root.light input.s-par,:root.light .s-par{background:#3b82f6!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
-:root.light input.s-bogey,:root.light .s-bogey{background:rgba(45,90,39,.25)!important;border:2px solid #2d5a27!important;color:#2d5a27!important;-webkit-text-fill-color:#2d5a27!important}
-:root.light input.s-doble,:root.light .s-doble{background:rgba(240,200,80,.3)!important;border:2px solid #b8a030!important;color:#7a6010!important;-webkit-text-fill-color:#7a6010!important}
-:root.light input.s-peor,:root.light .s-peor{background:rgba(200,100,30,.2)!important;border:2px solid #b06020!important;color:#804010!important;-webkit-text-fill-color:#804010!important}
+:root.light input.s-bogey,:root.light .s-bogey{background:#2d5a27!important;border:2px solid #4a8c3f!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+:root.light input.s-doble,:root.light .s-doble{background:rgba(150,150,150,.5)!important;border:2px solid rgba(100,100,100,.8)!important;outline:2px solid rgba(100,100,100,.8)!important;outline-offset:2px!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+:root.light input.s-peor,:root.light .s-peor{background:#222!important;border:2px solid rgba(0,0,0,.5)!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
 
 input.err{border-color:var(--red)!important;background:rgba(224,85,85,.08)!important}
 select option{background:#1a2f1a}
@@ -487,7 +488,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.111-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.112-DEV</div>
   </div>
 </div>
 
@@ -707,7 +708,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.111-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.112-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
