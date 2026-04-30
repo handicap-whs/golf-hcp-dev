@@ -170,7 +170,7 @@ select option{background:#1a2f1a}
 .hist-table tr:last-child td{border-bottom:none}
 .used-badge{background:rgba(123,198,122,.15);border:1px solid rgba(123,198,122,.3);color:var(--green);font-size:7px;padding:2px 5px;border-radius:10px}
 .stbl-badge{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold2);font-size:7px;letter-spacing:1px;padding:2px 6px;border-radius:20px;white-space:nowrap}
-.barra-dot{display:inline-block;width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,.3)}
+.barra-dot{display:inline-block;width:8px;height:8px;border-radius:50%;border:1px solid rgba(0,0,0,.2)}
 .hist-actions{display:flex;gap:4px}
 .hist-actions button{background:none;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-size:12px;padding:2px 6px}
 
@@ -194,7 +194,7 @@ select option{background:#1a2f1a}
 
 /* ── BARRAS ── */
 .barra-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.barra-dot-lg{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.barra-dot-lg{width:12px;height:12px;border-radius:50%;flex-shrink:0;border:1px solid rgba(0,0,0,.15)}
 .barra-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1}
 .barra-fields label{font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold2)}
 #p-barra-aviso{display:none;margin-top:8px;padding:10px 13px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-radius:5px;font-size:11px;color:var(--gold2);line-height:1.6}
@@ -422,7 +422,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.070-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.072-DEV</div>
   </div>
 </div>
 
@@ -642,7 +642,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.070-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.072-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -795,7 +795,7 @@ nav.nav-hidden{transform:translateY(100%)}
 
 <!-- PAGE: CAMPOS -->
 <div class="page" id="page-campos">
-  <div style="margin-bottom:6px"><button onclick="goTo('ajustes',$('nav-ajustes'))" style="background:none;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;padding:0;display:flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="15 18 9 12 15 6"/></svg><span data-i18n="nav_ajustes">Ajustes</span></button></div>
+  <div style="margin-bottom:6px"><button onclick="goTo('ajustes',$('nav-ajustes'))" style="background:none;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:14px;cursor:pointer;padding:0;display:flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="15 18 9 12 15 6"/></svg><span data-i18n="nav_ajustes">Ajustes</span></button></div>
   <!-- Formulario Nuevo Campo — aparece primero cuando está abierto -->
   <div id="nuevo-campo-wrap" style="display:none">
     <div class="card">
