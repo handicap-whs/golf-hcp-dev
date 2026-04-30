@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--hist-sticky:#233723;--bg:#1a2f1a;--bg2:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.09);--gold:#c9a84c;--gold2:#e8c96a;--green:#7bc67a;--cream:#f5f0e8;--muted:rgba(255,255,255,0.35);--red:#e05555;--text:#ffffff;--text2:rgba(255,255,255,0.65);--card-bg:rgba(255,255,255,0.04);--nav-bg:#0f1a0f;--input-bg:rgba(255,255,255,0.07);--splash-bg:#1a2f1a}
-:root.light{--hist-sticky:#e8f0e8;--bg:#f0f4f0;--text:#000000;--bg2:rgba(0,0,0,0.03);--border:rgba(0,0,0,0.12);--gold:#7a5a10;--gold2:#8a6a18;--green:#1a4a1a;--cream:#2a1a00;--muted:rgba(0,0,0,0.5);--red:#b01010;--text:#000000;--text2:rgba(0,0,0,0.75);--card-bg:rgba(255,255,255,0.9);--nav-bg:#e0ebe0;--input-bg:#ffffff;--splash-bg:#f0f4f0}
+:root.light{--hist-sticky:#e8f0e8;--bg:#f0f4f0;--text:#000000;--cream:#1a2f1a;--bg2:rgba(0,0,0,0.03);--border:rgba(0,0,0,0.12);--gold:#7a5a10;--gold2:#8a6a18;--green:#1a4a1a;--cream:#2a1a00;--muted:rgba(0,0,0,0.5);--red:#b01010;--text:#000000;--text2:rgba(0,0,0,0.75);--card-bg:rgba(255,255,255,0.9);--nav-bg:#e0ebe0;--input-bg:#ffffff;--splash-bg:#f0f4f0}
 :root.light body,
 :root.light .page,
 :root.light .card,
@@ -41,21 +41,21 @@ body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-
 /* ── SPLASH ── */
 #splash{position:fixed;inset:0;background:#1a2f1a;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .5s}
 #splash.hide{opacity:0;pointer-events:none}
-#splash-t{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:#fff}
+#splash-t{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--cream)}
 #splash-t em{color:#c9a84c;font-style:italic}
 #splash-s{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#7bc67a;opacity:.7}
 
 /* ── AUTH SCREENS ── */
 .auth-screen{position:fixed;inset:0;background:#1a2f1a;z-index:8500;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;overflow-y:auto}
 .auth-screen.hidden{display:none}
-.auth-logo{font-family:'Playfair Display',serif;font-size:clamp(34px,9vw,52px);font-weight:900;color:#fff;text-align:center;margin-bottom:4px}
+.auth-logo{font-family:'Playfair Display',serif;font-size:clamp(34px,9vw,52px);font-weight:900;color:var(--cream);text-align:center;margin-bottom:4px}
 .auth-logo em{color:#c9a84c;font-style:italic}
 .auth-sub{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#7bc67a;opacity:.8;margin-bottom:32px}
 .auth-box{width:100%;max-width:360px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:28px 24px}
 .auth-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;text-align:center}
 .auth-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}.auth-input-wrap{position:relative;display:flex;align-items:center}.auth-input-wrap input{flex:1;padding-right:36px!important}.auth-input-wrap.has-eye input{padding-right:64px!important}.auth-clear{position:absolute;right:8px;width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:rgba(255,255,255,.6);font-size:9px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0;touch-action:manipulation;z-index:2}.auth-clear.visible{display:flex}.auth-eye{position:absolute;right:30px;background:none;border:none;color:rgba(255,255,255,.4);font-size:14px;cursor:pointer;padding:4px;z-index:2}
 .auth-field label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--green);opacity:.9}
-.auth-field input{background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:5px;color:#fff;font-family:'DM Mono',monospace;font-size:16px;padding:12px;outline:none;width:100%;-webkit-appearance:none;box-sizing:border-box}.auth-field input:-webkit-autofill,.auth-field input:-webkit-autofill:hover,.auth-field input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 1000px #1e3d1e inset!important;-webkit-text-fill-color:#fff!important;border-color:var(--border)!important}
+.auth-field input{background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:5px;color:var(--text,#fff);font-family:'DM Mono',monospace;font-size:16px;padding:12px;outline:none;width:100%;-webkit-appearance:none;box-sizing:border-box}.auth-field input:-webkit-autofill,.auth-field input:-webkit-autofill:hover,.auth-field input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 1000px var(--input-bg,#1e3d1e) inset!important;-webkit-text-fill-color:var(--text,#fff)!important;border-color:var(--border)!important}
 .auth-field input:focus{border-color:var(--gold);background:rgba(201,168,76,.09)}
 .auth-btn{background:var(--gold);color:#1a2f1a;border:none;border-radius:5px;font-family:'DM Mono',monospace;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:14px;cursor:pointer;width:100%;margin-top:6px}
 .auth-btn:disabled{opacity:.5;cursor:not-allowed}
@@ -86,6 +86,16 @@ nav button.active svg{stroke:var(--gold)}
 .page{display:none;padding:16px 14px calc(70px + env(safe-area-inset-bottom,0px));max-width:700px;margin:0 auto;width:100%}
 .page.active{display:block}
 
+
+:root.light input, :root.light select, :root.light textarea {
+  color: #000 !important;
+  background: var(--input-bg) !important;
+}
+:root.light .auth-input-wrap input {
+  -webkit-text-fill-color: #000 !important;
+  background-color: var(--input-bg) !important;
+  box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+}
 /* ── GUÍA DIDÁCTICA ── */
 .guia-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden}
 .guia-card-header{padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer}
@@ -127,7 +137,7 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
 .f3{grid-template-columns:1fr 1fr 1fr}
 .field{display:flex;flex-direction:column;gap:6px}
 .field label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--green);opacity:.9}
-input,select{background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:5px;color:#fff;font-family:'DM Mono',monospace;font-size:16px;padding:10px;outline:none;width:100%;-webkit-appearance:none}
+input,select{background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:5px;color:var(--text,#fff);font-family:'DM Mono',monospace;font-size:16px;padding:10px;outline:none;width:100%;-webkit-appearance:none}
 input:focus,select:focus{border-color:var(--gold);background:rgba(201,168,76,.09)}
 input.err{border-color:var(--red)!important;background:rgba(224,85,85,.08)!important}
 select option{background:#1a2f1a}
@@ -275,7 +285,7 @@ nav.nav-hidden{transform:translateY(100%)}
 #guide-screen{position:fixed;inset:0;background:var(--splash-bg);z-index:8400;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) 0 0}
 #guide-screen.hidden{display:none}
 .guide-hero{text-align:center;padding:32px 24px 24px}
-.guide-logo{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#fff;line-height:1}
+.guide-logo{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--cream);line-height:1}
 .guide-logo em{color:#c9a84c;font-style:italic}
 .guide-sub{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#7bc67a;margin-top:6px;opacity:.8}
 .guide-tagline{font-size:12px;color:rgba(255,255,255,.5);margin-top:10px;letter-spacing:.5px}
@@ -433,7 +443,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.075-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.077-DEV</div>
   </div>
 </div>
 
@@ -653,7 +663,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.075-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.077-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -1017,7 +1027,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="ajuste-sep"></div>
     <div class="ajuste-btn">
       <div class="ajuste-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
-      <div class="ajuste-text"><div data-i18n="menu_tema">Modo claro</div><div class="ajuste-sub" data-i18n="sub_tema">Cambia la apariencia</div></div>
+      <div class="ajuste-text"><div data-i18n="menu_tema" id="theme-label">Modo claro</div><div class="ajuste-sub" data-i18n="sub_tema">Cambia la apariencia</div></div>
       <label class="toggle-switch" onclick="event.stopPropagation()">
         <input type="checkbox" id="toggle-theme" onchange="toggleTheme()">
         <span class="toggle-slider"></span>
@@ -1174,7 +1184,7 @@ nav.nav-hidden{transform:translateY(100%)}
 const i18n = {
   es: {
     'nav_inicio':'Inicio','nav_ronda':'Ronda','nav_rondas':'Rondas','nav_historial':'Historial','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estadísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estadísticas','compartir_hcp':'Compartir mi HCP','gestionar_campos':'Gestionar Campos','evolucion_hcp':'EVOLUCIÓN HCP','ultimas_20':'20 últimas rondas','ultimas_10':'10 últimas rondas',
-    'menu_info_hcp':'Info Hándicap','menu_guia_didactica':'Guía Didáctica del Jugador','sub_guia_didactica':'Aprende a gestionar tu hándicap','menu_guia':'Guía de inicio','menu_clave':'Cambiar clave','sec_campos_juego':'Campos y Juego','sec_guias':'Guías','sec_cuenta':'Cuenta','sec_compartir':'Compartir y Soporte','sec_sobre':'Sobre Golf HCP','sub_sobre':'Versión, créditos y más','sobre_desc':'Calculadora de Hándicap WHS actualizada a 2024 para uso personal. Diseñada para jugadores de golf que quieren conocer su Hándicap Index de forma rápida y sencilla.','sobre_plataforma':'Plataforma','sec_legal':'Legal','menu_idioma':'Idioma','menu_tema':'Modo claro','sub_campos':'Añade y edita tus campos de golf','sub_guia':'Aprende a usar la app','sub_info_hcp':'Cómo se calcula el HCP WHS','sub_clave':'Actualiza tu contraseña','sub_compartir':'Comparte Golf HCP con tus compañeros','sub_contacto':'Envíanos tus sugerencias','sub_legal':'No afiliado a R&A / USGA','sub_privacidad':'Cómo usamos tus datos','sub_salir':'Cerrar sesión','sub_tema':'Cambia la apariencia','menu_salir':'Salir','legal_p1':'Golf HCP es una herramienta de cálculo de Hándicap de uso personal e informativo.','legal_p2':'Esta aplicación <strong style="font-weight:normal;color:var(--cream)">no está afiliada, asociada ni respaldada</strong> por The R&amp;A ni por la USGA (United States Golf Association).','legal_p3':'El sistema de Hándicap WHS (World Handicap System) es propiedad de The R&amp;A y la USGA. Los cálculos realizados por esta app son aproximados y tienen carácter orientativo.','legal_p4':'Para competiciones oficiales, consulta siempre con tu federación o club de golf.','priv_p1':'Golf HCP almacena tus datos de juego (rondas, campos, resultados) en una base de datos segura (Supabase) vinculada a tu cuenta de email.','priv_p2':'No compartimos tus datos con terceros. No mostramos publicidad. Tus datos son de uso exclusivo para el funcionamiento de la aplicación.','priv_p3':'Puedes eliminar tu cuenta y todos tus datos en cualquier momento contactando con nosotros.','priv_p4':'Esta aplicación no recopila datos de localización ni información sensible del dispositivo.','menu_legal':'Info Legal','menu_privacidad':'Política de Privacidad','menu_compartir_app':'Compartir App Golf HCP','menu_contacto':'Contacto Golf HCP',
+    'menu_info_hcp':'Info Hándicap','menu_guia_didactica':'Guía Didáctica del Jugador','sub_guia_didactica':'Aprende a gestionar tu hándicap','menu_guia':'Guía de inicio','menu_clave':'Cambiar clave','sec_campos_juego':'Campos y Juego','sec_guias':'Guías','sec_cuenta':'Cuenta','sec_compartir':'Compartir y Soporte','sec_sobre':'Sobre Golf HCP','sub_sobre':'Versión, créditos y más','sobre_desc':'Calculadora de Hándicap WHS actualizada a 2024 para uso personal. Diseñada para jugadores de golf que quieren conocer su Hándicap Index de forma rápida y sencilla.','sobre_plataforma':'Plataforma','sec_legal':'Legal','menu_idioma':'Idioma','menu_tema':'Apariencia','sub_campos':'Añade y edita tus campos de golf','sub_guia':'Aprende a usar la app','sub_info_hcp':'Cómo se calcula el HCP WHS','sub_clave':'Actualiza tu contraseña','sub_compartir':'Comparte Golf HCP con tus compañeros','sub_contacto':'Envíanos tus sugerencias','sub_legal':'No afiliado a R&A / USGA','sub_privacidad':'Cómo usamos tus datos','sub_salir':'Cerrar sesión','sub_tema':'Cambia la apariencia','menu_salir':'Salir','legal_p1':'Golf HCP es una herramienta de cálculo de Hándicap de uso personal e informativo.','legal_p2':'Esta aplicación <strong style="font-weight:normal;color:var(--cream)">no está afiliada, asociada ni respaldada</strong> por The R&amp;A ni por la USGA (United States Golf Association).','legal_p3':'El sistema de Hándicap WHS (World Handicap System) es propiedad de The R&amp;A y la USGA. Los cálculos realizados por esta app son aproximados y tienen carácter orientativo.','legal_p4':'Para competiciones oficiales, consulta siempre con tu federación o club de golf.','priv_p1':'Golf HCP almacena tus datos de juego (rondas, campos, resultados) en una base de datos segura (Supabase) vinculada a tu cuenta de email.','priv_p2':'No compartimos tus datos con terceros. No mostramos publicidad. Tus datos son de uso exclusivo para el funcionamiento de la aplicación.','priv_p3':'Puedes eliminar tu cuenta y todos tus datos en cualquier momento contactando con nosotros.','priv_p4':'Esta aplicación no recopila datos de localización ni información sensible del dispositivo.','menu_legal':'Info Legal','menu_privacidad':'Política de Privacidad','menu_compartir_app':'Compartir App Golf HCP','menu_contacto':'Contacto Golf HCP',
     'email':'Email','password':'Contraseña','btn_entrar':'Entrar','sin_cuenta':'¿Sin cuenta?','registrate':'Regístrate','politica_priv':'Política de Privacidad',
     'ya_cuenta':'¿Ya tienes cuenta?','inicia_sesion':'Inicia sesión','crear_cuenta':'Crear Cuenta',
     'enviar_enlace':'Enviar enlace','volver':'← Volver','recuperar_pass':'Recuperar contraseña',
@@ -1266,7 +1276,7 @@ const i18n = {
   },
   pt: {
     'nav_inicio':'Início','nav_ronda':'Volta','nav_rondas':'Voltas','nav_historial':'Histórico','nav_campos':'Campos','nav_info':'Info','nav_stats':'Estatísticas','nav_ajustes':'Ajustes','ajustes_titulo':'Ajustes','estadisticas':'Estatísticas','compartir_hcp':'Partilhar o meu HCP','gestionar_campos':'Gerir Campos','evolucion_hcp':'EVOLUÇÃO HCP','ultimas_20':'20 últimas voltas','ultimas_10':'10 últimas voltas',
-    'menu_info_hcp':'Info Handicap','menu_guia_didactica':'Guia Didática do Jogador','sub_guia_didactica':'Aprende a gerir o teu handicap','menu_guia':'Guia inicial','menu_clave':'Alterar senha','sec_campos_juego':'Campos e Jogo','sec_guias':'Guias','sec_cuenta':'Conta','sec_compartir':'Partilhar e Suporte','sec_sobre':'Sobre Golf HCP','sub_sobre':'Versão, créditos e mais','sobre_desc':'Calculadora de Handicap WHS atualizada a 2024 para uso pessoal. Desenhada para jogadores de golfe que querem conhecer o seu Handicap Index de forma rápida e simples.','sobre_plataforma':'Plataforma','sec_legal':'Legal','menu_idioma':'Idioma','menu_tema':'Modo claro','sub_campos':'Adiciona e edita os teus campos de golfe','sub_guia':'Aprende a usar a app','sub_info_hcp':'Como se calcula o HCP WHS','sub_clave':'Atualiza a tua palavra-passe','sub_compartir':'Partilha Golf HCP com os teus colegas','sub_contacto':'Envia-nos as tuas sugestões','sub_legal':'Não afiliado à R&A / USGA','sub_privacidad':'Como usamos os teus dados','sub_salir':'Terminar sessão','sub_tema':'Muda a aparência','menu_salir':'Sair','legal_p1':'Golf HCP é uma ferramenta de cálculo de Handicap de uso pessoal e informativo.','legal_p2':'Esta aplicação <strong style="font-weight:normal;color:var(--cream)">não está afiliada, associada nem apoiada</strong> pela R&amp;A nem pela USGA (United States Golf Association).','legal_p3':'O sistema de Handicap WHS (World Handicap System) é propriedade da R&amp;A e da USGA. Os cálculos realizados por esta app são aproximados e têm carácter orientativo.','legal_p4':'Para competições oficiais, consulta sempre a tua federação ou clube de golfe.','priv_p1':'Golf HCP armazena os teus dados de jogo (voltas, campos, resultados) numa base de dados segura (Supabase) associada à tua conta de email.','priv_p2':'Não partilhamos os teus dados com terceiros. Não mostramos publicidade. Os teus dados são de uso exclusivo para o funcionamento da aplicação.','priv_p3':'Podes eliminar a tua conta e todos os teus dados a qualquer momento contactando-nos.','priv_p4':'Esta aplicação não recolhe dados de localização nem informação sensível do dispositivo.','menu_legal':'Info Legal','menu_privacidad':'Política de Privacidade','menu_compartir_app':'Partilhar App Golf HCP','menu_contacto':'Contacto Golf HCP',
+    'menu_info_hcp':'Info Handicap','menu_guia_didactica':'Guia Didática do Jogador','sub_guia_didactica':'Aprende a gerir o teu handicap','menu_guia':'Guia inicial','menu_clave':'Alterar senha','sec_campos_juego':'Campos e Jogo','sec_guias':'Guias','sec_cuenta':'Conta','sec_compartir':'Partilhar e Suporte','sec_sobre':'Sobre Golf HCP','sub_sobre':'Versão, créditos e mais','sobre_desc':'Calculadora de Handicap WHS atualizada a 2024 para uso pessoal. Desenhada para jogadores de golfe que querem conhecer o seu Handicap Index de forma rápida e simples.','sobre_plataforma':'Plataforma','sec_legal':'Legal','menu_idioma':'Idioma','menu_tema':'Apariencia','sub_campos':'Adiciona e edita os teus campos de golfe','sub_guia':'Aprende a usar a app','sub_info_hcp':'Como se calcula o HCP WHS','sub_clave':'Atualiza a tua palavra-passe','sub_compartir':'Partilha Golf HCP com os teus colegas','sub_contacto':'Envia-nos as tuas sugestões','sub_legal':'Não afiliado à R&A / USGA','sub_privacidad':'Como usamos os teus dados','sub_salir':'Terminar sessão','sub_tema':'Muda a aparência','menu_salir':'Sair','legal_p1':'Golf HCP é uma ferramenta de cálculo de Handicap de uso pessoal e informativo.','legal_p2':'Esta aplicação <strong style="font-weight:normal;color:var(--cream)">não está afiliada, associada nem apoiada</strong> pela R&amp;A nem pela USGA (United States Golf Association).','legal_p3':'O sistema de Handicap WHS (World Handicap System) é propriedade da R&amp;A e da USGA. Os cálculos realizados por esta app são aproximados e têm carácter orientativo.','legal_p4':'Para competições oficiais, consulta sempre a tua federação ou clube de golfe.','priv_p1':'Golf HCP armazena os teus dados de jogo (voltas, campos, resultados) numa base de dados segura (Supabase) associada à tua conta de email.','priv_p2':'Não partilhamos os teus dados com terceiros. Não mostramos publicidade. Os teus dados são de uso exclusivo para o funcionamento da aplicação.','priv_p3':'Podes eliminar a tua conta e todos os teus dados a qualquer momento contactando-nos.','priv_p4':'Esta aplicação não recolhe dados de localização nem informação sensível do dispositivo.','menu_legal':'Info Legal','menu_privacidad':'Política de Privacidade','menu_compartir_app':'Partilhar App Golf HCP','menu_contacto':'Contacto Golf HCP',
     'email':'Email','password':'Senha','btn_entrar':'Entrar','sin_cuenta':'Sem conta?','registrate':'Registe-se','politica_priv':'Política de Privacidade',
     'ya_cuenta':'Já tem conta?','inicia_sesion':'Iniciar sessão','crear_cuenta':'Criar Conta',
     'enviar_enlace':'Enviar link','volver':'← Voltar','recuperar_pass':'Recuperar senha',
@@ -3468,7 +3478,10 @@ function updateThemeLabel() {
   if (cb) cb.checked = isLight;
 }
 function applyStoredTheme() {
-  if (localStorage.getItem('golf_theme') === 'light') {
+  const stored = localStorage.getItem('golf_theme');
+  if (stored === 'dark') {
+    document.documentElement.classList.remove('light');
+  } else {
     document.documentElement.classList.add('light');
   }
   updateThemeLabel();
