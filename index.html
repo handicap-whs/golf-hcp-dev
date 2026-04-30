@@ -290,13 +290,13 @@ nav.nav-hidden{transform:translateY(100%)}
 .guide-sub{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#7bc67a;margin-top:6px;opacity:.8}
 .guide-tagline{font-size:12px;color:rgba(255,255,255,.5);margin-top:10px;letter-spacing:.5px}
 .guide-sections{padding:0 20px 24px;display:flex;flex-direction:column;gap:12px}
-.guide-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px}
+.guide-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
 .guide-card-title{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#c9a84c;margin-bottom:8px}
 .guide-card-body{font-size:11px;color:var(--text2);line-height:1.7}
 .guide-card-body li{margin-bottom:4px;padding-left:10px;position:relative}
 .guide-card-body li::before{content:'⛳';position:absolute;left:-4px;font-size:9px}
-.guide-footer{flex-shrink:0;background:#1a2f1a;padding:16px 20px calc(env(safe-area-inset-bottom,0px) + 20px);text-align:center;border-top:1px solid rgba(255,255,255,.06)}
-.guide-btn{width:100%;background:linear-gradient(135deg,#c9a84c,#e8c96a);color:#1a2f1a;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;padding:16px;cursor:pointer}
+.guide-footer{flex-shrink:0;background:var(--bg);padding:16px 20px calc(env(safe-area-inset-bottom,0px) + 20px);text-align:center;border-top:1px solid var(--border)}
+.guide-btn{width:100%;background:var(--gold);color:var(--bg);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;padding:16px;cursor:pointer}
 .guide-skip{font-size:9px;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase;margin-top:12px;display:block;background:none;border:none;cursor:pointer;width:100%}
 
 
@@ -443,7 +443,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.077-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.078-DEV</div>
   </div>
 </div>
 
@@ -663,7 +663,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.077-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.078-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
