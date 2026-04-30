@@ -514,7 +514,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.31.007-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.31.009-DEV</div>
   </div>
 </div>
 
@@ -734,7 +734,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.31.007-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.31.009-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -1570,7 +1570,7 @@ const WHS = [[1,-2],[1,-2],[1,-2],[1,-2],[2,-1],[2,-1],[2,0],[2,0],[3,0],[3,0],[
 const BARRAS = ['blanca','amarilla','azul','roja'];
 const BARRAS_FR = ['blanca','amarilla','azul','roja','violeta','naranja','negra'];
 const BARRA_COLORS_EXT = {violeta:'#8b5cf6',naranja:'#f97316',negra:'#1a1a1a'};
-const BARRA_COLORS = {blanca:'#e8e8e8',amarilla:'#f5c518',azul:'#3b82f6',roja:'#e05555'};
+const BARRA_COLORS = {blanca:'#e8e8e8',amarilla:'#f5c518',azul:'#3b82f6',roja:'#e05555',violeta:'#8b5cf6',naranja:'#f97316',negra:'#1a1a1a'};
 const BARRA_LABELS = {blanca:'Blanca',amarilla:'Amarilla',azul:'Azul',roja:'Roja',violeta:'Violeta',naranja:'Naranja',negra:'Negra'};
 const BARRA_LABELS_PL = {blanca:'Blancas',amarilla:'Amarillas',azul:'Azules',roja:'Rojas',violeta:'Violetas',naranja:'Naranjas',negra:'Negras'};
 const BARRA_LABELS_PT = {blanca:'Branca',amarilla:'Amarela',azul:'Azul',roja:'Vermelha',violeta:'Violeta',naranja:'Laranja',negra:'Preta'};
@@ -2303,7 +2303,7 @@ function renderCampos() {
     const dots = (campo.barras || []).map(b => {
       const has9H = (b.cr_out && b.slope_out) || (b.cr_in && b.slope_in);
       return `<span style="display:inline-flex;align-items:center;gap:2px;margin-right:4px">
-        <span class="barra-dot" style="background:${BARRA_COLORS[b.color]}" title="${BARRA_LABELS_PL[b.color]}"></span>
+        <span class="barra-dot" style="background:${BARRA_COLORS[b.color]}" title="${lang==='fr'?(BARRA_LABELS_FR[b.color]||b.color):lang==='pt'?(BARRA_LABELS_PT[b.color]||b.color):(BARRA_LABELS_PL[b.color]||b.color)}"></span>
         ${has9H ? '<span style="font-size:7px;color:var(--gold2)">9H</span>' : ''}
       </span>`;
     }).join('');
