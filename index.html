@@ -132,6 +132,7 @@ nav button.active svg{stroke:var(--gold)}
 :root.light .stbl-badge{color:var(--gold)}
 :root.light .barra-9h{background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.2)}
 
+:root.light .light-select{background:#ffffff!important;color:#000!important;-webkit-text-fill-color:#000!important}
 /* ── GUÍA DIDÁCTICA ── */
 .guia-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden}
 .guia-card-header{padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer}
@@ -505,7 +506,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.113-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.114-DEV</div>
   </div>
 </div>
 
@@ -667,14 +668,14 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="card-title" style="font-size:17px;text-align:center">Handicap de Campo</div>
     <div class="field" style="margin-bottom:8px">
       <label data-i18n="campo">Campo</label>
-      <select id="p-campo" onchange="onCampoAntes()" style="padding:5px 8px;font-size:13px;border-radius:4px">
+      <select id="p-campo" class="light-select" onchange="onCampoAntes()" style="padding:5px 8px;font-size:13px;border-radius:4px">
         <option value="">— Selecciona un campo —</option>
       </select>
     </div>
     <div id="p-barra-wrap" style="display:none;margin-bottom:8px">
       <div class="field" style="gap:3px">
         <label data-i18n="barra_salida">Barra de salida</label>
-        <select id="p-barra" onchange="onBarraAntes()" style="padding:5px 8px;font-size:13px;border-radius:4px">
+        <select id="p-barra" class="light-select" onchange="onBarraAntes()" style="padding:5px 8px;font-size:13px;border-radius:4px">
           <option value="">— Selecciona barra —</option>
         </select>
       </div>
@@ -725,7 +726,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.113-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.114-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -773,7 +774,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="fields f2" style="margin-bottom:6px;gap:6px">
       <div class="field" style="gap:3px">
         <label data-i18n="campo">Campo</label>
-        <select id="f-campo" onchange="onCampoChange()" style="padding:5px 8px;font-size:13px;border-radius:4px">
+        <select id="f-campo" class="light-select" onchange="onCampoChange()" style="padding:5px 8px;font-size:13px;border-radius:4px">
           <option value="">— Selecciona campo —</option>
         </select>
       </div>
@@ -783,7 +784,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
       <div class="field" style="gap:3px">
         <label data-i18n="hoyos">Hoyos</label>
-        <select id="f-num-hoyos" onchange="onNumHoyosChange()" style="padding:5px 8px;font-size:13px;border-radius:4px">
+        <select id="f-num-hoyos" class="light-select" onchange="onNumHoyosChange()" style="padding:5px 8px;font-size:13px;border-radius:4px">
           <option value="" id="opt-hoyos-ph">— Hoyos —</option>
           <option value="18" data-i18n-opt="hoyos_18">18 hoyos</option>
           <option value="9" data-i18n-opt="hoyos_9">9 hoyos</option>
@@ -791,7 +792,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
       <div id="f-vuelta-wrap" class="field" style="gap:3px;display:none">
         <label data-i18n="vuelta">Vuelta</label>
-        <select id="f-vuelta" onchange="onVueltaChange()" style="padding:5px 8px;font-size:13px;border-radius:4px">
+        <select id="f-vuelta" class="light-select" onchange="onVueltaChange()" style="padding:5px 8px;font-size:13px;border-radius:4px">
           <option value="1">1ª (1–9)</option>
           <option value="2">2ª (10–18)</option>
         </select>
@@ -800,7 +801,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <div id="barra-selector" style="display:none;margin-bottom:6px">
       <div class="field" style="gap:3px">
         <label data-i18n="barra_salida">Barra de salida</label>
-        <select id="f-barra" onchange="onBarraChange()" style="padding:5px 8px;font-size:13px;border-radius:4px">
+        <select id="f-barra" class="light-select" onchange="onBarraChange()" style="padding:5px 8px;font-size:13px;border-radius:4px">
           <option value="">— Selecciona barra —</option>
         </select>
       </div>
@@ -827,7 +828,7 @@ nav.nav-hidden{transform:translateY(100%)}
       <div class="fields f2" style="margin-bottom:6px;gap:6px">
         <div class="field" style="gap:3px">
           <label data-i18n="formato">Formato de juego</label>
-          <select id="nueva-fmt" style="background:var(--input-bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'DM Mono',monospace;font-size:13px;padding:5px 8px;width:100%;-webkit-appearance:none;outline:none" onchange="calcNuevaChcp()">
+          <select id="nueva-fmt" class="light-select" style="background:var(--input-bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'DM Mono',monospace;font-size:13px;padding:5px 8px;width:100%;-webkit-appearance:none;outline:none" onchange="calcNuevaChcp()">
             <option value="100">100% — Informal</option>
             <option value="95">95% — Medal / Stblf</option>
             <option value="85">85% — Four Ball</option>
@@ -3983,7 +3984,7 @@ function drawStatsChart(canvasId, labelsId, data, color, minVal, maxVal, labelFn
   // Date labels at bottom of canvas - aligned with data points
   ctx.fillStyle = document.documentElement.classList.contains('light') ? 'rgba(0,0,0,0.45)' : 'rgba(255,255,255,0.45)';
   ctx.font = '7px DM Mono,monospace';
-  const step = n <= 4 ? 1 : n <= 7 ? 2 : 3;
+  const step = n <= 6 ? 1 : n <= 12 ? 2 : 3;
   data.forEach((d, i) => {
     if (i % step !== 0 && i !== n-1) return;
     const label = labelFn(d);
