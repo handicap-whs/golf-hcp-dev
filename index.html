@@ -507,7 +507,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.126-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.132-DEV</div>
   </div>
 </div>
 
@@ -727,7 +727,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.126-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.132-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -931,7 +931,10 @@ nav.nav-hidden{transform:translateY(100%)}
     <div class="formula-grid">
       <div class="formula-row"><span class="fk" data-i18n="fi_dif">Diferencial</span><span class="fv" data-i18n="fi_dif_f">(Golpes − CR) × 113 / Slope</span></div>
       <div class="formula-row"><span class="fk" data-i18n="fi_hcp_jug">HCP Jugador</span><span class="fv" data-i18n="fi_hcp_jug_f">Promedio mejores diferenciales × 0.95</span></div>
-      <div class="formula-row"><span class="fk">Course HCP</span><span class="fv">HCP × (Slope/113) + (CR−Par)</span></div>
+      <div class="formula-row" style="background:rgba(201,168,76,.07);border-radius:4px"><span class="fk" data-i18n="fi_hi_label">HI</span><span class="fv" data-i18n="fi_hi_desc">Handicap Index (tu nivel de juego)</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_chcp">Course HCP</span><span class="fv" data-i18n="fi_chcp_f">HI × SR/113 + CR − Par</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_chcp9">Course HCP 9H</span><span class="fv" data-i18n="fi_chcp9_f">0,5 × HI × SR/113 + CR − Par</span></div>
+      <div class="formula-row"><span class="fk" data-i18n="fi_chcp_old">Antes 2024</span><span class="fv" data-i18n="fi_chcp_old_f">HI × SR/113 (sin CR−Par)</span></div>
       <div class="formula-row"><span class="fk" data-i18n="fi_r14">1–4 rondas</span><span class="fv" data-i18n="fi_mejor_dif2">Mejor diferencial − 2.0</span></div>
       <div class="formula-row"><span class="fk" data-i18n="fi_r56">5–6 rondas</span><span class="fv" data-i18n="fi_mejor_dif1">Mejor diferencial − 1.0</span></div>
       <div class="formula-row"><span class="fk" data-i18n="fi_r78">7–8 rondas</span><span class="fv" data-i18n="fi_mejor_dif">Mejor diferencial</span></div>
@@ -1317,7 +1320,7 @@ const i18n = {
     'g_nav_campos':'Estadísticas — Gráficas de evolución y métricas de tu juego.',
     'g_nav_clave':'Ajustes — Campos, guías, idioma, apariencia y más.',
     'g_nav_salir':'Compartir — Comparte tu HCP Index desde la pantalla de Inicio.',
-    'fi_dif':'Diferencial','fi_dif_f':'(Golpes − CR) × 113 / Slope',
+    'fi_hi_label':'HI','fi_hi_desc':'Handicap Index (tu nivel de juego)','fi_chcp':'Course HCP','fi_chcp_f':'HI × SR/113 + CR − Par','fi_chcp9':'Course HCP 9H','fi_chcp9_f':'0,5 × HI × SR/113 + CR − Par','fi_chcp_old':'Antes 2024','fi_chcp_old_f':'HI × SR/113 (sin CR−Par)','fi_chcp':'Course HCP','fi_chcp_f':'HI × SR/113 + CR − Par','fi_chcp9':'Course HCP 9H','fi_chcp9_f':'0,5 × HI × SR/113 + CR − Par','fi_chcp_old':'Antes 2024','fi_chcp_old_f':'HI × SR/113 (sin CR−Par)','fi_dif':'Diferencial','fi_dif_f':'(Golpes − CR) × 113 / Slope',
     'fi_hcp_jug':'HCP Jugador','fi_hcp_jug_f':'Promedio mejores diferenciales × 0.95',
     'fi_max':'Máximo','fi_eagle':'Eagle o mejor','fi_bogey':'Bogey','fi_dbogey':'Doble bogey +',
     'fi_stbl_title':'Stableford','fi_barras_title':'Barras de Salida',
@@ -1409,7 +1412,7 @@ const i18n = {
     'g_nav_campos':'Estatísticas — Gráficos de evolução e métricas do teu jogo.',
     'g_nav_clave':'Ajustes — Campos, guias, idioma, aparência e mais.',
     'g_nav_salir':'Partilhar — Partilha o teu HCP Index a partir do ecrã de Início.',
-    'fi_dif':'Diferencial','fi_dif_f':'(Pancadas − CR) × 113 / Slope',
+    'fi_hi_label':'HI','fi_hi_desc':'Handicap Index (o teu nível de jogo)','fi_chcp':'Course HCP','fi_chcp_f':'HI × SR/113 + CR − Par','fi_chcp9':'Course HCP 9H','fi_chcp9_f':'0,5 × HI × SR/113 + CR − Par','fi_chcp_old':'Antes 2024','fi_chcp_old_f':'HI × SR/113 (sem CR−Par)','fi_dif':'Diferencial','fi_dif_f':'(Pancadas − CR) × 113 / Slope',
     'fi_hcp_jug':'HCP Jogador','fi_hcp_jug_f':'Média melhores diferenciais × 0.95',
     'fi_max':'Máximo','fi_eagle':'Eagle ou melhor','fi_bogey':'Bogey','fi_dbogey':'Double bogey +',
     'fi_stbl_title':'Stableford','fi_barras_title':'Tees de Saída',
@@ -3520,7 +3523,7 @@ function compartirApp() {
   }
 }
 function contactarGolfHCP() {
-  window.open('mailto:golfhcp@example.com?subject=Golf HCP App', '_blank');
+  window.open('mailto:golf.hcp.webmaster@gmail.com?subject=Golf HCP App', '_blank');
 }
 
 
