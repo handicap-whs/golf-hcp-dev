@@ -86,6 +86,17 @@ nav button.active svg{stroke:var(--gold)}
 .page{display:none;padding:16px 14px calc(70px + env(safe-area-inset-bottom,0px));max-width:700px;margin:0 auto;width:100%}
 .page.active{display:block}
 
+/* ── GUÍA DIDÁCTICA ── */
+.guia-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.guia-card-header{padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.guia-card-icon{font-size:22px;flex-shrink:0}
+.guia-card-meta{flex:1;min-width:0}
+.guia-card-title{font-size:13px;font-family:'DM Mono',monospace;letter-spacing:.5px;color:var(--cream);margin-bottom:3px}
+.guia-card-type{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.guia-card-body{padding:0 16px 14px;font-size:11px;color:var(--muted);line-height:1.8;display:none}
+.guia-card-body.open{display:block}
+.guia-card-media{width:100%;border-radius:8px;margin-bottom:10px;display:block}
+.guia-btn-dl{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);border-radius:6px;color:var(--gold2);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;padding:7px 12px;cursor:pointer;display:flex;align-items:center;gap:6px;text-decoration:none}
 /* ── AJUSTES iOS STYLE ── */
 .ajuste-btn{width:100%;background:none;border:none;padding:13px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;color:var(--text,#fff);font-family:'DM Mono',monospace;font-size:20px;letter-spacing:.3px;min-height:60px}
 .ajuste-btn:active{background:rgba(255,255,255,.05)}
@@ -422,7 +433,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.074-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.075-DEV</div>
   </div>
 </div>
 
@@ -642,7 +653,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.074-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace">v1.30.075-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -1129,9 +1140,12 @@ nav.nav-hidden{transform:translateY(100%)}
     </button>
   </div>
   <div style="font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);padding:4px 2px 16px;font-family:'DM Mono',monospace;text-align:center" data-i18n="menu_guia_didactica">Guía Didáctica del Jugador</div>
-  <div class="card" style="text-align:center;padding:40px 20px">
-    <div style="font-size:32px;margin-bottom:12px">📚</div>
-    <div style="font-size:12px;color:var(--muted);letter-spacing:1px" data-i18n="proximamente">Contenido próximamente</div>
+  <!-- Artículos — loadGuiaDidactica() rellena este div -->
+  <div id="guia-content">
+    <div style="padding:40px 0;text-align:center">
+      <div style="font-size:28px;margin-bottom:12px">📚</div>
+      <div style="font-size:11px;color:var(--muted);letter-spacing:1px" data-i18n="proximamente">Contenidos próximamente</div>
+    </div>
   </div>
 </div>
 
@@ -3623,6 +3637,7 @@ async function delCampo(id) {
 // ── NAV ───────────────────────────────────────────────────────────────────
 function goTo(id, btn) {
   closeNavMenu();
+  if (id === 'guia-didactica') { setTimeout(loadGuiaDidactica, 30); }
   if (id === 'sobre') {
     const vEl = document.getElementById('sobre-version');
     // Find version from the version div in Inicio
@@ -3933,6 +3948,46 @@ function renderStatsCharts() {
       Math.max(0,Math.min(...stblVals)-3), Math.ceil(Math.max(...stblVals)+2),
       fmt, r=>r.stableford, true);
   }
+}
+
+// ── GUÍA DIDÁCTICA ─────────────────────────────────────────────
+// Para añadir contenido: editar GUIA_CONTENIDOS
+// Tipos: 'texto' | 'video' | 'pdf' | 'imagen'
+const GUIA_CONTENIDOS = [
+  // Ejemplo descomentado cuando haya contenido:
+  // { id:1, tipo:'texto', titulo:'Cómo funciona el WHS', subtitulo:'Lectura · 5 min',
+  //   contenido:'<p>El World Handicap System...</p>', descargable:false },
+  // { id:2, tipo:'video', titulo:'Tutorial: primera ronda', subtitulo:'Vídeo · 3 min',
+  //   url:'https://www.youtube.com/embed/XXXX', descargable:false },
+  // { id:3, tipo:'pdf', titulo:'Guía WHS 2024', subtitulo:'PDF · Descargable',
+  //   url:'https://example.com/guia.pdf', descargable:true }
+];
+
+function loadGuiaDidactica() {
+  const el = document.getElementById('guia-content');
+  if (!el) return;
+  const lbl = (es, pt) => lang === 'pt' ? pt : es;
+  if (!GUIA_CONTENIDOS.length) {
+    el.innerHTML = '<div style="padding:40px 0;text-align:center"><div style="font-size:28px;margin-bottom:12px">📚</div><div style="font-size:11px;color:var(--muted);letter-spacing:1px">' + lbl('Contenidos próximamente', 'Conteúdos em breve') + '</div></div>';
+    return;
+  }
+  const icons = { texto:'📄', video:'🎬', pdf:'📋', imagen:'🖼️' };
+  el.innerHTML = GUIA_CONTENIDOS.map(function(a) {
+    let body = '';
+    if (a.tipo === 'video' && a.url) body += '<div style="position:relative;padding-bottom:56.25%;height:0;border-radius:8px;overflow:hidden;margin-bottom:10px"><iframe src="' + a.url + '" style="position:absolute;inset:0;width:100%;height:100%;border:none" allowfullscreen></iframe></div>';
+    if (a.tipo === 'imagen' && a.url) body += '<img src="' + a.url + '" class="guia-card-media" alt="' + a.titulo + '">';
+    if (a.contenido) body += '<div>' + a.contenido + '</div>';
+    if (a.descargable && a.url) body += '<div class="guia-card-actions"><a href="' + a.url + '" target="_blank" download class="guia-btn-dl">⬇ ' + lbl('Descargar', 'Descarregar') + '</a></div>';
+    return '<div class="guia-card"><div class="guia-card-header" onclick="toggleGuiaCard(' + a.id + ')"><div class="guia-card-icon">' + (icons[a.tipo]||'📄') + '</div><div class="guia-card-meta"><div class="guia-card-title">' + a.titulo + '</div><div class="guia-card-type">' + (a.subtitulo||a.tipo) + '</div></div><svg id="guia-chev-' + a.id + '" viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2;flex-shrink:0;transition:transform .2s"><polyline points="9 18 15 12 9 6"/></svg></div><div class="guia-card-body" id="guia-body-' + a.id + '">' + body + '</div></div>';
+  }).join('');
+}
+
+function toggleGuiaCard(id) {
+  var body = document.getElementById('guia-body-' + id);
+  var chev = document.getElementById('guia-chev-' + id);
+  if (!body) return;
+  var open = body.classList.toggle('open');
+  if (chev) chev.style.transform = open ? 'rotate(90deg)' : '';
 }
 
 init();
