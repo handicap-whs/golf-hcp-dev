@@ -455,7 +455,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.097-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.30.098-DEV</div>
   </div>
 </div>
 
@@ -675,7 +675,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.097-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.30.098-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -814,7 +814,12 @@ nav.nav-hidden{transform:translateY(100%)}
 
 <!-- PAGE: RONDAS -->
 <div class="page" id="page-rondas">
-  <div style="font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);font-family:'DM Mono',monospace;padding:4px 2px 4px;text-align:center" data-i18n="historial">Historial de Rondas</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 2px 4px">
+    <button class="btn" onclick="goTo('nueva',null)" style="font-size:10px;padding:8px 12px;height:34px;border-radius:8px" data-i18n="nueva_ronda">+ Nueva</button>
+    <div style="font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);font-family:'DM Mono',monospace" data-i18n="historial">Historial</div>
+    <button class="btn-danger" id="btn-borrar-todo" onclick="clearAll()" style="display:none;font-size:9px;padding:8px 10px;height:34px;border-radius:8px;letter-spacing:.3px" data-i18n="borrar_todo">Borrar todo</button>
+    <div id="btn-borrar-placeholder" style="width:60px"></div>
+  </div>
   <div style="font-size:9px;letter-spacing:.5px;color:var(--muted);text-align:center;padding-bottom:10px" data-i18n="toca_ronda">Toca una ronda para más detalles</div>
   <div class="card" style="margin-bottom:70px">
     <div id="hist-container"><div class="empty">Cargando…</div></div>
@@ -3694,7 +3699,7 @@ function goTo(id, btn) {
       try { renderStats(); setTimeout(() => { renderStatsCharts(); statsChartsDirty = false; }, 200); } catch(e) {}
     }, 50);
   }
-  const _ab = $('rondas-action-bar'); if (_ab) _ab.style.display = (id === 'rondas') ? 'flex' : 'none';
+
   if (id === 'inicio') {
     // Avisar si no hay campos creados
     if (state.user && !state.campos.length) {
