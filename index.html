@@ -514,7 +514,7 @@ nav.nav-hidden{transform:translateY(100%)}
     <button class="auth-btn" id="btn-login" onclick="doLogin()" data-i18n="btn_entrar">Entrar</button>
     <div class="auth-link"><span data-i18n="sin_cuenta">¿Sin cuenta?</span> <span onclick="showAuth('register')" data-i18n="registrate">Regístrate</span></div>
     <div class="auth-link" style="margin-top:16px;font-size:10px;opacity:.6"><a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:none" data-i18n="politica_priv">Política de Privacidad</a></div>
-    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.31.027-DEV</div>
+    <div style="text-align:center;margin-top:8px;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">v1.31.029-DEV</div>
   </div>
 </div>
 
@@ -734,7 +734,7 @@ nav.nav-hidden{transform:translateY(100%)}
       </div>
     </div>
   </div>
-  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.31.027-DEV</div>
+  <div style="text-align:center;padding:12px 0 4px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);font-family:'DM Mono',monospace" class="version-label">v1.31.029-DEV</div>
   <div class="card" style="margin-bottom:8px;padding:12px 14px;display:none" id="mini-chart-wrap">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:11px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold" data-i18n="evolucion_hcp">EVOLUCIÓN HCP</span><span style="font-size:9px;color:var(--muted);letter-spacing:.5px" data-i18n="ultimas_20">20 últimas rondas</span></div>
     <canvas id="mini-hcp-chart" height="100" style="width:100%;display:block"></canvas>
@@ -864,7 +864,7 @@ nav.nav-hidden{transform:translateY(100%)}
     </div>
 
     <div style="display:flex;gap:10px">
-      <button class="btn" id="btn-add" type="button" style="flex:2;margin-top:0">+ Registrar Ronda</button>
+      <button class="btn" id="btn-add" type="button" style="flex:2;margin-top:0" data-i18n="registrar_ronda">+ Registrar Ronda</button>
       <button class="btn-danger" onclick="if(confirm(t('c_cancelar_nueva_ronda')))cancelarNueva()" style="flex:1;margin-top:0" data-i18n="cancelar">Cancelar</button>
     </div>
     <div class="info" data-i18n="fi_dif_formula">Diferencial = (Golpes − CR) × 113 / Slope</div>
@@ -2143,7 +2143,7 @@ function renderStats() {
     const sorted = [...combined].sort((a,b) => new Date(a.fecha||a.date) - new Date(b.fecha||b.date));
     const last5 = sorted.slice(-5).map(r => r.diff);
     const trend = last5[last5.length-1] - last5[0];
-    tendencia = trend < -0.5 ? '↘ ' + lbl('Mejorando','A melhorar') : trend > 0.5 ? '↗ ' + lbl('Subiendo','A subir') : '→ ' + lbl('Estable','Estável');
+    tendencia = trend < -0.5 ? '↘ ' + lbl('Mejorando','A melhorar') : trend > 0.5 ? '↗ ' + lbl('Subiendo','A subir') : '→ ' + lbl('Estable','Estável','Stable');
   }
 
   // Rondas este mes
@@ -2179,16 +2179,16 @@ function renderStats() {
       <div id="stats-stbl-labels"></div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-    ${card(lbl('Rondas jugadas','Voltas jogadas'), combined.length)}
-    ${card(lbl('Usadas en HCP','Usadas no HCP'), res ? res.numBest : '—')}
-    ${card(lbl('Mejor diferencial','Melhor diferencial'), bestDif !== null ? fmtD(bestDif) : '—')}
-    ${card(lbl('Tendencia HCP','Tendência HCP'), tendencia)}
-    ${card(lbl('Media de golpes','Média de pancadas'), avgScore)}
-    ${card(lbl('Mejor resultado (golpes)','Melhor resultado (pancadas)'), bestScore)}
-    ${card(lbl('Peor resultado (golpes)','Pior resultado (pancadas)'), worstScore)}
-    ${card(lbl('Mejor Stableford','Melhor Stableford'), bestStbl)}
-    ${card(lbl('Media Stableford (todas las rondas)','Média Stableford (todas as voltas)'), avgStbl)}
-    ${card(lbl('Rondas este mes','Voltas este mês'), thisMon)}
+    ${card(lbl('Rondas jugadas','Voltas jogadas','Parties jouées'), combined.length)}
+    ${card(lbl('Usadas en HCP','Usadas no HCP','Utilisées HCP'), res ? res.numBest : '—')}
+    ${card(lbl('Mejor diferencial','Melhor diferencial','Meilleur différentiel'), bestDif !== null ? fmtD(bestDif) : '—')}
+    ${card(lbl('Tendencia HCP','Tendência HCP','Tendance HCP'), tendencia)}
+    ${card(lbl('Media de golpes','Média de pancadas','Moyenne coups'), avgScore)}
+    ${card(lbl('Mejor resultado (golpes)','Melhor resultado (pancadas)','Meilleur résultat (coups)'), bestScore)}
+    ${card(lbl('Peor resultado (golpes)','Pior resultado (pancadas)','Pire résultat (coups)'), worstScore)}
+    ${card(lbl('Mejor Stableford','Melhor Stableford','Meilleur Stableford'), bestStbl)}
+    ${card(lbl('Media Stableford (todas las rondas)','Média Stableford (todas as voltas)','Moyenne Stableford (toutes)'), avgStbl)}
+    ${card(lbl('Rondas este mes','Voltas este mês','Parties ce mois'), thisMon)}
   </div>`;
   // Draw charts after DOM renders
   setTimeout(() => { try { renderStatsCharts(); } catch(e) { console.error('charts:',e); } }, 50);
@@ -2908,7 +2908,7 @@ async function addRound() {
     toast(t('t_error_guardar') + (e.message || e), true);
   } finally {
     const b = $('btn-add');
-    if (b) { b.textContent = '+ Registrar Ronda'; b.disabled = false; }
+    if (b) { b.textContent = t('registrar_ronda'); b.disabled = false; }
   }
 }
 
@@ -4111,7 +4111,7 @@ const GUIA_CONTENIDOS = [
 function loadGuiaDidactica() {
   const el = document.getElementById('guia-content');
   if (!el) return;
-  const lbl = (es, pt) => lang === 'pt' ? pt : es;
+  const lbl = (es, pt, fr) => lang === 'fr' ? (fr||es) : lang === 'pt' ? pt : es;
   if (!GUIA_CONTENIDOS.length) {
     el.innerHTML = '<div style="padding:40px 0;text-align:center"><div style="font-size:28px;margin-bottom:12px">📚</div><div style="font-size:11px;color:var(--muted);letter-spacing:1px">' + lbl('Contenidos próximamente', 'Conteúdos em breve') + '</div></div>';
     return;
