@@ -1,0 +1,38 @@
+name: Keep Supabase Dev Alive
+ 
+# Ejecuta cada 3 días a las 09:00 UTC
+# (Supabase pausa proyectos Free tras 7 días de inactividad,
+#  así que cada 3 días nos da doble margen de seguridad)
+#
+# También se puede lanzar manualmente desde la pestaña "Actions"
+# usando el botón "Run workflow"
+ 
+on:
+  schedule:
+    - cron: '0 9 */3 * *'
+  workflow_dispatch:
+ 
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Dev REST API
+        run: |
+          echo "🏓 Pingueando Supabase Dev..."
+          HTTP_STATUS=$(curl -s -o response.txt -w "%{http_code}" \
+            -X GET "${{ secrets.SUPABASE_DEV_URL }}/rest/v1/keep_alive?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_DEV_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_DEV_ANON_KEY }}")
+ 
+          echo "📡 HTTP Status: $HTTP_STATUS"
+          echo "📥 Response: $(cat response.txt)"
+ 
+          if [ "$HTTP_STATUS" -eq 200 ]; then
+            echo "✅ Supabase Dev OK — proyecto seguirá activo"
+            exit 0
+          else
+            echo "❌ Error: status HTTP $HTTP_STATUS"
+            exit 1
+          fi
+ # Keep-alive workflow para Supabase Dev
+ # Commit changes
