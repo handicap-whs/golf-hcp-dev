@@ -3430,8 +3430,11 @@ function setLang(l) {
 // ── CONSTANTES ──────────────────────────────────────────────────────────
 // ⚠️ ENTORNO DEV — apunta al Supabase Dev (vykfqhpjkvcdulcbpahy), NO a producción.
 // NO copiar estas 2 líneas a producción (producción usa su propio ref distinto).
+// v1.34.260-dev: publishable key nueva (sb_publishable_...) en vez de anon legacy eyJ...
+// La anon legacy daba error PGRST301 "No suitable key" en PostgREST porque el proyecto
+// Dev usa el sistema nuevo de JWT signing keys (asimétrico).
 const SB_URL = 'https://vykfqhpjkvcdulcbpahy.supabase.co';
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5a2ZxaHBqa3ZjZHVsY2JwYWh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMDcxOTksImV4cCI6MjA5Mjc4MzE5OX0.oscTrFmJnYHagxs5QHhtoOR1mGQ5syh9VMXv3ab2kf4';
+const SB_KEY = 'sb_publishable_eRqmazTwL7fGMrH9jJijbQ_NoVErOIt';
 const WHS = [[1,-2],[1,-2],[1,-2],[1,-1],[1,0],[2,-1],[2,0],[2,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[5,0],[5,0],[6,0],[6,0],[7,0],[8,0]];
 const BARRAS = ['blanca','amarilla','azul','roja'];
 const BARRAS_FR = ['blanca','amarilla','azul','roja','violeta','naranja','negra'];
