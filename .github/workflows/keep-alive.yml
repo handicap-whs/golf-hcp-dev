@@ -1,6 +1,17 @@
 name: Keep Supabase Dev Alive
 
 # Mantener Supabase Dev activo (proyecto Free pausa tras 7 dias sin actividad).
+#
+# v3 (2026-09-06): migracion a las claves nuevas de Supabase.
+#   Las claves publicables (sb_publishable_...) NO son JWT, y la documentacion
+#   de Supabase dice que van SOLO en la cabecera "apikey", nunca en
+#   "Authorization: Bearer". Con la clave anon funcionaba porque era un JWT
+#   valido; con la nueva, mandarla como Bearer hace que se intente verificar
+#   como JWT y la peticion devuelve 401.
+#   Cambio: eliminadas las tres cabeceras "Authorization: Bearer".
+#   El secret sigue llamandose SUPABASE_DEV_ANON_KEY para no tocar nada mas,
+#   pero su VALOR pasa a ser la clave publicable.
+#
 # v2 (2026-05-16): refuerzo tras detectar que la version SELECT-only no era
 # suficiente. Ahora hace INSERT real + DELETE de limpieza (actividad de
 # escritura, mas dificil de ignorar por Supabase).
@@ -35,6 +46,21 @@ jobs:
             exit 1
           fi
           echo "✓ Secrets presentes"
+          # Aviso si el secret sigue llevando la clave antigua (JWT, empieza por eyJ).
+          case "$SUPABASE_KEY" in
+            eyJ*)
+              echo "⚠  AVISO: el secret contiene todavia una clave JWT antigua (anon)."
+              echo "   Supabase retira las claves anon y service_role a finales de 2026."
+              echo "   Sustituye el secret por la clave publicable (sb_publishable_...)."
+              ;;
+            sb_publishable_*)
+              echo "✓ Clave publicable en uso"
+              ;;
+            sb_secret_*)
+              echo "ERROR: el secret contiene una clave SECRETA. Nunca aqui."
+              exit 1
+              ;;
+          esac
 
       - name: INSERT row (escritura real)
         env:
@@ -46,7 +72,6 @@ jobs:
           HTTP_STATUS=$(curl -s -o response.txt -w "%{http_code}" \
             -X POST "${SUPABASE_URL}/rest/v1/keep_alive" \
             -H "apikey: ${SUPABASE_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_KEY}" \
             -H "Content-Type: application/json" \
             -H "Prefer: return=minimal" \
             -d '{}')
@@ -69,8 +94,7 @@ jobs:
           echo "→ DELETE rows con ping_at < ${THIRTY_DAYS_AGO}"
           HTTP_STATUS=$(curl -s -o response.txt -w "%{http_code}" \
             -X DELETE "${SUPABASE_URL}/rest/v1/keep_alive?ping_at=lt.${THIRTY_DAYS_AGO}" \
-            -H "apikey: ${SUPABASE_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_KEY}")
+            -H "apikey: ${SUPABASE_KEY}")
           echo "HTTP status: ${HTTP_STATUS}"
           # 204 (no content) y 200 son ok. 404 tambien (no habia nada que borrar).
           if [ "${HTTP_STATUS}" != "204" ] && [ "${HTTP_STATUS}" != "200" ] && [ "${HTTP_STATUS}" != "404" ]; then
@@ -88,8 +112,7 @@ jobs:
           set -e
           echo "→ SELECT verificacion del estado de la tabla"
           curl -s "${SUPABASE_URL}/rest/v1/keep_alive?select=id,ping_at&order=ping_at.desc&limit=5" \
-            -H "apikey: ${SUPABASE_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_KEY}"
+            -H "apikey: ${SUPABASE_KEY}"
           echo ""
           echo "✓ Pings recientes listados"
 
